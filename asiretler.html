@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aşiretler ve Konfederasyonlar - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Ek stiller (mevcut CSS ile uyumlu) */
+        .konfederasyon-karti {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            border-left: 4px solid var(--zer);
+            padding: 20px;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+        
+        .konfederasyon-karti:hover {
+            border-left-color: var(--sor);
+            transform: translateX(5px);
+        }
+        
+        .konfederasyon-baslik {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--zer);
+            padding-bottom: 10px;
+        }
+        
+        .konfederasyon-baslik h2 {
+            margin: 0;
+            color: var(--zer);
+            font-size: 1.8rem;
+        }
+        
+        .konfederasyon-baslik i {
+            font-size: 2rem;
+            color: var(--sor);
+        }
+        
+        .asiret-tablosu {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        .asiret-tablosu th {
+            background: var(--sor);
+            color: var(--spî);
+            padding: 10px;
+            text-align: left;
+            font-family: var(--font-baslik);
+            font-size: 0.9rem;
+        }
+        
+        .asiret-tablosu td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--zer);
+            font-size: 0.95rem;
+        }
+        
+        .asiret-tablosu tr:hover {
+            background: rgba(225, 25, 25, 0.1);
+        }
+        
+        .asiret-link {
+            color: var(--zer);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .asiret-link:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .not-badge {
+            display: inline-block;
+            background: var(--sor);
+            color: var(--spî);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+        
+        .bolge-etiket {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--pêşeroj-cyan);
+            color: var(--pêşeroj-cyan);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        @media (max-width: 768px) {
+            .asiret-tablosu {
+                font-size: 0.85rem;
+            }
+            
+            .asiret-tablosu th,
+            .asiret-tablosu td {
+                padding: 6px 4px;
+            }
+            
+            .konfederasyon-baslik h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler-konfederasyonlar.html" class="nav-link active">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Aşiret ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                <h1>🏔️ Kürt Aşiretleri ve Konfederasyonlar</h1>
+                <p>Kürdistan coğrafyasında yüzyıllar boyunca varlığını sürdürmüş aşiret konfederasyonları, bağlı aşiretler ve kolları. Her aşiretin detaylı sayfasına tıklayarak ulaşabilirsiniz.</p>
+                
+                <!-- Filtreleme -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="federasyon">Federasyonlar</button>
+                    <button class="filter-btn" data-filter="konfederasyon">Konfederasyonlar</button>
+                    <button class="filter-btn" data-filter="asiret">Bağımsız Aşiretler</button>
+                </div>
+                
+                <!-- HEMEVEND FEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="federasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>HEMEVEND FEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/hemenevend-begzade.html" class="asiret-link">Begzade kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Hemevend</td>
+                                <td>Kerkük</td>
+                                <td>Liderlik hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hemenevend-sexler.html" class="asiret-link">Şêxler kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Hemevend</td>
+                                <td>Süleymaniye</td>
+                                <td>Dini nüfuzlu aileler</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/qerecolan.html" class="asiret-link">Qereçolan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Hemevend</td>
+                                <td>Diyala</td>
+                                <td>Sınır hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hemenevend-karadagi.html" class="asiret-link">Karadaği bağlantılı kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Hemevend sahası</td>
+                                <td>Karadağ</td>
+                                <td>Bölgesel temas</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/swan.html" class="asiret-link">Şwan kolu</a></td>
+                                <td>Aşiret</td>
+                                <td>Hemevend</td>
+                                <td>Kerkük kırsalı</td>
+                                <td>Göçer kökenli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/satiri.html" class="asiret-link">Şatiri bağlantısı</a></td>
+                                <td>Aşiret</td>
+                                <td>Hemevend/Jaf teması</td>
+                                <td>Sınır bölgesi</td>
+                                <td>Dönemsel ilişki</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- ŞİKAK FEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="federasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>ŞİKAK FEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/sikak-simko.html" class="asiret-link">Simko kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Şikak</td>
+                                <td>Urmiye – Salmas</td>
+                                <td>İsmail Ağa Simko hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/kardar.html" class="asiret-link">Kardar</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Şikak</td>
+                                <td>İran sınır hattı</td>
+                                <td>Eski kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/avdoyi.html" class="asiret-link">Avdoyi</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Şikak</td>
+                                <td>Hakkâri</td>
+                                <td>Sınır geçişli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/mamish.html" class="asiret-link">Mamish</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Şikak</td>
+                                <td>İran tarafı</td>
+                                <td>Bazı kaynakta bağımsız</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/silki.html" class="asiret-link">Silki</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Şikak</td>
+                                <td>Salmas</td>
+                                <td>Küçük kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sikak-cekirdek.html" class="asiret-link">Şikak (çekirdek)</a></td>
+                                <td>Aşiret</td>
+                                <td>Şikak</td>
+                                <td>İran kuzeyi</td>
+                                <td>Adı veren gövde</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- CELALÎ FEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="federasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>CELALÎ FEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/hayderan-celali.html" class="asiret-link">Hayderan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Celalî bağlantılı dönem</td>
+                                <td>Ağrı – Van</td>
+                                <td>Bazen Milan ile de anılır</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/zilan-celali.html" class="asiret-link">Zilan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Celalî</td>
+                                <td>Ağrı – Patnos</td>
+                                <td>Zilan havzası</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sakan.html" class="asiret-link">Sakan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Celalî</td>
+                                <td>Doğubayazıt</td>
+                                <td>Sınır hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/celali-cekirdek.html" class="asiret-link">Celalî (çekirdek kol)</a></td>
+                                <td>Aşiret</td>
+                                <td>Celalî</td>
+                                <td>Ağrı</td>
+                                <td>Adı veren kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sipkan.html" class="asiret-link">Sipkan (etkileşimli)</a></td>
+                                <td>Aşiret</td>
+                                <td>Celalî sahası</td>
+                                <td>Hakkâri – İran</td>
+                                <td>Tam bağlı sayılmaz</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/ademan.html" class="asiret-link">Ademan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Celalî</td>
+                                <td>Van kuzeyi</td>
+                                <td>Küçük kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/milan-dogu-celali.html" class="asiret-link">Milan (Doğu temaslı)</a></td>
+                                <td>Aşiret</td>
+                                <td>Dönemsel ittifak</td>
+                                <td>Van hattı</td>
+                                <td>Kalıcı bağlılık değil</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sikak-celali.html" class="asiret-link">Şikak (temaslı)</a></td>
+                                <td>Aşiret</td>
+                                <td>Bölgesel etkileşim</td>
+                                <td>İran sınırı</td>
+                                <td>Ayrı büyük yapı</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- REWŞAN FEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="federasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>REWŞAN FEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/alikanli-reswan.html" class="asiret-link">Alikanlı (Reşwan kolu)</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Reşwan</td>
+                                <td>Adıyaman</td>
+                                <td>Milan'daki Alikan ile karıştırılır</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/kavi.html" class="asiret-link">Kavi</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Reşwan</td>
+                                <td>Siverek</td>
+                                <td>Eski göçer kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/celikan.html" class="asiret-link">Çelikan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Reşwan</td>
+                                <td>Adıyaman</td>
+                                <td>Yerleşikleşmiş</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hevedi.html" class="asiret-link">Hevêdi</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Reşwan</td>
+                                <td>Kahta</td>
+                                <td>Küçük kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/kirvar.html" class="asiret-link">Kırvar</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Reşwan</td>
+                                <td>Malatya güneyi</td>
+                                <td>Bölgesel varyant</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/atmi.html" class="asiret-link">Atmî (temaslı dönem)</a></td>
+                                <td>Aşiret</td>
+                                <td>Bölgesel ilişki</td>
+                                <td>Adıyaman</td>
+                                <td>Tam bağlı sayılmaz</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sexbizini-reswan.html" class="asiret-link">Şexbizinî bağlantılı kol</a></td>
+                                <td>Aşiret teması</td>
+                                <td>Reşwan hattı</td>
+                                <td>Sınır bölgesi</td>
+                                <td>Tartışmalı bağ</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sinemilli.html" class="asiret-link">Sinemilli (etkileşimli)</a></td>
+                                <td>Aşiret</td>
+                                <td>Reşwan sahası</td>
+                                <td>Maraş</td>
+                                <td>Bazı dönemlerde iç içe</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- DOĞU MİLAN FEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="federasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>DOĞU MİLAN FEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/hayderan-milan.html" class="asiret-link">Hayderan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Doğu)</td>
+                                <td>Van – Ağrı</td>
+                                <td>Zaman zaman Celalî ile ilişkilendirilir</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/kejan.html" class="asiret-link">Kejan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Doğu)</td>
+                                <td>Erzincan güneyi</td>
+                                <td>Bölgesel farklılaşma gösterir</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/zilan-milan.html" class="asiret-link">Zilan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Doğu)</td>
+                                <td>Ağrı – Patnos</td>
+                                <td>Zilan havzası</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sadilli-dogu.html" class="asiret-link">Şadilli (Doğu varyantı)</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan</td>
+                                <td>Van çevresi</td>
+                                <td>Batı'dan ayrışmış kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/mand.html" class="asiret-link">Mand</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan bağlantılı</td>
+                                <td>Van kırsalı</td>
+                                <td>Küçük kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/lolan.html" class="asiret-link">Lolan</a></td>
+                                <td>Aşiret bağlantılı</td>
+                                <td>Milan etkisi</td>
+                                <td>Doğu Anadolu</td>
+                                <td>Kaynaklara göre değişir</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hormek-milan.html" class="asiret-link">Hormek (temaslı dönem)</a></td>
+                                <td>Aşiret</td>
+                                <td>Bölgesel etkileşim</td>
+                                <td>Erzurum hattı</td>
+                                <td>Tam bağlı sayılmaz</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/cibran-milan.html" class="asiret-link">Cibran (etkileşimli)</a></td>
+                                <td>Aşiret</td>
+                                <td>Bölgesel temas</td>
+                                <td>Varto – Bingöl</td>
+                                <td>Milan ile dönemsel ittifak</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- BATI MİLAN FEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="federasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>BATI MİLAN FEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/duderan.html" class="asiret-link">Dudêran</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Batı)</td>
+                                <td>Siverek</td>
+                                <td>En güçlü Batı kolu</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/alikan-bati.html" class="asiret-link">Alikan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Batı)</td>
+                                <td>Viranşehir</td>
+                                <td>Yerleşik güç odağı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sadilli-bati.html" class="asiret-link">Şadilli</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Batı)</td>
+                                <td>Urfa kırsalı</td>
+                                <td>Göçer kökenli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hasenan.html" class="asiret-link">Hasenan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Batı)</td>
+                                <td>Diyarbakır güneyi</td>
+                                <td>Çeşitli alt varyant</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/berazi-milan.html" class="asiret-link">Berazi</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan bağlantılı</td>
+                                <td>Urfa</td>
+                                <td>Zamanla ayrı kimlikleşmiş</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/koser.html" class="asiret-link">Koser</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Batı)</td>
+                                <td>Mardin</td>
+                                <td>Küçük ölçekli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/semsikan.html" class="asiret-link">Şemsikan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Batı)</td>
+                                <td>Urfa</td>
+                                <td>Yerel kaynak geçişli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sexan.html" class="asiret-link">Şêxan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Milan (Batı)</td>
+                                <td>Suriye sınırı</td>
+                                <td>Şeyh kökenli ad</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/kikan.html" class="asiret-link">Kikan</a></td>
+                                <td>Aşiret/bağlantılı</td>
+                                <td>Milan etkisi</td>
+                                <td>Mardin</td>
+                                <td>Bazı kaynakta bağımsız</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/karakeci-milan.html" class="asiret-link">Karakeçi (Milan bağlantılı dönemler)</a></td>
+                                <td>Aşiret</td>
+                                <td>Bölgesel temas</td>
+                                <td>Urfa</td>
+                                <td>Tam bağlı sayılmaz</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- JAF KONFEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="konfederasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>JAF KONFEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/mikayili.html" class="asiret-link">Mikayili</a></td>
+                                <td>Aşiret (ana kol)</td>
+                                <td>Jaf</td>
+                                <td>Süleymaniye</td>
+                                <td>En güçlü kollardan</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/pisder.html" class="asiret-link">Pişder</a></td>
+                                <td>Aşiret</td>
+                                <td>Jaf</td>
+                                <td>Pişder bölgesi</td>
+                                <td>Bölge adı aşiretleşmiş</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/gorani-jaf.html" class="asiret-link">Goranî Jaf</a></td>
+                                <td>Aşiret</td>
+                                <td>Jaf</td>
+                                <td>Halepçe çevresi</td>
+                                <td>Goran etkili kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/zardeli.html" class="asiret-link">Zardeli</a></td>
+                                <td>Aşiret</td>
+                                <td>Jaf</td>
+                                <td>Süleymaniye</td>
+                                <td>Geleneksel kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/babani-jaf.html" class="asiret-link">Babanî Jaf</a></td>
+                                <td>Aşiret</td>
+                                <td>Jaf</td>
+                                <td>Kerkük hattı</td>
+                                <td>Baban etkisiyle anılan kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/satiri-jaf.html" class="asiret-link">Şatiri</a></td>
+                                <td>Aşiret</td>
+                                <td>Jaf</td>
+                                <td>İran sınır hattı</td>
+                                <td>Sınır yerleşimi</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/xurmali.html" class="asiret-link">Xurmalî</a></td>
+                                <td>Aşiret</td>
+                                <td>Jaf</td>
+                                <td>Hurmal çevresi</td>
+                                <td>Yerleşim temelli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sercinari.html" class="asiret-link">Serçinarî</a></td>
+                                <td>Aşiret</td>
+                                <td>Jaf</td>
+                                <td>Süleymaniye kırsalı</td>
+                                <td>Küçük kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/qaradaghi-jaf.html" class="asiret-link">Qaradaghî (Jaf kolu)</a></td>
+                                <td>Aşiret</td>
+                                <td>Jaf</td>
+                                <td>Karadağ bölgesi</td>
+                                <td>Bölgesel ad taşıyan</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/kelhuri-jaf.html" class="asiret-link">Kelhurî Jaf</a></td>
+                                <td>Aşiret bağlantısı</td>
+                                <td>Jaf</td>
+                                <td>İran tarafı</td>
+                                <td>Kelhur ile temaslı</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- ZENGENE KONFEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="konfederasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>ZENGENE KONFEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/zengene-begzade.html" class="asiret-link">Begzade kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Zengene</td>
+                                <td>Kerkük</td>
+                                <td>Lider aile hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/serifzade.html" class="asiret-link">Şerifzade</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Zengene</td>
+                                <td>Hanekin</td>
+                                <td>Eşraf kökenli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/qerehasan.html" class="asiret-link">Qere Hasan</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Zengene</td>
+                                <td>Diyala</td>
+                                <td>Bölgesel kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/mamand.html" class="asiret-link">Mamand</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Zengene</td>
+                                <td>İran sınırı</td>
+                                <td>Küçük ölçekli</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- BRADOST KONFEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="konfederasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>BRADOST KONFEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/mir-bradost.html" class="asiret-link">Mir Bradost kolu</a></td>
+                                <td>Aşiret çekirdeği</td>
+                                <td>Bradost</td>
+                                <td>Soran</td>
+                                <td>Tarihsel lider hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sidekan.html" class="asiret-link">Sidekan kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Bradost</td>
+                                <td>Sidekan</td>
+                                <td>İran sınır geçişli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/dolamari.html" class="asiret-link">Dolamari</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Bradost</td>
+                                <td>Çoman</td>
+                                <td>Küçük kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/bilbas-bradost.html" class="asiret-link">Bilbas bağlantılı kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Bradost sahası</td>
+                                <td>İran tarafı</td>
+                                <td>Bazı dönem ittifaklı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/soran-bradost.html" class="asiret-link">Soran temaslı kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Bradost</td>
+                                <td>Erbil kuzeyi</td>
+                                <td>Emirlik etkisi</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/mergasor-bradost.html" class="asiret-link">Mergasor kolu</a></td>
+                                <td>Aşiret</td>
+                                <td>Bradost</td>
+                                <td>Mergasor</td>
+                                <td>Dağlık yoğunluk</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- SİNDİ KONFEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="konfederasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>SİNDİ KONFEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/mir-sindi.html" class="asiret-link">Mir Sindi kolu</a></td>
+                                <td>Aşiret çekirdeği</td>
+                                <td>Sindi</td>
+                                <td>Zaho</td>
+                                <td>Lider hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/guli.html" class="asiret-link">Guli</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Sindi</td>
+                                <td>Duhok kuzeyi</td>
+                                <td>Küçük kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/nerwayi.html" class="asiret-link">Nerwayi</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Sindi</td>
+                                <td>Sınır hattı</td>
+                                <td>Türkiye temaslı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/bamerne-sindi.html" class="asiret-link">Bamerne kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Sindi</td>
+                                <td>Bamerne</td>
+                                <td>Yerleşikleşmiş</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/derkari.html" class="asiret-link">Derkarî kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Sindi</td>
+                                <td>Derkar</td>
+                                <td>Dağ kökenli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/silivani.html" class="asiret-link">Şilivani temaslı</a></td>
+                                <td>Aşiret</td>
+                                <td>Sindi sahası</td>
+                                <td>Duhok</td>
+                                <td>Bölgesel etkileşim</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- ERTUŞİ KONFEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="konfederasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>ERTUŞİ KONFEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/mir-ertusi.html" class="asiret-link">Mir Ertuşi kolu</a></td>
+                                <td>Aşiret çekirdeği</td>
+                                <td>Ertuşi</td>
+                                <td>Hakkâri</td>
+                                <td>Lider hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/bamerne-ertusi.html" class="asiret-link">Bamerne bağlantılı kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Ertuşi sahası</td>
+                                <td>Duhok</td>
+                                <td>Sindi ile temaslı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/derkari-ertusi.html" class="asiret-link">Derkarî temaslı kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Ertuşi</td>
+                                <td>Sınır hattı</td>
+                                <td>Bölgesel geçiş</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/semdinan.html" class="asiret-link">Şemdinan hattı</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Ertuşi</td>
+                                <td>Şemdinli</td>
+                                <td>Yerel güç odağı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/cukurca.html" class="asiret-link">Çukurca kolu</a></td>
+                                <td>Aşiret</td>
+                                <td>Ertuşi</td>
+                                <td>Çukurca</td>
+                                <td>Dağlık çekirdek</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/zibar.html" class="asiret-link">Zibar temaslı kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Ertuşi sahası</td>
+                                <td>Irak kuzeyi</td>
+                                <td>İttifaklı dönemler</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- HERKÎ KONFEDERASYONU -->
+                <div class="konfederasyon-karti" data-kategori="konfederasyon">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-flag"></i>
+                        <h2>HERKÎ KONFEDERASYONU</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/mir-herki.html" class="asiret-link">Mir Herkî kolu</a></td>
+                                <td>Aşiret çekirdeği</td>
+                                <td>Herkî</td>
+                                <td>Hakkâri</td>
+                                <td>Lider hattı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/sidkan.html" class="asiret-link">Sîdkan hattı</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Herkî</td>
+                                <td>Erbil kuzeyi</td>
+                                <td>Bradost ile temaslı</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/semdinan-herki.html" class="asiret-link">Şemdinan bağlantılı kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Herkî sahası</td>
+                                <td>Şemdinli</td>
+                                <td>Ertuşi ile temas</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/urmiye-herki.html" class="asiret-link">Urmiye kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Herkî</td>
+                                <td>İran tarafı</td>
+                                <td>Sınır geçişli</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/rawanduz-herki.html" class="asiret-link">Rawanduz temaslı kol</a></td>
+                                <td>Aşiret</td>
+                                <td>Herkî</td>
+                                <td>Soran hattı</td>
+                                <td>Bölgesel etkileşim</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/mergasor-herki.html" class="asiret-link">Mergasor kolu</a></td>
+                                <td>Aşiret</td>
+                                <td>Herkî</td>
+                                <td>Dağlık alan</td>
+                                <td>Göçer kökenli</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- BERAZÎ -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>BERAZÎ</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/karakeci-berazi.html" class="asiret-link">Karakeçi kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Berazî sahası</td>
+                                <td>Urfa</td>
+                                <td>Bağlantı dönemsel</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/seddadi-berazi.html" class="asiret-link">Şeddadi kolu</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Berazî</td>
+                                <td>Suruç</td>
+                                <td>Yerleşikleşmiş</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/mervani-berazi.html" class="asiret-link">Mervani hattı</a></td>
+                                <td>Aşiret kolu</td>
+                                <td>Berazî</td>
+                                <td>Harran</td>
+                                <td>Küçük kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/kizilhisar.html" class="asiret-link">Kızılhisar kolu</a></td>
+                                <td>Aşiret</td>
+                                <td>Berazî</td>
+                                <td>Birecik</td>
+                                <td>Bölgesel kol</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/alikan-berazi.html" class="asiret-link">Alikan temaslı</a></td>
+                                <td>Aşiret</td>
+                                <td>Milan/Berazî etkileşim</td>
+                                <td>Viranşehir</td>
+                                <td>Kalıcı bağlılık değil</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/duderan-berazi.html" class="asiret-link">Dudêran temaslı</a></td>
+                                <td>Aşiret</td>
+                                <td>Milan etkileşim</td>
+                                <td>Siverek</td>
+                                <td>Siyasi temas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- BARZAN -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>BARZAN</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/barzan.html" class="asiret-link">Barzan</a></td>
+                                <td>Lider ailesi</td>
+                                <td>Barzan</td>
+                                <td>Barzan vadisi</td>
+                                <td>Dini otorite hattı</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- MAHMUDİ -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>MAHMUDİ</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/mahmudi.html" class="asiret-link">Mahmudi</a></td>
+                                <td>Aşiret çekirdeği</td>
+                                <td>Mahmudi</td>
+                                <td>Başkale</td>
+                                <td>Lider hattı</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- HORMEK -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>HORMEK</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/hormek-kalan.html" class="asiret-link">Kalan</a></td>
+                                <td>Kol</td>
+                                <td>Hormek</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hormek-alan.html" class="asiret-link">Alan</a></td>
+                                <td>Kol</td>
+                                <td>Hormek</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hormek-lolan.html" class="asiret-link">Lolan</a></td>
+                                <td>Kol</td>
+                                <td>Hormek</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hormek-abbasan.html" class="asiret-link">Abbasan</a></td>
+                                <td>Kol</td>
+                                <td>Hormek</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hormek-sadi.html" class="asiret-link">Şadi</a></td>
+                                <td>Kol</td>
+                                <td>Hormek</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hormek-balaban.html" class="asiret-link">Balaban (bazı dönemlerde ilişkili)</a></td>
+                                <td>Kol</td>
+                                <td>Hormek teması</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/hormek-demenan.html" class="asiret-link">Demenan</a></td>
+                                <td>Kol</td>
+                                <td>Hormek teması</td>
+                                <td>-</td>
+                                <td>Tarihsel bağlar var, her zaman doğrudan alt kol değil</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- HEVÊRKAN -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>HEVÊRKAN</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/heverkan-alikan.html" class="asiret-link">Alikan</a></td>
+                                <td>Kol</td>
+                                <td>Hevêrkan</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/heverkan-elikan.html" class="asiret-link">Elikan</a></td>
+                                <td>Kol</td>
+                                <td>Hevêrkan</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/heverkan-doman.html" class="asiret-link">Doman</a></td>
+                                <td>Kol</td>
+                                <td>Hevêrkan</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/heverkan-hesenan.html" class="asiret-link">Hesenan</a></td>
+                                <td>Kol</td>
+                                <td>Hevêrkan</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/heverkan-haci-musa.html" class="asiret-link">Hacı Musa</a></td>
+                                <td>Kol</td>
+                                <td>Hevêrkan</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- CİBRAN -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>CİBRAN</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/cibran.html" class="asiret-link">Cibran</a></td>
+                                <td>Aşiret</td>
+                                <td>Cibran</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- MUTKİ -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>MUTKİ</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/mutki.html" class="asiret-link">Mutki</a></td>
+                                <td>Aşiret</td>
+                                <td>Mutki</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- BERWARÎ -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>BERWARÎ</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/nerwa.html" class="asiret-link">Nerwa</a></td>
+                                <td>Kol</td>
+                                <td>Berwarî</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/rekan.html" class="asiret-link">Rekan</a></td>
+                                <td>Kol</td>
+                                <td>Berwarî</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- ZIRKAN -->
+                <div class="konfederasyon-karti" data-kategori="asiret">
+                    <div class="konfederasyon-baslik">
+                        <i class="fas fa-tree"></i>
+                        <h2>ZIRKAN</h2>
+                    </div>
+                    
+                    <table class="asiret-tablosu">
+                        <thead>
+                            <tr>
+                                <th>Aşiret / Kol</th>
+                                <th>Tür</th>
+                                <th>Üst Yapı</th>
+                                <th>Yoğun Bölge</th>
+                                <th>Not</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="asiret/besnav.html" class="asiret-link">Beşnav</a></td>
+                                <td>Kol</td>
+                                <td>Zırkan</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="asiret/reskotan.html" class="asiret-link">Reşkotan</a></td>
+                                <td>Kol</td>
+                                <td>Zırkan</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Toplam Bilgi -->
+                <div style="margin-top: 40px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <h3 style="color: var(--zer);">📊 Aşiret Yapıları Hakkında</h3>
+                    <p>Bu sayfada <strong>20+ konfederasyon/federasyon</strong> ve <strong>100'ün üzerinde aşiret kolu</strong> listelenmiştir. Her bir aşiret adına tıklayarak detaylı bilgilere ulaşabilirsiniz.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">Not: Aşiret bağlantıları ve üst yapılar tarihsel döneme ve kaynağa göre değişiklik gösterebilir.</p>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-tree"></i></div>
+                <h4>40+ Federasyon</h4>
+                <p>Aşiret konfederasyonları</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-link"></i></div>
+                <h4>100+ Aşiret</h4>
+                <p>Bağlı kol ve aşiretler</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h4>Zagros'tan Toroslar'a</h4>
+                <p>Geniş coğrafya</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · KÜRDİSTAN</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Filtreleme
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Aktif sınıfını güncelle
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const kartlar = document.querySelectorAll('.konfederasyon-karti');
+                
+                kartlar.forEach(kart => {
+                    if (filter === 'all' || kart.dataset.kategori === filter) {
+                        kart.style.display = 'block';
+                    } else {
+                        kart.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Arama
+        document.querySelector('.search-input')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('.asiret-tablosu tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
