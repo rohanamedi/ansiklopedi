@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kürt Devletleri ve Beylikleri - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Devletler sayfası için özel stiller */
+        .donem-baslik {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--zer);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .donem-baslik h2 {
+            margin: 0;
+            color: var(--zer);
+            font-size: 2rem;
+        }
+        
+        .donem-baslik i {
+            font-size: 2rem;
+            color: var(--sor);
+        }
+        
+        .devlet-karti {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            border-left: 4px solid var(--zer);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .devlet-karti:hover {
+            border-left-color: var(--sor);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(225, 25, 25, 0.2);
+        }
+        
+        .devlet-bilgi {
+            flex: 2;
+            min-width: 250px;
+        }
+        
+        .devlet-bilgi h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+        }
+        
+        .devlet-bilgi h3 a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .devlet-bilgi h3 a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .devlet-tarih {
+            display: inline-block;
+            background: var(--sor);
+            color: var(--spî);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .devlet-niteligi {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--pêşeroj-cyan);
+            color: var(--pêşeroj-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .devlet-bolge {
+            flex: 1;
+            min-width: 200px;
+            text-align: right;
+            font-size: 1rem;
+            color: var(--pêşeroj-cyan);
+        }
+        
+        .devlet-bolge i {
+            margin-right: 5px;
+            color: var(--zer);
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        .devlet-sayac {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+        
+        .sayaç-item {
+            text-align: center;
+        }
+        
+        .sayaç-sayi {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--zer);
+            line-height: 1.2;
+        }
+        
+        .sayaç-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .timeline-line {
+            position: relative;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--zer);
+        }
+        
+        @media (max-width: 768px) {
+            .devlet-karti {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .devlet-bolge {
+                text-align: left;
+                width: 100%;
+            }
+            
+            .donem-baslik h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link active">Devletler</a>
+                <a href="asiretler-konfederasyonlar.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="devletSearch" placeholder="Devlet ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                <h1>🏰 Kürt Devletleri ve Beylikleri</h1>
+                <p>Antik Çağ'dan günümüze Kürdistan coğrafyasında kurulmuş devletler, krallıklar, emirlikler ve beylikler. MÖ 2300'den MS 2026'ya uzanan 4.300 yıllık devlet geleneği.</p>
+                
+                <!-- Filtreleme -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">Tüm Dönemler</button>
+                    <button class="filter-btn" data-filter="ilk-cag">İlk Çağ</button>
+                    <button class="filter-btn" data-filter="orta-cag">Orta Çağ</button>
+                    <button class="filter-btn" data-filter="yeni-cag">Yeni Çağ</button>
+                    <button class="filter-btn" data-filter="modern">Modern Dönem</button>
+                </div>
+                
+                <!-- İstatistikler -->
+                <div class="devlet-sayac">
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="toplamDevlet">0</div>
+                        <div class="sayaç-label">Toplam Devlet/Beylik</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="ilkCagSayi">0</div>
+                        <div class="sayaç-label">İlk Çağ</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="ortaCagSayi">0</div>
+                        <div class="sayaç-label">Orta Çağ</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="yeniCagSayi">0</div>
+                        <div class="sayaç-label">Yeni Çağ</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="modernSayi">0</div>
+                        <div class="sayaç-label">Modern Dönem</div>
+                    </div>
+                </div>
+                
+                <!-- ===== İLK ÇAĞ ===== -->
+                <div class="donem-baslik" data-donem="ilk-cag">
+                    <i class="fas fa-archway"></i>
+                    <h2>İLK ÇAĞ (MÖ 2300 – MS 300)</h2>
+                </div>
+                
+                <div class="devlet-listesi" id="ilkCagListesi">
+                    <!-- Gutiler -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="gutiler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/gutiler.html">Gutiler (Gutium)</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 2200–2100</span>
+                                <span class="devlet-niteligi">Zagros kökenli dağ konfederasyonu</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Zagros Dağları
+                        </div>
+                    </div>
+                    
+                    <!-- Lullubiler -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="lullubiler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/lullubiler.html">Lullubiler</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 2300–2000</span>
+                                <span class="devlet-niteligi">Zagros krallık yapısı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Zagros Dağları
+                        </div>
+                    </div>
+                    
+                    <!-- Kassitler -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="kassitler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/kassitler.html">Kassitler</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 1595–1155</span>
+                                <span class="devlet-niteligi">Babil'i yöneten Zagros kökenli hanedan</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Babil, Mezopotamya
+                        </div>
+                    </div>
+                    
+                    <!-- Mannalar -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="mannalar">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/mannalar.html">Mannalar (Manna Krallığı)</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 10.–7. yy</span>
+                                <span class="devlet-niteligi">Urmiye havzası krallığı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Urmiye Havzası
+                        </div>
+                    </div>
+                    
+                    <!-- Med İmparatorluğu -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="medler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/medler.html">Med İmparatorluğu</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 678–550</span>
+                                <span class="devlet-niteligi">İranî imparatorluk</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> İran, Mezopotamya, Anadolu
+                        </div>
+                    </div>
+                    
+                    <!-- Atropatene -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="atropatene">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/atropatene.html">Atropatene (Media Atropatene)</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 4. yy–MS 3. yy</span>
+                                <span class="devlet-niteligi">Helenistik İranî krallık</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Kuzeybatı İran, Azerbaycan
+                        </div>
+                    </div>
+                    
+                    <!-- Corduene -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="corduene">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/corduene.html">Corduene (Gordyene)</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 2. yy–MS 4. yy</span>
+                                <span class="devlet-niteligi">Bölgesel dağ krallığı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Güneydoğu Anadolu, Kuzey Irak
+                        </div>
+                    </div>
+                    
+                    <!-- Adiabene -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="adiabene">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/adiabene.html">Adiabene</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 1. yy–MS 3. yy</span>
+                                <span class="devlet-niteligi">Bölgesel krallık</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Erbil, Kuzey Irak
+                        </div>
+                    </div>
+                    
+                    <!-- Karduklar -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="karduklar">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/karduklar.html">Karduklar (Kardukhi)</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 5. yy</span>
+                                <span class="devlet-niteligi">Dağ halkı, Ksenophon'da geçer</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Güneydoğu Anadolu
+                        </div>
+                    </div>
+                    
+                    <!-- Sophene -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="sophene">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/sophene.html">Sophene</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 3.–1. yy</span>
+                                <span class="devlet-niteligi">Helenistik Dönem krallığı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Diyarbakır – Elazığ hattı
+                        </div>
+                    </div>
+                    
+                    <!-- Osroene -->
+                    <div class="devlet-karti" data-donem="ilk-cag" data-isim="osroene">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/osroene.html">Osroene (Edessa Krallığı)</a></h3>
+                            <div>
+                                <span class="devlet-tarih">MÖ 132–MS 244</span>
+                                <span class="devlet-niteligi">Roma Dönemi krallığı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Urfa (Edessa)
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ===== ORTA ÇAĞ ===== -->
+                <div class="donem-baslik" data-donem="orta-cag">
+                    <i class="fas fa-crown"></i>
+                    <h2>ORTA ÇAĞ (8. yy – 14. yy)</h2>
+                </div>
+                
+                <div class="devlet-listesi" id="ortaCagListesi">
+                    <!-- Revvadîler -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="revvadiler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/revvadiler.html">Revvadîler</a></h3>
+                            <div>
+                                <span class="devlet-tarih">8.–11. yy</span>
+                                <span class="devlet-niteligi">Kürt hanedanı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Tebriz – Azerbaycan
+                        </div>
+                    </div>
+                    
+                    <!-- Hasanveyhîler -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="hasanveyhiler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/hasanveyhiler.html">Hasanveyhîler</a></h3>
+                            <div>
+                                <span class="devlet-tarih">959–1015</span>
+                                <span class="devlet-niteligi">Kürt hanedanı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Kirmanshah – Dinaver
+                        </div>
+                    </div>
+                    
+                    <!-- Şeddadîler -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="seddadiler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/seddadiler.html">Şeddadîler</a></h3>
+                            <div>
+                                <span class="devlet-tarih">951–1199</span>
+                                <span class="devlet-niteligi">Kürt hanedanı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Gence – Ani – Dvin
+                        </div>
+                    </div>
+                    
+                    <!-- Mervanîler -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="mervaniler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/mervaniler.html">Mervanîler</a></h3>
+                            <div>
+                                <span class="devlet-tarih">990–1085</span>
+                                <span class="devlet-niteligi">Kürt hanedanı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Diyarbakır (Amid) – Silvan
+                        </div>
+                    </div>
+                    
+                    <!-- Annazîler -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="annaziler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/annaziler.html">Annazîler</a></h3>
+                            <div>
+                                <span class="devlet-tarih">990–1117</span>
+                                <span class="devlet-niteligi">Kürt hanedanı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Hulvan – Kirmanşah
+                        </div>
+                    </div>
+                    
+                    <!-- Hazaraspîler -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="hazaraspiler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/hazaraspiler.html">Hazaraspîler</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1155–1424</span>
+                                <span class="devlet-niteligi">Kürt hanedanı</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Luristan
+                        </div>
+                    </div>
+                    
+                    <!-- Eyyûbîler -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="eyyubiler">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/eyyubiler.html">Eyyûbî Devleti</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1171–1250</span>
+                                <span class="devlet-niteligi">Kürt kökenli sultanlık</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Kahire – Şam – Halep
+                        </div>
+                    </div>
+                    
+                    <!-- Ardalan (Orta Çağ) -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="ardalan">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/ardalan.html">Ardalan Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">14. yy – 1867</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Senendec, Doğu Kürdistan
+                        </div>
+                    </div>
+                    
+                    <!-- Bitlis Emirliği (Orta Çağ) -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="bitlis">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/bitlis.html">Bitlis Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">13. yy – 19. yy</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Bitlis
+                        </div>
+                    </div>
+                    
+                    <!-- Baban Emirliği (Orta Çağ) -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="baban">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/baban.html">Baban Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1649–1851</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Soran Emirliği (Orta Çağ) -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="soran">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/soran.html">Soran Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1816–1836</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Rewanduz
+                        </div>
+                    </div>
+                    
+                    <!-- Bohtan Emirliği (Orta Çağ) -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="bohtan">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/bohtan.html">Bohtan Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">14.–19. yy</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Cizre
+                        </div>
+                    </div>
+                    
+                    <!-- Hakkâri Emirliği (Orta Çağ) -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="hakkari">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/hakkari.html">Beylik-i Hakkâri</a></h3>
+                            <div>
+                                <span class="devlet-tarih">14.–19. yy</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Hakkâri
+                        </div>
+                    </div>
+                    
+                    <!-- Badinan -->
+                    <div class="devlet-karti" data-donem="orta-cag" data-isim="badinan">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/badinan.html">Beylik-i Badinan</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1376–1843</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Amediye
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ===== YENİ ÇAĞ ===== -->
+                <div class="donem-baslik" data-donem="yeni-cag">
+                    <i class="fas fa-scroll"></i>
+                    <h2>YENİ ÇAĞ (14. yy – 19. yy)</h2>
+                </div>
+                
+                <div class="devlet-listesi" id="yeniCagListesi">
+                    <!-- Ardalan (Yeni Çağ) -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="ardalan">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/ardalan.html">Ardalan Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">14. yy – 1867</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Senendec
+                        </div>
+                    </div>
+                    
+                    <!-- Bitlis Emirliği -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="bitlis">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/bitlis.html">Bitlis Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">13. yy – 1847</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Bitlis
+                        </div>
+                    </div>
+                    
+                    <!-- Bohtan Emirliği -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="bohtan">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/bohtan.html">Bohtan Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">14. yy – 1847</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Cizre
+                        </div>
+                    </div>
+                    
+                    <!-- Baban Emirliği -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="baban">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/baban.html">Baban Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1649 – 1851</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Soran Emirliği -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="soran">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/soran.html">Soran Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1816 – 1836</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Rewanduz
+                        </div>
+                    </div>
+                    
+                    <!-- Badinan -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="badinan">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/badinan.html">Beylik-i Badinan</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1376 – 1843</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Amediye
+                        </div>
+                    </div>
+                    
+                    <!-- Hakkâri Emirliği -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="hakkari">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/hakkari.html">Hakkâri Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">14. yy – 19. yy</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Hakkâri
+                        </div>
+                    </div>
+                    
+                    <!-- Müküs -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="mukus">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/mukus.html">Müküs (Bahçesaray) Beyliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">15.–19. yy</span>
+                                <span class="devlet-niteligi">Kürt beyliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Van güneyi, Bahçesaray
+                        </div>
+                    </div>
+                    
+                    <!-- Palu -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="palu">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/palu.html">Palu Emirliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">15.–19. yy</span>
+                                <span class="devlet-niteligi">Kürt emirliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Palu, Elazığ
+                        </div>
+                    </div>
+                    
+                    <!-- Çemişgezek -->
+                    <div class="devlet-karti" data-donem="yeni-cag" data-isim="cemisgezek">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/cemisgezek.html">Çemişgezek Beyliği</a></h3>
+                            <div>
+                                <span class="devlet-tarih">15.–17. yy</span>
+                                <span class="devlet-niteligi">Kürt beyliği</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Dersim hattı, Çemişgezek
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ===== MODERN DÖNEM ===== -->
+                <div class="donem-baslik" data-donem="modern">
+                    <i class="fas fa-flag"></i>
+                    <h2>MODERN DÖNEM (20. yy – Günümüz)</h2>
+                </div>
+                
+                <div class="devlet-listesi" id="modernListesi">
+                    <!-- Kürdistan Krallığı -->
+                    <div class="devlet-karti" data-donem="modern" data-isim="kurdistan-kralligi">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/kurdistan-kralligi.html">Kürdistan Krallığı</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1922–1924</span>
+                                <span class="devlet-niteligi">Mahmud Berzenci önderliğinde krallık</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Ağrı Cumhuriyeti -->
+                    <div class="devlet-karti" data-donem="modern" data-isim="agri-cumhuriyeti">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/agri-cumhuriyeti.html">Ağrı Kürdistan Cumhuriyeti</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1927–1930</span>
+                                <span class="devlet-niteligi">İhsan Nuri Paşa önderliğinde cumhuriyet</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Ağrı Dağı çevresi
+                        </div>
+                    </div>
+                    
+                    <!-- Mahabad Cumhuriyeti -->
+                    <div class="devlet-karti" data-donem="modern" data-isim="mahabad">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/mahabad.html">Mahabad Kürdistan Cumhuriyeti</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1946</span>
+                                <span class="devlet-niteligi">Qazî Mihemed önderliğinde cumhuriyet</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Mahabad, Doğu Kürdistan
+                        </div>
+                    </div>
+                    
+                    <!-- Irak Kürdistan Bölgesel Yönetimi -->
+                    <div class="devlet-karti" data-donem="modern" data-isim="kurdistan-bolgesel">
+                        <div class="devlet-bilgi">
+                            <h3><a href="devlet/kurdistan-bolgesel.html">Irak Kürdistan Bölgesel Yönetimi</a></h3>
+                            <div>
+                                <span class="devlet-tarih">1992–</span>
+                                <span class="devlet-niteligi">Federal bölgesel yönetim</span>
+                            </div>
+                        </div>
+                        <div class="devlet-bolge">
+                            <i class="fas fa-map-marker-alt"></i> Erbil, Süleymaniye, Duhok
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Zaman Çizelgesi Notu -->
+                <div style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <h3 style="color: var(--zer);"><i class="fas fa-hourglass-half"></i> Tarihsel Not</h3>
+                    <p>Bu listede <strong id="toplamSayi">40'ın üzerinde</strong> Kürt devleti, krallığı, emirliği ve beyliği yer almaktadır. MÖ 2300'den günümüze kadar kesintisiz bir devlet geleneği söz konusudur. Bazı devletler/beylikler birden fazla dönemde varlığını sürdürdüğü için her iki dönemde de listelenmiştir.</p>
+                    
+                    <div class="timeline-line" style="margin-top: 20px;">
+                        <p><strong>En eski:</strong> Lullubiler (MÖ 2300)</p>
+                        <p><strong>En uzun süreli:</strong> Ardalan Emirliği (14. yy – 1867, ~500 yıl)</p>
+                        <p><strong>En geniş sınırlar:</strong> Med İmparatorluğu, Eyyûbîler</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-crown"></i></div>
+                <h4>40+ Devlet</h4>
+                <p>4.300 yıllık gelenek</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-scroll"></i></div>
+                <h4>15+ Emirlik</h4>
+                <p>Orta Çağ beylikleri</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-map"></i></div>
+                <h4>3 Kıtada</h4>
+                <p>Mısır'dan İran'a</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · KÜRDİSTAN</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Sayıları hesapla
+        function hesaplaSayilari() {
+            const tumKartlar = document.querySelectorAll('.devlet-karti');
+            const ilkCagKartlar = document.querySelectorAll('.devlet-karti[data-donem="ilk-cag"]');
+            const ortaCagKartlar = document.querySelectorAll('.devlet-karti[data-donem="orta-cag"]');
+            const yeniCagKartlar = document.querySelectorAll('.devlet-karti[data-donem="yeni-cag"]');
+            const modernKartlar = document.querySelectorAll('.devlet-karti[data-donem="modern"]');
+            
+            document.getElementById('toplamDevlet').textContent = tumKartlar.length;
+            document.getElementById('ilkCagSayi').textContent = ilkCagKartlar.length;
+            document.getElementById('ortaCagSayi').textContent = ortaCagKartlar.length;
+            document.getElementById('yeniCagSayi').textContent = yeniCagKartlar.length;
+            document.getElementById('modernSayi').textContent = modernKartlar.length;
+            document.getElementById('toplamSayi').textContent = tumKartlar.length;
+        }
+        
+        // Filtreleme
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Aktif sınıfını güncelle
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const kartlar = document.querySelectorAll('.devlet-karti');
+                const donemBasliklari = document.querySelectorAll('.donem-baslik');
+                
+                if (filter === 'all') {
+                    // Tümünü göster
+                    kartlar.forEach(kart => kart.style.display = 'flex');
+                    donemBasliklari.forEach(baslik => baslik.style.display = 'flex');
+                } else {
+                    // Sadece seçili dönemi göster
+                    kartlar.forEach(kart => {
+                        if (kart.dataset.donem === filter) {
+                            kart.style.display = 'flex';
+                        } else {
+                            kart.style.display = 'none';
+                        }
+                    });
+                    
+                    // Sadece ilgili dönem başlığını göster
+                    donemBasliklari.forEach(baslik => {
+                        if (baslik.dataset.donem === filter) {
+                            baslik.style.display = 'flex';
+                        } else {
+                            baslik.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Arama
+        document.getElementById('devletSearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const kartlar = document.querySelectorAll('.devlet-karti');
+            
+            kartlar.forEach(kart => {
+                const isim = kart.dataset.isim;
+                const metin = kart.textContent.toLowerCase();
+                
+                if (metin.includes(searchTerm) || (isim && isim.includes(searchTerm))) {
+                    kart.style.display = 'flex';
+                } else {
+                    kart.style.display = 'none';
+                }
+            });
+        });
+        
+        // Sayfa yüklendiğinde sayıları hesapla
+        window.addEventListener('load', hesaplaSayilari);
+    </script>
+</body>
+</html>
