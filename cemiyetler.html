@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kürt Cemiyetler ve Örgütler - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Cemiyetler sayfası için özel stiller */
+        .donem-baslik {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--zer);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .donem-baslik h2 {
+            margin: 0;
+            color: var(--zer);
+            font-size: 2rem;
+        }
+        
+        .donem-baslik i {
+            font-size: 2rem;
+            color: var(--sor);
+        }
+        
+        .orgut-karti {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            border-left: 4px solid var(--zer);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .orgut-karti:hover {
+            border-left-color: var(--sor);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(225, 25, 25, 0.2);
+        }
+        
+        .orgut-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+            padding-bottom: 10px;
+        }
+        
+        .orgut-header h3 {
+            margin: 0;
+            font-size: 1.6rem;
+        }
+        
+        .orgut-header h3 a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .orgut-header h3 a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .kisaltma-badge {
+            background: var(--sor);
+            color: var(--spî);
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: var(--font-baslik);
+        }
+        
+        .orgut-bilgi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .bilgi-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .bilgi-label {
+            font-size: 0.85rem;
+            color: var(--pêşeroj-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .bilgi-value {
+            font-size: 1rem;
+            color: var(--spî);
+        }
+        
+        .bilgi-value a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .bilgi-value a:hover {
+            text-decoration: underline;
+            color: var(--sor);
+        }
+        
+        .ideoloji-tag {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--zer);
+            color: var(--zer);
+            padding: 4px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        .orgut-sayac {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+        
+        .sayaç-item {
+            text-align: center;
+        }
+        
+        .sayaç-sayi {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--zer);
+            line-height: 1.2;
+        }
+        
+        .sayaç-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .timeline-line {
+            position: relative;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--zer);
+        }
+        
+        @media (max-width: 768px) {
+            .orgut-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .donem-baslik h2 {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler-konfederasyonlar.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link active">Cemiyetler</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="orgutSearch" placeholder="Cemiyet ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                <h1>🏛️ Kürt Cemiyetler, Örgütler ve Partiler</h1>
+                <p>1908'den günümüze Kürt siyasi ve kültürel örgütlenmeleri. Cemiyetler, partiler, askeri yapılar ve diaspora örgütleri.</p>
+                
+                <!-- İstatistikler -->
+                <div class="orgut-sayac">
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="toplamOrgut">0</div>
+                        <div class="sayaç-label">Toplam Örgüt</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="kulturSayi">0</div>
+                        <div class="sayaç-label">Kültürel Cemiyetler</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="siyasiSayi">0</div>
+                        <div class="sayaç-label">Siyasi Partiler</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="askeriSayi">0</div>
+                        <div class="sayaç-label">Askeri Yapılar</div>
+                    </div>
+                </div>
+                
+                <!-- Filtreleme -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">Tüm Dönemler</button>
+                    <button class="filter-btn" data-filter="erken">Erken Dönem (1908-1927)</button>
+                    <button class="filter-btn" data-filter="orta">Orta Dönem (1942-1978)</button>
+                    <button class="filter-btn" data-filter="modern">Modern Dönem (1978-2023)</button>
+                </div>
+                
+                <!-- ===== ERKEN DÖNEM (1908-1927) ===== -->
+                <div class="donem-baslik" data-donem="erken">
+                    <i class="fas fa-scroll"></i>
+                    <h2>Erken Dönem Cemiyetler (1908–1927)</h2>
+                </div>
+                
+                <!-- Kürt Teavün ve Terakki Cemiyeti -->
+                <div class="orgut-karti" data-donem="erken" data-isim="teavun-terakki" data-tur="kulturel">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/kurt-teavun-ve-terakki-cemiyeti.html">Kürt Teavün ve Terakki Cemiyeti</a></h3>
+                        <span class="kisaltma-badge">-</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1908</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/seyid-abdulkadir.html">Seyid Abdulkadir</a>, <a href="sahsiyet/emin-ali-bedirxan.html">Emin Ali Bedirxan</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/serif-pasa.html">Şerif Paşa</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Kültürel</span> <span class="ideoloji-tag">Sosyal reform</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kürt Neşr-i Maarif Cemiyeti -->
+                <div class="orgut-karti" data-donem="erken" data-isim="nesr-i-maarif" data-tur="kulturel">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/kurt-nesr-i-maarif-cemiyeti.html">Kürt Neşr-i Maarif Cemiyeti</a></h3>
+                        <span class="kisaltma-badge">-</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1910</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/abdullah-cevdet.html">Abdullah Cevdet</a>, <a href="sahsiyet/ishak-sukuti.html">İshak Sükuti</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value">-</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Eğitim</span> <span class="ideoloji-tag">Kültürel modernleşme</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kürt Talebe Hêvî Cemiyeti -->
+                <div class="orgut-karti" data-donem="erken" data-isim="hevi" data-tur="kulturel">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/kurt-talebe-hevi-cemiyeti.html">Kürt Talebe Hêvî Cemiyeti</a></h3>
+                        <span class="kisaltma-badge">Hêvî</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1912</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/celadet-ali-bedirxan.html">Celadet Bedirxan</a>, <a href="sahsiyet/kamuran-bedirxan.html">Kamuran Bedirxan</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/ekrem-cemilpasa.html">Ekrem Cemilpaşa</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Öğrenci</span> <span class="ideoloji-tag">Kültürel milliyetçilik</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kürdistan Teali Cemiyeti -->
+                <div class="orgut-karti" data-donem="erken" data-isim="teali" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/kurdistan-teali-cemiyeti.html">Kürdistan Teali Cemiyeti</a></h3>
+                        <span class="kisaltma-badge">KTC</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1918</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/seyid-abdulkadir.html">Seyid Abdulkadir</a>, <a href="sahsiyet/emin-ali-bedirxan.html">Emin Ali Bedirxan</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/kadri-cemilpasa.html">Kadri Cemilpaşa</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Ulusalcı</span> <span class="ideoloji-tag">Bağımsızlık</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Azadî Cemiyeti -->
+                <div class="orgut-karti" data-donem="erken" data-isim="azadi" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/azadi-cemiyeti.html">Azadî Cemiyeti</a></h3>
+                        <span class="kisaltma-badge">Azadî</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1921</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/cibranli-halit-bey.html">Cibranlı Halit Bey</a>, Yusuf Ziya Bey</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/seyh-said.html">Şeyh Said</a> (dolaylı ilişki)</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Ulusalcı</span> <span class="ideoloji-tag">Askerî</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Şark İstiklal Cemiyeti -->
+                <div class="orgut-karti" data-donem="erken" data-isim="sark-istiklal" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/sark-istiklal-cemiyeti.html">Şark İstiklal Cemiyeti</a></h3>
+                        <span class="kisaltma-badge">-</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1920'ler</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/seyh-said.html">Şeyh Said</a> çevresi</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/halit-bege-cibri.html">Halit Begê Cibrî</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">İslami</span> <span class="ideoloji-tag">Bölgesel direniş</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Xoybûn -->
+                <div class="orgut-karti" data-donem="erken" data-isim="xoybun" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/xoybun.html">Xoybûn (Hoybun)</a></h3>
+                        <span class="kisaltma-badge">Xoybûn</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1927</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/celadet-ali-bedirxan.html">Celadet Bedirxan</a>, <a href="sahsiyet/kamuran-bedirxan.html">Kamuran Bedirxan</a>, <a href="sahsiyet/haco-aga.html">Haco Ağa</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/memduh-selim.html">Memduh Selim</a>, <a href="sahsiyet/qedrican.html">Qedrîcan</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Ulusalcı</span> <span class="ideoloji-tag">Bağımsızlık</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ===== ORTA DÖNEM (1942-1978) ===== -->
+                <div class="donem-baslik" data-donem="orta">
+                    <i class="fas fa-flag"></i>
+                    <h2>Orta Dönem Örgütler (1942–1978)</h2>
+                </div>
+                
+                <!-- Komala JK -->
+                <div class="orgut-karti" data-donem="orta" data-isim="komala" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/komala-jk.html">Komala JK</a></h3>
+                        <span class="kisaltma-badge">Komala</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1942</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/qazi-mihemed.html">Qazî Mihemed</a>, <a href="sahsiyet/seid-qazi.html">Seîd Qazî</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value">Hecî Baba Şêx</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Sosyalist</span> <span class="ideoloji-tag">Ulusalcı</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- KDP-İran (KDPI) -->
+                <div class="orgut-karti" data-donem="orta" data-isim="kdpi" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/kdp-iran.html">Kürdistan Demokrat Partisi - İran</a></h3>
+                        <span class="kisaltma-badge">KDPI</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1945</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/qazi-mihemed.html">Qazî Mihemed</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/abdurrahman-qasimlu.html">Abdurrahman Qasimlu</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Ulusalcı</span> <span class="ideoloji-tag">Sosyal demokrat</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kürdistan Demokrat Partisi (KDP) -->
+                <div class="orgut-karti" data-donem="orta" data-isim="kdp" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/kdp.html">Kürdistan Demokrat Partisi</a></h3>
+                        <span class="kisaltma-badge">KDP</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1946</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/mustafa-barzani.html">Mustafa Barzani</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/mesud-barzani.html">Mesud Barzani</a>, <a href="sahsiyet/ahmed-barzani.html">Ahmed Barzani</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Ulusalcı</span> <span class="ideoloji-tag">Muhafazakâr</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kürdistan Yurtseverler Birliği (KYB) -->
+                <div class="orgut-karti" data-donem="orta" data-isim="kyb" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/kyb.html">Kürdistan Yurtseverler Birliği</a></h3>
+                        <span class="kisaltma-badge">KYB</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1975</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/celal-talabani.html">Celal Talabani</a>, <a href="sahsiyet/ibrahim-ahmed.html">İbrahim Ahmed</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value">Kosret Resul</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Sosyal demokrat</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PKK -->
+                <div class="orgut-karti" data-donem="orta" data-isim="pkk" data-tur="askeri">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/pkk.html">Partiya Karkerên Kurdistan (PKK)</a></h3>
+                        <span class="kisaltma-badge">PKK</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1978</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/abdullah-ocalan.html">Abdullah Öcalan</a>, <a href="sahsiyet/kemal-pir.html">Kemal Pir</a>, <a href="sahsiyet/mazlum-dogan.html">Mazlum Doğan</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/cemil-bayik.html">Cemil Bayık</a>, <a href="sahsiyet/murat-karayilan.html">Murat Karayılan</a>, <a href="sahsiyet/duran-kalkan.html">Duran Kalkan</a>, <a href="sahsiyet/hayri-durmus.html">Hayri Durmuş</a>, <a href="sahsiyet/mahsun-korkmaz.html">Mahsun Korkmaz</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Demokratik konfederalizm</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ===== MODERN DÖNEM (2000'ler - 2023) ===== -->
+                <div class="donem-baslik" data-donem="modern">
+                    <i class="fas fa-building"></i>
+                    <h2>Modern Dönem Örgütler (2000–2023)</h2>
+                </div>
+                
+                <!-- PYD -->
+                <div class="orgut-karti" data-donem="modern" data-isim="pyd" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/pyd.html">Partiya Yekîtiya Demokrat (PYD)</a></h3>
+                        <span class="kisaltma-badge">PYD</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">2003</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/salih-muslim.html">Salih Müslim</a>, <a href="sahsiyet/asya-abdullah.html">Asya Abdullah</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/aldar-xelil.html">Aldar Xelil</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Demokratik konfederalizm</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- YPG -->
+                <div class="orgut-karti" data-donem="modern" data-isim="ypg" data-tur="askeri">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/ypg.html">Yekîneyên Parastina Gel (YPG)</a></h3>
+                        <span class="kisaltma-badge">YPG</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">2011</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value">-</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/mazlum-kobani.html">Mazlum Kobanî</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Demokratik konfederalizm</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- YPJ -->
+                <div class="orgut-karti" data-donem="modern" data-isim="ypj" data-tur="askeri">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/ypj.html">Yekîneyên Parastina Jin (YPJ)</a></h3>
+                        <span class="kisaltma-badge">YPJ</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">2012</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value">-</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value">-</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Jineoloji</span> <span class="ideoloji-tag">Kadın özgürlüğü</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- HDP -->
+                <div class="orgut-karti" data-donem="modern" data-isim="hdp" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/hdp.html">Halkların Demokratik Partisi (HDP)</a></h3>
+                        <span class="kisaltma-badge">HDP</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">2012</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/selahattin-demirtas.html">Selahattin Demirtaş</a>, <a href="sahsiyet/figen-yuksekdag.html">Figen Yüksekdağ</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value">-</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Demokratik sosyalizm</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DEM Parti -->
+                <div class="orgut-karti" data-donem="modern" data-isim="dem" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/dem-parti.html">Halkların Eşitlik ve Demokrasi Partisi (DEM Parti)</a></h3>
+                        <span class="kisaltma-badge">DEM</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">2023</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/tulay-hatimogullari.html">Tülay Hatimoğulları</a>, <a href="sahsiyet/tuncer-bakirhan.html">Tuncer Bakırhan</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value">-</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Demokratik sosyalizm</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kürdistan Gençlik Koalisyonu (KGK) -->
+                <div class="orgut-karti" data-donem="modern" data-isim="kgk" data-tur="sivil">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/kgk.html">Kürdistan Gençlik Koalisyonu</a></h3>
+                        <span class="kisaltma-badge">KGK</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">2000'ler</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value">-</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value"><a href="sahsiyet/tuncay-koc.html">Tuncay Koç</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Diaspora temelli hak savunuculuğu</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Partiya Azadiya Kurdistan (PAK) -->
+                <div class="orgut-karti" data-donem="modern" data-isim="pak" data-tur="siyasi">
+                    <div class="orgut-header">
+                        <h3><a href="cemiyet/pak.html">Partiya Azadiya Kurdistan (PAK)</a></h3>
+                        <span class="kisaltma-badge">PAK</span>
+                    </div>
+                    
+                    <div class="orgut-bilgi-grid">
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kuruluş</span>
+                            <span class="bilgi-value">1990'lar</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Kurucular</span>
+                            <span class="bilgi-value"><a href="sahsiyet/yasar-kaya.html">Yaşar Kaya</a></span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">Öne Çıkan Kadrolar</span>
+                            <span class="bilgi-value">-</span>
+                        </div>
+                        <div class="bilgi-item">
+                            <span class="bilgi-label">İdeoloji</span>
+                            <span class="bilgi-value"><span class="ideoloji-tag">Ulusalcı</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Toplam Bilgi -->
+                <div style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <h3 style="color: var(--zer);"><i class="fas fa-sitemap"></i> Kürt Örgütlenmesi Hakkında</h3>
+                    <p>Bu sayfada <strong id="toplamOrgutText">19</strong> Kürt cemiyeti, partisi ve örgütü listelenmiştir. 1908'den günümüze uzanan örgütlenme geleneği.</p>
+                    
+                    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 20px;">
+                        <div><strong>En eski:</strong> Kürt Teavün ve Terakki Cemiyeti (1908)</div>
+                        <div><strong>En yeni:</strong> DEM Parti (2023)</div>
+                        <div><strong>En uzun süreli:</strong> KDP (1946'dan beri)</div>
+                    </div>
+                    
+                    <div class="timeline-line" style="margin-top: 20px;">
+                        <p><strong>Kültürel Cemiyetler:</strong> 1908-1927 arasında İstanbul merkezli aydın hareketleri</p>
+                        <p><strong>Ulusalcı Partiler:</strong> 1940'lardan itibaren Irak ve İran Kürdistanı'nda</p>
+                        <p><strong>Modern Hareketler:</strong> 1978 sonrası PKK ve Rojava örgütlenmeleri</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-scroll"></i></div>
+                <h4>1908</h4>
+                <p>İlk cemiyet</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-flag"></i></div>
+                <h4>19 Örgüt</h4>
+                <p>Parti ve cemiyet</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-globe"></i></div>
+                <h4>4 parçada</h4>
+                <p>Örgütlenme</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · KÜRDİSTAN</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Sayıları hesapla
+        function hesaplaSayilari() {
+            const tumKartlar = document.querySelectorAll('.orgut-karti');
+            const kulturelKartlar = document.querySelectorAll('.orgut-karti[data-tur="kulturel"]');
+            const siyasiKartlar = document.querySelectorAll('.orgut-karti[data-tur="siyasi"]');
+            const askeriKartlar = document.querySelectorAll('.orgut-karti[data-tur="askeri"]');
+            
+            document.getElementById('toplamOrgut').textContent = tumKartlar.length;
+            document.getElementById('kulturSayi').textContent = kulturelKartlar.length;
+            document.getElementById('siyasiSayi').textContent = siyasiKartlar.length;
+            document.getElementById('askeriSayi').textContent = askeriKartlar.length;
+            document.getElementById('toplamOrgutText').textContent = tumKartlar.length;
+        }
+        
+        // Filtreleme
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const kartlar = document.querySelectorAll('.orgut-karti');
+                const donemBasliklari = document.querySelectorAll('.donem-baslik');
+                
+                if (filter === 'all') {
+                    kartlar.forEach(kart => kart.style.display = 'block');
+                    donemBasliklari.forEach(baslik => baslik.style.display = 'flex');
+                } else {
+                    kartlar.forEach(kart => {
+                        if (kart.dataset.donem === filter) {
+                            kart.style.display = 'block';
+                        } else {
+                            kart.style.display = 'none';
+                        }
+                    });
+                    
+                    donemBasliklari.forEach(baslik => {
+                        if (baslik.dataset.donem === filter) {
+                            baslik.style.display = 'flex';
+                        } else {
+                            baslik.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Arama
+        document.getElementById('orgutSearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const kartlar = document.querySelectorAll('.orgut-karti');
+            
+            kartlar.forEach(kart => {
+                const isim = kart.dataset.isim;
+                const metin = kart.textContent.toLowerCase();
+                
+                if (metin.includes(searchTerm) || (isim && isim.includes(searchTerm))) {
+                    kart.style.display = 'block';
+                } else {
+                    kart.style.display = 'none';
+                }
+            });
+        });
+        
+        // Sayfa yüklendiğinde sayıları hesapla
+        window.addEventListener('load', hesaplaSayilari);
+    </script>
+</body>
+</html>
