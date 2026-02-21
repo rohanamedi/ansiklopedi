@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kürt Şahsiyetler - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Şahsiyetler sayfası için özel stiller */
+        .kategori-baslik {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--zer);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .kategori-baslik h2 {
+            margin: 0;
+            color: var(--zer);
+            font-size: 2rem;
+        }
+        
+        .kategori-baslik i {
+            font-size: 2rem;
+            color: var(--sor);
+        }
+        
+        .sahsiyet-karti {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            border-left: 4px solid var(--zer);
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .sahsiyet-karti:hover {
+            border-left-color: var(--sor);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(225, 25, 25, 0.2);
+        }
+        
+        .sahsiyet-bilgi {
+            flex: 2;
+            min-width: 250px;
+        }
+        
+        .sahsiyet-bilgi h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+        }
+        
+        .sahsiyet-bilgi h3 a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .sahsiyet-bilgi h3 a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .sahsiyet-tarih {
+            display: inline-block;
+            background: var(--sor);
+            color: var(--spî);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            font-family: var(--font-baslik);
+        }
+        
+        .sahsiyet-rol {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--pêşeroj-cyan);
+            color: var(--pêşeroj-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-family: var(--font-baslik);
+        }
+        
+        .sahsiyet-dogumolum {
+            flex: 1;
+            min-width: 150px;
+            text-align: right;
+            font-size: 1rem;
+            color: var(--pêşeroj-cyan);
+        }
+        
+        .sahsiyet-dogumolum i {
+            margin-right: 5px;
+            color: var(--zer);
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        .sahsiyet-sayac {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+        
+        .sayaç-item {
+            text-align: center;
+        }
+        
+        .sayaç-sayi {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--zer);
+            line-height: 1.2;
+        }
+        
+        .sayaç-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .alphabet-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+            margin: 30px 0;
+        }
+        
+        .alphabet-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            font-family: var(--font-baslik);
+        }
+        
+        .alphabet-btn:hover,
+        .alphabet-btn.active {
+            background: var(--sor);
+            border-color: var(--zer);
+        }
+        
+        @media (max-width: 768px) {
+            .sahsiyet-karti {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .sahsiyet-dogumolum {
+                text-align: left;
+                width: 100%;
+            }
+            
+            .kategori-baslik h2 {
+                font-size: 1.6rem;
+            }
+            
+            .alphabet-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link active">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler-konfederasyonlar.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="sahsiyetSearch" placeholder="Şahsiyet ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                <h1>👤 Kürt Şahsiyetler</h1>
+                <p>Siyasi liderler, aydınlar, şairler, yazarlar ve tarihe damga vurmuş Kürt şahsiyetleri. 17. yüzyıldan günümüze 70'in üzerinde isim.</p>
+                
+                <!-- Alfabe Filtresi -->
+                <div class="alphabet-bar" id="alphabetBar"></div>
+                
+                <!-- İstatistikler -->
+                <div class="sahsiyet-sayac">
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="toplamSahsiyet">0</div>
+                        <div class="sayaç-label">Toplam Şahsiyet</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="siyasiSayi">0</div>
+                        <div class="sayaç-label">Siyasi Lider</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="edebiyatSayi">0</div>
+                        <div class="sayaç-label">Edebiyatçı</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="klasikSayi">0</div>
+                        <div class="sayaç-label">Klasik Edebiyat</div>
+                    </div>
+                </div>
+                
+                <!-- Filtreleme Butonları -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="siyasi">Siyasi Liderler</button>
+                    <button class="filter-btn" data-filter="edebiyat">Modern Edebiyatçılar</button>
+                    <button class="filter-btn" data-filter="klasik">Klasik Edebiyat</button>
+                </div>
+                
+                <!-- ===== SİYASİ LİDERLER ===== -->
+                <div class="kategori-baslik" data-kategori="siyasi">
+                    <i class="fas fa-landmark"></i>
+                    <h2>Siyasi Liderler ve Aktivistler</h2>
+                </div>
+                
+                <div class="sahsiyet-listesi" id="siyasiListesi">
+                    <!-- Abdullah Öcalan -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="ocalan" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/abdullah-ocalan.html">Abdullah Öcalan</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1949 –</span>
+                                <span class="sahsiyet-rol">PKK kurucusu</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1949, Ömerli
+                        </div>
+                    </div>
+                    
+                    <!-- Abdurrahman Qasimlu -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="qasimlu" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/abdurrahman-qasimlu.html">Abdurrahman Qasimlu</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1930 – 1989</span>
+                                <span class="sahsiyet-rol">KDPI lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1930, Urmiye
+                        </div>
+                    </div>
+                    
+                    <!-- Ahmed Barzani -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="ahmed-barzani" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/ahmed-barzani.html">Ahmed Barzani</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1896 – 1969</span>
+                                <span class="sahsiyet-rol">Aşiret ve siyasi lider</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1896, Barzan
+                        </div>
+                    </div>
+                    
+                    <!-- Aldar Xelil -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="aldar-xelil" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/aldar-xelil.html">Aldar Xelil</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1957 –</span>
+                                <span class="sahsiyet-rol">PYD yöneticisi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1957, Kobanê
+                        </div>
+                    </div>
+                    
+                    <!-- Alişan (Dersim) -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="alisan" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/alisan.html">Alişan (Dersim)</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">19.–20. yy başı</span>
+                                <span class="sahsiyet-rol">Aşiret lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Dersim
+                        </div>
+                    </div>
+                    
+                    <!-- Alişer (Koçgiri) -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="aliser" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/aliser.html">Alişer (Koçgiri)</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1882 – 1937</span>
+                                <span class="sahsiyet-rol">Koçgiri önderi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1882, Koçgiri
+                        </div>
+                    </div>
+                    
+                    <!-- Asya Abdullah -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="asya-abdullah" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/asya-abdullah.html">Asya Abdullah</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1971 –</span>
+                                <span class="sahsiyet-rol">PYD eşbaşkanı</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1971, Halep
+                        </div>
+                    </div>
+                    
+                    <!-- Bedirxan Ailesi -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="bedirxan-ailesi" data-harf="B">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/bedirxan-ailesi.html">Bedirxan Ailesi</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">19.–20. yy</span>
+                                <span class="sahsiyet-rol">Emirlik ve aydın ailesi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Cizre
+                        </div>
+                    </div>
+                    
+                    <!-- Bedirxan Bey -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="bedirxan-bey" data-harf="B">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/bedirxan-bey.html">Bedirxan Bey</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1803 – 1868</span>
+                                <span class="sahsiyet-rol">Bohtan Emirliği lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1803, Cizre
+                        </div>
+                    </div>
+                    
+                    <!-- Bozan Bey -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="bozan-bey" data-harf="B">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/bozan-bey.html">Bozan Bey</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy başı</span>
+                                <span class="sahsiyet-rol">Ağrı hareketi çevresi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Ağrı
+                        </div>
+                    </div>
+                    
+                    <!-- Cebrail Ağa -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="cebrail-aga" data-harf="C">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/cebrail-aga.html">Cebrail Ağa</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">19.–20. yy</span>
+                                <span class="sahsiyet-rol">Dersim aşiret lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Dersim
+                        </div>
+                    </div>
+                    
+                    <!-- Celal Talabani -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="celal-talabani" data-harf="C">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/celal-talabani.html">Celal Talabani</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1933 – 2017</span>
+                                <span class="sahsiyet-rol">KYB lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1933, Kelkan
+                        </div>
+                    </div>
+                    
+                    <!-- Cemil Bayık -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="cemil-bayik" data-harf="C">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/cemil-bayik.html">Cemil Bayık</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1953 –</span>
+                                <span class="sahsiyet-rol">PKK yöneticisi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1953, Urfa
+                        </div>
+                    </div>
+                    
+                    <!-- Cibranlı Halit Bey -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="cibranli-halit" data-harf="C">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/cibranli-halit-bey.html">Cibranlı Halit Bey</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1882 – 1925</span>
+                                <span class="sahsiyet-rol">Subay, siyasal figür</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1882, Varto
+                        </div>
+                    </div>
+                    
+                    <!-- Duran Kalkan -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="duran-kalkan" data-harf="D">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/duran-kalkan.html">Duran Kalkan</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1954 –</span>
+                                <span class="sahsiyet-rol">PKK yöneticisi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1954, Tunceli
+                        </div>
+                    </div>
+                    
+                    <!-- Emin Ali Bedirxan -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="emin-ali-bedirxan" data-harf="E">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/emin-ali-bedirxan.html">Emin Ali Bedirxan</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1851 – 1926</span>
+                                <span class="sahsiyet-rol">Aydın</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1851, İstanbul
+                        </div>
+                    </div>
+                    
+                    <!-- Ekrem Cemilpaşa -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="ekrem-cemilpasa" data-harf="E">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/ekrem-cemilpasa.html">Ekrem Cemilpaşa</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1891 – 1974</span>
+                                <span class="sahsiyet-rol">Aydın, siyasal figür</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1891, Diyarbakır
+                        </div>
+                    </div>
+                    
+                    <!-- Faik Tewfîq -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="faik-tewfiq" data-harf="F">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/faik-tewfiq.html">Faik Tewfîq</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy</span>
+                                <span class="sahsiyet-rol">Aydın</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                    
+                    <!-- Ferzende Beg -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="ferzende-beg" data-harf="F">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/ferzende-beg.html">Ferzende Beg</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy başı</span>
+                                <span class="sahsiyet-rol">Ağrı hareketi figürü</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Ağrı
+                        </div>
+                    </div>
+                    
+                    <!-- Fuad Paşa -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="fuad-pasa" data-harf="F">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/fuad-pasa.html">Fuad Paşa</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">19. yy</span>
+                                <span class="sahsiyet-rol">Osmanlı devlet adamı</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 19. yy, İstanbul
+                        </div>
+                    </div>
+                    
+                    <!-- Haco Ağa -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="haco-aga" data-harf="H">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/haco-aga.html">Haco Ağa</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy başı</span>
+                                <span class="sahsiyet-rol">Xoybûn destekçisi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                    
+                    <!-- Halit Begê Cibrî -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="halit-bege-cibri" data-harf="H">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/halit-bege-cibri.html">Halit Begê Cibrî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy başı</span>
+                                <span class="sahsiyet-rol">Aşiret lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                    
+                    <!-- Haydar Bey -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="haydar-bey" data-harf="H">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/haydar-bey.html">Haydar Bey</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy başı</span>
+                                <span class="sahsiyet-rol">Koçgiri hareketi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Koçgiri
+                        </div>
+                    </div>
+                    
+                    <!-- Hayri Durmuş -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="hayri-durmus" data-harf="H">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/hayri-durmus.html">Hayri Durmuş</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1950 – 1982</span>
+                                <span class="sahsiyet-rol">PKK kadrosu</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1950, -
+                        </div>
+                    </div>
+                    
+                    <!-- Hikmet Baban -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="hikmet-baban" data-harf="H">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/hikmet-baban.html">Hikmet Baban</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy</span>
+                                <span class="sahsiyet-rol">Siyasi figür</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                    
+                    <!-- İbrahim Ahmed -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="ibrahim-ahmed" data-harf="İ">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/ibrahim-ahmed.html">İbrahim Ahmed</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1914 – 2000</span>
+                                <span class="sahsiyet-rol">KYB kurucu kadro</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1914, Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- İbrahim Paşa (Milli) -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="ibrahim-pasa" data-harf="İ">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/ibrahim-pasa.html">İbrahim Paşa (Milli)</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">19.–20. yy</span>
+                                <span class="sahsiyet-rol">Aşiret lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Viranşehir
+                        </div>
+                    </div>
+                    
+                    <!-- İhsan Nuri Paşa -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="ihsan-nuri-pasa" data-harf="İ">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/ihsan-nuri-pasa.html">İhsan Nuri Paşa</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1892 – 1976</span>
+                                <span class="sahsiyet-rol">Ağrı hareketi lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1892, Bitlis
+                        </div>
+                    </div>
+                    
+                    <!-- Kamuran Bedirxan -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="kamuran-bedirxan" data-harf="K">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/kamuran-bedirxan.html">Kamuran Bedirxan</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1895 – 1978</span>
+                                <span class="sahsiyet-rol">Aydın, diplomat</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1895, İstanbul
+                        </div>
+                    </div>
+                    
+                    <!-- Kemal Pir -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="kemal-pir" data-harf="K">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/kemal-pir.html">Kemal Pir</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1952 – 1982</span>
+                                <span class="sahsiyet-rol">PKK kurucu kadro</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1952, Nazımiye
+                        </div>
+                    </div>
+                    
+                    <!-- Mahsun Korkmaz -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="mahsun-korkmaz" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/mahsun-korkmaz.html">Mahsun Korkmaz</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1956 – 1986</span>
+                                <span class="sahsiyet-rol">PKK askeri kadro</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1956, Tunceli
+                        </div>
+                    </div>
+                    
+                    <!-- Malik Hoca -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="malik-hoca" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/malik-hoca.html">Malik Hoca</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">19.–20. yy</span>
+                                <span class="sahsiyet-rol">Nasturi din adamı</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Hakkâri
+                        </div>
+                    </div>
+                    
+                    <!-- Mazlum Doğan -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="mazlum-dogan" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/mazlum-dogan.html">Mazlum Doğan</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1955 – 1982</span>
+                                <span class="sahsiyet-rol">PKK kadrosu</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1955, -
+                        </div>
+                    </div>
+                    
+                    <!-- Mazlum Kobanî -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="mazlum-kobani" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/mazlum-kobani.html">Mazlum Kobanî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1967 –</span>
+                                <span class="sahsiyet-rol">YPG komutanı</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1967, Kobanê
+                        </div>
+                    </div>
+                    
+                    <!-- Memduh Selim -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="memduh-selim" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/memduh-selim.html">Memduh Selim</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1908 – 1976</span>
+                                <span class="sahsiyet-rol">Xoybûn kadrosu</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1908, -
+                        </div>
+                    </div>
+                    
+                    <!-- Mîr Mihemed Paşa -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="mir-mihemed-pasa" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/mir-mihemed-pasa.html">Mîr Mihemed Paşa</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">19. yy</span>
+                                <span class="sahsiyet-rol">Soran Emirliği</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Rewanduz
+                        </div>
+                    </div>
+                    
+                    <!-- Murat Karayılan -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="murat-karayilan" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/murat-karayilan.html">Murat Karayılan</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1954 –</span>
+                                <span class="sahsiyet-rol">PKK yöneticisi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1954, Urfa
+                        </div>
+                    </div>
+                    
+                    <!-- Mustafa Barzani -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="mustafa-barzani" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/mustafa-barzani.html">Mustafa Barzani</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1903 – 1979</span>
+                                <span class="sahsiyet-rol">KDP lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1903, Barzan
+                        </div>
+                    </div>
+                    
+                    <!-- Nuri Dersimi -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="nuri-dersimi" data-harf="N">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/nuri-dersimi.html">Nuri Dersimi</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1893 – 1973</span>
+                                <span class="sahsiyet-rol">Aydın, Dersim figürü</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1893, Dersim
+                        </div>
+                    </div>
+                    
+                    <!-- Nureddin Zaza -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="nureddin-zaza" data-harf="N">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/nureddin-zaza.html">Nureddin Zaza</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1919 – 1988</span>
+                                <span class="sahsiyet-rol">Aydın</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1919, -
+                        </div>
+                    </div>
+                    
+                    <!-- Osman Sebrî -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="osman-sebri" data-harf="O">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/osman-sebri.html">Osman Sebrî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1905 – 1993</span>
+                                <span class="sahsiyet-rol">Siyasal aktivist</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1905, -
+                        </div>
+                    </div>
+                    
+                    <!-- Qazî Mihemed -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="qazi-mihemed" data-harf="Q">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/qazi-mihemed.html">Qazî Mihemed</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1893 – 1947</span>
+                                <span class="sahsiyet-rol">Mahabad lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1893, Mahabad
+                        </div>
+                    </div>
+                    
+                    <!-- Qedrîcan -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="qedrican" data-harf="Q">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/qedrican.html">Qedrîcan</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy</span>
+                                <span class="sahsiyet-rol">Xoybûn çevresi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                    
+                    <!-- Salih Müslim -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="salih-muslim" data-harf="S">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/salih-muslim.html">Salih Müslim</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1951 –</span>
+                                <span class="sahsiyet-rol">PYD yöneticisi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1951, Kobanê
+                        </div>
+                    </div>
+                    
+                    <!-- Seîd Qazî -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="seid-qazi" data-harf="S">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/seid-qazi.html">Seîd Qazî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20. yy</span>
+                                <span class="sahsiyet-rol">Mahabad çevresi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> Mahabad
+                        </div>
+                    </div>
+                    
+                    <!-- Selahattin Demirtaş -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="selahattin-demirtas" data-harf="S">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/selahattin-demirtas.html">Selahattin Demirtaş</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1973 –</span>
+                                <span class="sahsiyet-rol">HDP siyasetçisi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1973, Diyarbakır
+                        </div>
+                    </div>
+                    
+                    <!-- Seyid Rıza -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="seyid-riza" data-harf="S">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/seyid-riza.html">Seyid Rıza</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1863 – 1937</span>
+                                <span class="sahsiyet-rol">Dersim lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1863, Dersim
+                        </div>
+                    </div>
+                    
+                    <!-- Seyid Abdulkadir -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="seyid-abdulkadir" data-harf="S">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/seyid-abdulkadir.html">Seyid Abdulkadir</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1851 – 1925</span>
+                                <span class="sahsiyet-rol">Siyasi-dini lider</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1851, -
+                        </div>
+                    </div>
+                    
+                    <!-- Şeyh Ubeydullah -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="seyh-ubeydullah" data-harf="Ş">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/seyh-ubeydullah.html">Şeyh Ubeydullah</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1820 – 1883</span>
+                                <span class="sahsiyet-rol">Dini-siyasi lider</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1820, Şemdinli
+                        </div>
+                    </div>
+                    
+                    <!-- Şeyh Said -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="seyh-said" data-harf="Ş">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/seyh-said.html">Şeyh Said</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1865 – 1925</span>
+                                <span class="sahsiyet-rol">Dini-siyasi lider</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1865, Palu
+                        </div>
+                    </div>
+                    
+                    <!-- Şeyh Mahmut Berzenci -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="seyh-mahmut-berzenci" data-harf="Ş">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/seyh-mahmut-berzenci.html">Şeyh Mahmut Berzenci</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1878 – 1956</span>
+                                <span class="sahsiyet-rol">Kürdistan Krallığı lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1878, Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Şerif Paşa -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="serif-pasa" data-harf="Ş">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/serif-pasa.html">Şerif Paşa</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1865 – 1951</span>
+                                <span class="sahsiyet-rol">Diplomatik temsilci</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1865, İstanbul
+                        </div>
+                    </div>
+                    
+                    <!-- Tuncay Koç -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="tuncay-koc" data-harf="T">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/tuncay-koc.html">Tuncay Koç</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">20.–21. yy</span>
+                                <span class="sahsiyet-rol">Siyasi aktivist</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                    
+                    <!-- Yaşar Kaya -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="yasar-kaya" data-harf="Y">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/yasar-kaya.html">Yaşar Kaya</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1938 – 2013</span>
+                                <span class="sahsiyet-rol">Siyasetçi</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1938, -
+                        </div>
+                    </div>
+                    
+                    <!-- Zübeyir Ağa -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="zubeyir-aga" data-harf="Z">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/zubeyir-aga.html">Zübeyir Ağa</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">19.–20. yy</span>
+                                <span class="sahsiyet-rol">Aşiret lideri</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                    
+                    <!-- Mihamed Emîn Zekî Beg -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="mihamed-emin-zeki" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/mihamed-emin-zeki-beg.html">Mihamed Emîn Zekî Beg</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1880 – 1948</span>
+                                <span class="sahsiyet-rol">Şair, yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1880, Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Şêx Fexrî -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="sex-fexri" data-harf="Ş">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/sex-fexri.html">Şêx Fexrî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">-</span>
+                                <span class="sahsiyet-rol">-</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                    
+                    <!-- Şêx Xweznevî -->
+                    <div class="sahsiyet-karti" data-kategori="siyasi" data-isim="sex-xweznevi" data-harf="Ş">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/sex-xweznevi.html">Şêx Xweznevî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">-</span>
+                                <span class="sahsiyet-rol">-</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-map-marker-alt"></i> -
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ===== KLASİK EDEBİYAT ===== -->
+                <div class="kategori-baslik" data-kategori="klasik">
+                    <i class="fas fa-feather-alt"></i>
+                    <h2>Klasik Kürt Edebiyatı (15.–19. yy)</h2>
+                </div>
+                
+                <div class="sahsiyet-listesi" id="klasikListesi">
+                    <!-- Ehmedê Xanî -->
+                    <div class="sahsiyet-karti" data-kategori="klasik" data-isim="ehmede-xani" data-harf="E">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/ehmede-xani.html">Ehmedê Xanî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1650 – 1707</span>
+                                <span class="sahsiyet-rol">Yazar, şair</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1650, Hakkâri
+                        </div>
+                    </div>
+                    
+                    <!-- Melayê Cizîrî -->
+                    <div class="sahsiyet-karti" data-kategori="klasik" data-isim="melaye-ciziri" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/melaye-ciziri.html">Melayê Cizîrî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1570 – 1640</span>
+                                <span class="sahsiyet-rol">Şair, mutasavvıf</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1570, Cizre
+                        </div>
+                    </div>
+                    
+                    <!-- Feqiyê Teyran -->
+                    <div class="sahsiyet-karti" data-kategori="klasik" data-isim="feqiye-teyran" data-harf="F">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/feqiye-teyran.html">Feqiyê Teyran</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1590 – 1660</span>
+                                <span class="sahsiyet-rol">Şair, yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1590, Hakkâri
+                        </div>
+                    </div>
+                    
+                    <!-- Ali Harirî -->
+                    <div class="sahsiyet-karti" data-kategori="klasik" data-isim="ali-hariri" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/ali-hariri.html">Ali Harirî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1425 – 1495</span>
+                                <span class="sahsiyet-rol">Şair</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1425, Hakkâri
+                        </div>
+                    </div>
+                    
+                    <!-- Nalî -->
+                    <div class="sahsiyet-karti" data-kategori="klasik" data-isim="nali" data-harf="N">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/nali.html">Nalî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1800 – 1856</span>
+                                <span class="sahsiyet-rol">Şair, yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1800, Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Salim -->
+                    <div class="sahsiyet-karti" data-kategori="klasik" data-isim="salim" data-harf="S">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/salim.html">Salim</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1805 – 1869</span>
+                                <span class="sahsiyet-rol">Şair, yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1805, Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Hecî Qadirê Koyî -->
+                    <div class="sahsiyet-karti" data-kategori="klasik" data-isim="heci-qadire-koyi" data-harf="H">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/heci-qadire-koyi.html">Hecî Qadirê Koyî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1817 – 1897</span>
+                                <span class="sahsiyet-rol">Şair</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1817, Köysancak
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ===== MODERN EDEBİYATÇILAR ===== -->
+                <div class="kategori-baslik" data-kategori="edebiyat">
+                    <i class="fas fa-pen-fancy"></i>
+                    <h2>Modern Edebiyatçılar (20.–21. yy)</h2>
+                </div>
+                
+                <div class="sahsiyet-listesi" id="edebiyatListesi">
+                    <!-- Cegerxwîn -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="cegerxwin" data-harf="C">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/cegerxwin.html">Cegerxwîn</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1903 – 1984</span>
+                                <span class="sahsiyet-rol">Şair, yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1903, Mardin
+                        </div>
+                    </div>
+                    
+                    <!-- Celadet Ali Bedirxan (edebiyat) -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="celadet-bedirxan" data-harf="C">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/celadet-bedirxan-edebiyat.html">Celadet Ali Bedirxan</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1893 – 1951</span>
+                                <span class="sahsiyet-rol">Aydın, dil çalışmaları</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1893, İstanbul
+                        </div>
+                    </div>
+                    
+                    <!-- Abdulla Goran -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="abdulla-goran" data-harf="A">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/abdulla-goran.html">Abdulla Goran</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1904 – 1962</span>
+                                <span class="sahsiyet-rol">Şair</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1904, Halepçe
+                        </div>
+                    </div>
+                    
+                    <!-- Osman Sebrî (edebiyat) -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="osman-sebri-edebiyat" data-harf="O">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/osman-sebri-edebiyat.html">Osman Sebrî</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1905 – 1993</span>
+                                <span class="sahsiyet-rol">Yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1905, -
+                        </div>
+                    </div>
+                    
+                    <!-- Hemin -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="hemin" data-harf="H">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/hemin.html">Hemin</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1921 – 1986</span>
+                                <span class="sahsiyet-rol">Şair</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1921, -
+                        </div>
+                    </div>
+                    
+                    <!-- Hejar -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="hejar" data-harf="H">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/hejar.html">Hejar</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1921 – 1990</span>
+                                <span class="sahsiyet-rol">Şair, yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1921, -
+                        </div>
+                    </div>
+                    
+                    <!-- Mehmed Uzun -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="mehmed-uzun" data-harf="M">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/mehmed-uzun.html">Mehmed Uzun</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1953 – 2007</span>
+                                <span class="sahsiyet-rol">Yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1953, Siverek
+                        </div>
+                    </div>
+                    
+                    <!-- Yaşar Kemal -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="yasar-kemal" data-harf="Y">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/yasar-kemal.html">Yaşar Kemal</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1923 – 2015</span>
+                                <span class="sahsiyet-rol">Yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1923, Gökçedam
+                        </div>
+                    </div>
+                    
+                    <!-- Bachtyar Ali -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="bachtyar-ali" data-harf="B">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/bachtyar-ali.html">Bachtyar Ali</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1960 –</span>
+                                <span class="sahsiyet-rol">Yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1960, Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Sherko Bekas -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="sherko-bekas" data-harf="Ş">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/sherko-bekas.html">Sherko Bekas</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1940 – 2013</span>
+                                <span class="sahsiyet-rol">Şair, yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1940, Süleymaniye
+                        </div>
+                    </div>
+                    
+                    <!-- Latif Halmat -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="latif-halmat" data-harf="L">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/latif-halmat.html">Latif Halmat</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1947 –</span>
+                                <span class="sahsiyet-rol">Şair</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1947, Kerkük
+                        </div>
+                    </div>
+                    
+                    <!-- Seyhmus Dagtekin -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="seyhmus-dagtekin" data-harf="S">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/seyhmus-dagtekin.html">Seyhmus Dagtekin</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1964 –</span>
+                                <span class="sahsiyet-rol">Şair</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1964, Harun
+                        </div>
+                    </div>
+                    
+                    <!-- Kajin Karaca -->
+                    <div class="sahsiyet-karti" data-kategori="edebiyat" data-isim="kajin-karaca" data-harf="K">
+                        <div class="sahsiyet-bilgi">
+                            <h3><a href="sahsiyet/kajin-karaca.html">Kajin Karaca</a></h3>
+                            <div>
+                                <span class="sahsiyet-tarih">1980 –</span>
+                                <span class="sahsiyet-rol">Yazar</span>
+                            </div>
+                        </div>
+                        <div class="sahsiyet-dogumolum">
+                            <i class="fas fa-birthday-cake"></i> 1980, -
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Toplam Bilgi -->
+                <div style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <h3 style="color: var(--zer);"><i class="fas fa-star"></i> Kürt Şahsiyetleri Hakkında</h3>
+                    <p>Bu sayfada <strong id="toplamSahsiyetText">70'in üzerinde</strong> Kürt şahsiyeti listelenmiştir: siyasi liderler, aydınlar, şairler ve yazarlar. 15. yüzyıldan günümüze uzanan geniş bir yelpaze.</p>
+                    
+                    <div style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 20px;">
+                        <div><strong>En eski:</strong> Ali Harirî (1425–1495)</div>
+                        <div><strong>En uzun yaşayan:</strong> Mustafa Barzani (76 yıl)</div>
+                        <div><strong>En genç:</strong> Selahattin Demirtaş (1973)</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-user-tie"></i></div>
+                <h4>40+ Lider</h4>
+                <p>Siyasi ve aşiret liderleri</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-feather"></i></div>
+                <h4>30+ Edebiyatçı</h4>
+                <p>Klasik ve modern yazarlar</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-scroll"></i></div>
+                <h4>15. yy'dan</h4>
+                <p>Günümüze edebiyat</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · KÜRDİSTAN</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Alfabe dizisi
+        const alfabe = ['A', 'B', 'C', 'Ç', 'D', 'E', 'F', 'G', 'H', 'I', 'İ', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'Ş', 'T', 'U', 'V', 'Y', 'Z'];
+        
+        // Alfabe barını oluştur
+        const alphabetBar = document.getElementById('alphabetBar');
+        alphabetBar.innerHTML = '<button class="alphabet-btn active" data-letter="all">Tümü</button>';
+        
+        alfabe.forEach(letter => {
+            alphabetBar.innerHTML += `<button class="alphabet-btn" data-letter="${letter}">${letter}</button>`;
+        });
+        
+        // Alfabe filtresi
+        document.querySelectorAll('.alphabet-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.alphabet-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const letter = this.dataset.letter;
+                const kartlar = document.querySelectorAll('.sahsiyet-karti');
+                
+                if (letter === 'all') {
+                    kartlar.forEach(kart => kart.style.display = 'flex');
+                } else {
+                    kartlar.forEach(kart => {
+                        if (kart.dataset.harf === letter) {
+                            kart.style.display = 'flex';
+                        } else {
+                            kart.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Sayıları hesapla
+        function hesaplaSayilari() {
+            const tumKartlar = document.querySelectorAll('.sahsiyet-karti');
+            const siyasiKartlar = document.querySelectorAll('.sahsiyet-karti[data-kategori="siyasi"]');
+            const edebiyatKartlar = document.querySelectorAll('.sahsiyet-karti[data-kategori="edebiyat"]');
+            const klasikKartlar = document.querySelectorAll('.sahsiyet-karti[data-kategori="klasik"]');
+            
+            document.getElementById('toplamSahsiyet').textContent = tumKartlar.length;
+            document.getElementById('siyasiSayi').textContent = siyasiKartlar.length;
+            document.getElementById('edebiyatSayi').textContent = edebiyatKartlar.length;
+            document.getElementById('klasikSayi').textContent = klasikKartlar.length;
+            document.getElementById('toplamSahsiyetText').textContent = tumKartlar.length;
+        }
+        
+        // Filtreleme
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const kartlar = document.querySelectorAll('.sahsiyet-karti');
+                const kategoriBasliklari = document.querySelectorAll('.kategori-baslik');
+                
+                if (filter === 'all') {
+                    kartlar.forEach(kart => kart.style.display = 'flex');
+                    kategoriBasliklari.forEach(baslik => baslik.style.display = 'flex');
+                } else {
+                    kartlar.forEach(kart => {
+                        if (kart.dataset.kategori === filter) {
+                            kart.style.display = 'flex';
+                        } else {
+                            kart.style.display = 'none';
+                        }
+                    });
+                    
+                    kategoriBasliklari.forEach(baslik => {
+                        if (baslik.dataset.kategori === filter) {
+                            baslik.style.display = 'flex';
+                        } else {
+                            baslik.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Arama
+        document.getElementById('sahsiyetSearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const kartlar = document.querySelectorAll('.sahsiyet-karti');
+            
+            kartlar.forEach(kart => {
+                const isim = kart.dataset.isim;
+                const metin = kart.textContent.toLowerCase();
+                
+                if (metin.includes(searchTerm) || (isim && isim.includes(searchTerm))) {
+                    kart.style.display = 'flex';
+                } else {
+                    kart.style.display = 'none';
+                }
+            });
+        });
+        
+        // Sayfa yüklendiğinde sayıları hesapla
+        window.addEventListener('load', hesaplaSayilari);
+    </script>
+</body>
+</html>
