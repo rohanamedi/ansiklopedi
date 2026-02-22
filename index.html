@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kürdistan Ansiklopedisi - Zagros'tan Geleceğe</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link active">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+                <a href="tarikatlar.html" class="nav-link">Tarikatlar</a>
+                <a href="sehirler.html" class="nav-link">Şehirler</a>
+                <a href="edebiyat.html" class="nav-link">Edebiyat</a>
+                <a href="kavramlar.html" class="nav-link">Kavramlar</a>
+                <a href="din.html" class="nav-link">Din</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Ansiklopedide ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- HERO BÖLÜMÜ -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="hero-title">ZAGROS'TAN GELECEĞE</div>
+                <div class="hero-subtitle">12.000 Yıllık Kürt Medeniyeti</div>
+                <p class="hero-description">Antik çağlardan günümüze Kürt tarihi, kültürü, edebiyatı, devletleri, şahsiyetleri ve direnişleri hakkında kapsamlı ansiklopedi.</p>
+            </div>
+        </div>
+        
+        <!-- ANA KATEGORİLER GRİD -->
+        <div class="kategori-grid">
+            <!-- Cemiyetler -->
+            <a href="cemiyetler.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-users"></i></div>
+                <h3>Cemiyetler</h3>
+                <p>Kürt siyasi ve kültürel örgütlenmeleri, partiler, cemiyetler</p>
+                <div class="kategori-sayi">19 örgüt</div>
+            </a>
+            
+            <!-- Tarikatlar -->
+            <a href="tarikatlar.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-mosque"></i></div>
+                <h3>Tarikatlar</h3>
+                <p>Dini tarikatlar, şeyhler, tasavvufi hareketler</p>
+                <div class="kategori-sayi">40+ tarikat</div>
+            </a>
+            
+            <!-- Şahsiyetler -->
+            <a href="sahsiyetler.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-user-tie"></i></div>
+                <h3>Şahsiyetler</h3>
+                <p>Liderler, aydınlar, şairler, yazarlar, düşünürler</p>
+                <div class="kategori-sayi">150+ şahsiyet</div>
+            </a>
+            
+            <!-- Direnişler -->
+            <a href="direnisler.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-fist-raised"></i></div>
+                <h3>Direnişler</h3>
+                <p>İsyanlar, hareketler, bağımsızlık mücadeleleri</p>
+                <div class="kategori-sayi">34 direniş</div>
+            </a>
+            
+            <!-- Devletler -->
+            <a href="devletler.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-crown"></i></div>
+                <h3>Devletler</h3>
+                <p>Antik krallıklar, emirlikler, beylikler, modern yapılar</p>
+                <div class="kategori-sayi">40+ devlet</div>
+            </a>
+            
+            <!-- Şehirler -->
+            <a href="sehirler.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-city"></i></div>
+                <h3>Şehirler</h3>
+                <p>Tarihi Kürt şehirleri, kültürel merkezler</p>
+                <div class="kategori-sayi">79 şehir</div>
+            </a>
+            
+            <!-- Aşiretler -->
+            <a href="asiretler.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-tree"></i></div>
+                <h3>Aşiretler</h3>
+                <p>Aşiret konfederasyonları, bağlı kollar, soyağaçları</p>
+                <div class="kategori-sayi">100+ Aşiret</div>
+            </a>
+            
+            <!-- Edebiyat -->
+            <a href="edebiyat.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-feather"></i></div>
+                <h3>Edebiyat</h3>
+                <p>Klasik ve modern Kürt edebiyatı, yazarlar, şairler</p>
+                <div class="kategori-sayi">80+ yazar</div>
+            </a>
+            
+            <!-- Kavramlar -->
+            <a href="kavramlar.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-book-open"></i></div>
+                <h3>Kavramlar</h3>
+                <p>Kürt tarihi ve kültürüne ait temel kavramlar</p>
+                <div class="kategori-sayi">150+ kavram</div>
+            </a>
+            
+            <!-- Din -->
+            <a href="din.html" class="kategori-card">
+                <div class="kategori-icon"><i class="fas fa-pray"></i></div>
+                <h3>Din</h3>
+                <p>İnanç sistemleri, mezhepler, dini yapılar</p>
+                <div class="kategori-sayi">8 inanç</div>
+            </a>
+        </div>
+        
+        <!-- İSTATİSTİKLER -->
+        <div class="istatistik-section">
+            <div class="istatistik-item">
+                <div class="istatistik-sayi">12.000</div>
+                <div class="istatistik-label">Yıllık Medeniyet</div>
+            </div>
+            <div class="istatistik-item">
+                <div class="istatistik-sayi">300+</div>
+                <div class="istatistik-label">Toplam Madde</div>
+            </div>
+            <div class="istatistik-item">
+                <div class="istatistik-sayi">150+</div>
+                <div class="istatistik-label">Şahsiyet</div>
+            </div>
+            <div class="istatistik-item">
+                <div class="istatistik-sayi">40+</div>
+                <div class="istatistik-label">Devlet</div>
+            </div>
+            <div class="istatistik-item">
+                <div class="istatistik-sayi">100+</div>
+                <div class="istatistik-label">Aşiretu</div>
+            </div>
+        </div>
+        
+        <!-- ÖZEL KATEGORİLER -->
+        <div class="ozel-kategori">
+            <div class="mini-card">
+                <i class="fas fa-scroll"></i>
+                <h4>Erken Dönem Cemiyetler</h4>
+                <p>1908-1927</p>
+            </div>
+            <div class="mini-card">
+                <i class="fas fa-crown"></i>
+                <h4>Kürt Hanedanları</h4>
+                <p>Şeddadiler, Mervaniler</p>
+            </div>
+            <div class="mini-card">
+                <i class="fas fa-feather-alt"></i>
+                <h4>Klasik Edebiyat</h4>
+                <p>Xanî, Cizîrî</p>
+            </div>
+            <div class="mini-card">
+                <i class="fas fa-flag"></i>
+                <h4>Modern Direnişler</h4>
+                <p>Şeyh Said, Mahabad</p>
+            </div>
+            <div class="mini-card">
+                <i class="fas fa-landmark"></i>
+                <h4>Kürt Devletleri</h4>
+                <p>Medler, Eyyûbîler</p>
+            </div>
+        </div>
+        
+        <!-- SON EKLENENLER -->
+        <div class="son-eklenenler">
+            <h2 style="color: var(--zer); margin-bottom: 20px;">📌 Son Eklenen Maddeler</h2>
+            <div class="son-eklenen-grid">
+                <div class="son-eklenen-item">
+                    <i class="fas fa-user" style="color: var(--zer); font-size: 1.5rem;"></i>
+                    <div>
+                        <a href="sahsiyet/seyh-said.html" style="color: var(--zer); text-decoration: none; font-weight: 600;">Şeyh Said</a>
+                        <p style="font-size: 0.85rem; opacity: 0.7;">1865-1925</p>
+                    </div>
+                </div>
+                <div class="son-eklenen-item">
+                    <i class="fas fa-flag" style="color: var(--zer); font-size: 1.5rem;"></i>
+                    <div>
+                        <a href="devlet/mahabad.html" style="color: var(--zer); text-decoration: none; font-weight: 600;">Mahabad Cumhuriyeti</a>
+                        <p style="font-size: 0.85rem; opacity: 0.7;">1946</p>
+                    </div>
+                </div>
+                <div class="son-eklenen-item">
+                    <i class="fas fa-feather" style="color: var(--zer); font-size: 1.5rem;"></i>
+                    <div>
+                        <a href="sahsiyet/ehmede-xani.html" style="color: var(--zer); text-decoration: none; font-weight: 600;">Ehmedê Xanî</a>
+                        <p style="font-size: 0.85rem; opacity: 0.7;">1650-1707</p>
+                    </div>
+                </div>
+                <div class="son-eklenen-item">
+                    <i class="fas fa-users" style="color: var(--zer); font-size: 1.5rem;"></i>
+                    <div>
+                        <a href="cemiyet/xoybun.html" style="color: var(--zer); text-decoration: none; font-weight: 600;">Xoybûn</a>
+                        <p style="font-size: 0.85rem; opacity: 0.7;">1927</p>
+                    </div>
+                </div>
+                <div class="son-eklenen-item">
+                    <i class="fas fa-crown" style="color: var(--zer); font-size: 1.5rem;"></i>
+                    <div>
+                        <a href="devlet/mervaniler.html" style="color: var(--zer); text-decoration: none; font-weight: 600;">Mervanîler</a>
+                        <p style="font-size: 0.85rem; opacity: 0.7;">990-1085</p>
+                    </div>
+                </div>
+                <div class="son-eklenen-item">
+                    <i class="fas fa-tree" style="color: var(--zer); font-size: 1.5rem;"></i>
+                    <div>
+                        <a href="asiret/barzan.html" style="color: var(--zer); text-decoration: none; font-weight: 600;">Barzan Aşireti</a>
+                        <p style="font-size: 0.85rem; opacity: 0.7;">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ÖNE ÇIKANLAR -->
+        <div style="margin: 50px 0;">
+            <h2 style="color: var(--zer); margin-bottom: 20px;">⭐ Öne Çıkan Maddeler</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div class="item-card">
+                    <h3><a href="sahsiyet/seyh-said.html" style="color: var(--zer);">Şeyh Said</a></h3>
+                    <span class="year-badge">1865-1925</span>
+                    <p>1925 Kürt isyanının lideri. Nakşibendi şeyhi. 15 Nisan 1925'te Diyarbakır'da şehit edildi.</p>
+                    <a href="sahsiyet/seyh-said.html" class="read-more">Detay →</a>
+                </div>
+                <div class="item-card">
+                    <h3><a href="devlet/mahabad.html" style="color: var(--zer);">Mahabad Cumhuriyeti</a></h3>
+                    <span class="year-badge">1946</span>
+                    <p>Modern Kürt tarihinin ilk bağımsız cumhuriyeti. Qazî Mihemed liderliğinde kuruldu.</p>
+                    <a href="devlet/mahabad.html" class="read-more">Detay →</a>
+                </div>
+                <div class="item-card">
+                    <h3><a href="sahsiyet/ehmede-xani.html" style="color: var(--zer);">Ehmedê Xanî</a></h3>
+                    <span class="year-badge">1650-1707</span>
+                    <p>Mem û Zîn yazarı, Kürt edebiyatının en büyük şairi ve düşünürü.</p>
+                    <a href="sahsiyet/ehmede-xani.html" class="read-more">Detay →</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HAKKINDA -->
+        <div style="margin: 50px 0; padding: 30px; background: rgba(0,0,0,0.3); border-radius: 20px;">
+            <h3 style="color: var(--zer);"><i class="fas fa-info-circle"></i> Zagros'tan Geleceğe</h3>
+            <p style="margin-top: 15px;">Kürdistan Ansiklopedisi, Zagros dağlarından Mezopotamya ovalarına, Anadolu'dan İran yaylalarına uzanan coğrafyada 12.000 yıllık Kürt medeniyetini belgelemeyi amaçlayan kapsamlı bir dijital ansiklopedidir.</p>
+            <p>Antik çağlardan günümüze devletler, beylikler, şahsiyetler, edebiyat, direnişler ve kültürel miras hakkında detaylı bilgiler sunar.</p>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-mountain"></i></div>
+                <h4>Zagros</h4>
+                <p>Medeniyetin beşiği</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-book"></i></div>
+                <h4>Mem û Zîn</h4>
+                <p>Kürt edebiyatı şaheseri</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-flag"></i></div>
+                <h4>Mahabad 1946</h4>
+                <p>İlk Kürt cumhuriyeti</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-scroll"></i></div>
+                <h4>Şerefname</h4>
+                <p>İlk Kürt tarihi</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · KÜRDİSTAN</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Arama (placeholder)
+        document.querySelector('.search-btn')?.addEventListener('click', function() {
+            const query = document.querySelector('.search-input').value;
+            if (query.trim() !== '') {
+                window.location.href = 'arama.html?q=' + encodeURIComponent(query);
+            }
+        });
+        
+        document.querySelector('.search-input')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = e.target.value;
+                if (query.trim() !== '') {
+                    window.location.href = 'arama.html?q=' + encodeURIComponent(query);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
