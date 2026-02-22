@@ -1,12 +1,9 @@
 /*
 Theme Name: Kürdistan Ansiklopedisi
-Theme URI: https://example.com
-Author: Sizin Adınız
-Author URI: https://example.com
-Description: Zagros'tan Geleceğe - Kürdistan Ansiklopedisi teması. Koyu tema, Kürt bayrağı renkleri, Montserrat ve Roboto fontları.
-Version: 1.0
-License: GPL v2 or later
-Text Domain: kurdistan-ansiklopedisi
+Theme URI: https://rohanamedi.github.io/ansiklopedi/
+Author: Rohan Amedî
+Description: Zagros'tan Geleceğe - Kürdistan Ansiklopedisi teması. Koyu tema, Kürt bayrağı renkleri.
+Version: 2.0
 */
 
 /* ===== GOOGLE FONTS ===== */
@@ -96,6 +93,7 @@ a {
 
 a:hover {
     color: var(--sor);
+    text-decoration: underline;
 }
 
 /* ===== LAYOUT ===== */
@@ -133,7 +131,6 @@ header {
     border-bottom: 3px solid var(--sor);
 }
 
-/* Bayrak şeridi */
 .flag {
     display: flex;
     height: 8px;
@@ -159,7 +156,6 @@ header {
     background: var(--kesk);
 }
 
-/* Logo - yazı tabanlı */
 .site-title {
     font-family: var(--font-baslik);
     font-size: 2.8rem;
@@ -186,6 +182,10 @@ header {
     margin-bottom: 40px;
     border: 1px solid var(--sor);
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav-links {
@@ -211,6 +211,7 @@ header {
     background: var(--sor);
     color: var(--spî);
     border-color: var(--zer);
+    text-decoration: none;
 }
 
 .nav-link.active {
@@ -242,6 +243,7 @@ header {
         display: none;
         flex-direction: column;
         margin-top: 10px;
+        width: 100%;
     }
     
     .nav-links.show {
@@ -254,6 +256,47 @@ header {
     }
 }
 
+/* ===== ARA ===== */
+.search-container {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+}
+
+.search-input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--zer);
+    border-radius: 30px;
+    padding: 8px 15px;
+    color: var(--spî);
+    font-size: 0.9rem;
+    width: 100%;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--sor);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.search-btn {
+    background: transparent;
+    border: 1px solid var(--sor);
+    color: var(--spî);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.search-btn:hover {
+    background: var(--sor);
+    color: var(--spî);
+}
+
 /* ===== ANA İÇERİK KARTI ===== */
 .main-card {
     background: var(--bg-card);
@@ -264,7 +307,180 @@ header {
     backdrop-filter: blur(5px);
 }
 
-/* ===== İÇERİK KARTLARI (şahsiyetler, devletler için) ===== */
+/* ===== HERO BÖLÜMÜ ===== */
+.hero-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(225,25,25,0.2), rgba(0,153,0,0.2), rgba(255,215,0,0.2));
+    border-radius: 30px;
+    margin-bottom: 50px;
+    border: 1px solid var(--zer);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, var(--sor), var(--zer), var(--kesk));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--pêşeroj-cyan);
+    margin-bottom: 30px;
+}
+
+.hero-description {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* ===== ANA SAYFA KATEGORİ GRİD ===== */
+.kategori-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 50px 0;
+}
+
+.kategori-card {
+    background: rgba(20, 24, 28, 0.9);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid var(--sor);
+    transition: var(--transition);
+    text-decoration: none;
+    color: var(--spî);
+    position: relative;
+    overflow: hidden;
+}
+
+.kategori-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--zer);
+    box-shadow: 0 10px 30px rgba(225, 25, 25, 0.3);
+    text-decoration: none;
+    color: var(--spî);
+}
+
+.kategori-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--sor), var(--zer), var(--kesk));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.kategori-card:hover::before {
+    transform: scaleX(1);
+}
+
+.kategori-icon {
+    font-size: 3rem;
+    color: var(--zer);
+    margin-bottom: 20px;
+}
+
+.kategori-card h3 {
+    color: var(--sor);
+    margin-bottom: 10px;
+    font-size: 1.6rem;
+}
+
+.kategori-card p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.kategori-sayi {
+    display: inline-block;
+    background: var(--sor);
+    color: var(--spî);
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    margin-top: 15px;
+    font-family: var(--font-baslik);
+}
+
+/* ===== İSTATİSTİK BÖLÜMÜ ===== */
+.istatistik-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 60px 0;
+    padding: 40px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 30px;
+}
+
+.istatistik-item {
+    text-align: center;
+}
+
+.istatistik-sayi {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--zer);
+    line-height: 1.2;
+}
+
+.istatistik-label {
+    font-size: 1rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== ÖZEL KATEGORİ MİNİ KARTLAR ===== */
+.ozel-kategori {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin: 40px 0;
+}
+
+.mini-card {
+    background: rgba(20, 24, 28, 0.8);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid var(--pêşeroj-cyan);
+    transition: var(--transition);
+}
+
+.mini-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--zer);
+}
+
+.mini-card i {
+    font-size: 2rem;
+    color: var(--pêşeroj-cyan);
+    margin-bottom: 10px;
+}
+
+.mini-card h4 {
+    color: var(--zer);
+    margin-bottom: 5px;
+}
+
+.mini-card p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin: 0;
+}
+
+/* ===== İTEM KARTLARI (Liste Sayfaları İçin) ===== */
 .items-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -301,6 +517,7 @@ header {
 
 .item-card h3 a:hover {
     color: var(--sor);
+    text-decoration: underline;
 }
 
 .item-card .year-badge {
@@ -328,13 +545,168 @@ header {
 
 .item-card .read-more:hover {
     color: var(--zer);
+    text-decoration: none;
+}
+
+/* ===== MADDE İÇİ BİLGİ KARTI (Wikipedia Tarzı) ===== */
+.madde-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.madde-icerik {
+    order: 1;
+}
+
+.bilgi-karti {
+    order: 2;
+    background: rgba(20, 24, 28, 0.95);
+    border-radius: 15px;
+    border: 1px solid var(--zer);
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    align-self: start;
+    position: sticky;
+    top: 20px;
+}
+
+.bilgi-karti-baslik {
+    background: var(--sor);
+    color: var(--spî);
+    padding: 15px;
+    text-align: center;
+    font-family: var(--font-baslik);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.bilgi-karti-resim {
+    width: 100%;
+    height: 200px;
+    background: #1a1e2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--zer);
+    font-size: 5rem;
+    border-bottom: 1px solid var(--zer);
+}
+
+.bilgi-karti-icerik {
+    padding: 15px;
+}
+
+.bilgi-satiri {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,215,0,0.2);
+}
+
+.bilgi-satiri:last-child {
+    border-bottom: none;
+}
+
+.bilgi-etiket {
+    width: 100px;
+    font-weight: 600;
+    color: var(--pêşeroj-cyan);
+    font-family: var(--font-baslik);
+    font-size: 0.9rem;
+}
+
+.bilgi-deger {
+    flex: 1;
+    color: var(--spî);
+    font-size: 0.95rem;
+}
+
+.bilgi-deger a {
+    color: var(--zer);
+}
+
+/* Kişi kartı özel */
+.kisi-dogum {
+    color: var(--kesk);
+}
+
+.kisi-olum {
+    color: var(--sor);
+}
+
+.kisi-meslek {
+    display: inline-block;
+    background: rgba(0,212,255,0.2);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin: 2px;
+    font-size: 0.85rem;
+}
+
+/* Devlet kartı özel */
+.devlet-baskent {
+    color: var(--zer);
+}
+
+.devlet-para {
+    font-family: monospace;
+}
+
+/* Şehir kartı özel */
+.sehir-nufus {
+    font-weight: 600;
+    color: var(--pêşeroj-cyan);
+}
+
+.sehir-bolge {
+    color: var(--kesk);
+}
+
+/* Tarikat kartı özel */
+.tarikat-kurucu {
+    color: var(--zer);
+}
+
+.tarikat-silsile {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Örgüt kartı özel */
+.orgut-kisaltma {
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: var(--zer);
+}
+
+.orgut-ideoloji {
+    display: inline-block;
+    background: var(--sor);
+    color: var(--spî);
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin: 2px;
+}
+
+@media (max-width: 768px) {
+    .madde-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .bilgi-karti {
+        order: -1;
+        position: static;
+        margin-bottom: 30px;
+    }
 }
 
 /* ===== ALFABE FİLTRESİ ===== */
-.alphabet-filter {
+.alphabet-bar {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 5px;
     justify-content: center;
     padding: 20px;
     background: rgba(0, 0, 0, 0.3);
@@ -342,31 +714,24 @@ header {
     margin: 30px 0;
 }
 
-.filter-btn {
-    padding: 8px 15px;
-    border-radius: 30px;
+.alphabet-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     background: transparent;
     border: 1px solid var(--sor);
     color: var(--spî);
-    text-decoration: none;
-    font-size: 0.9rem;
+    cursor: pointer;
     transition: var(--transition);
-    font-family: var(--font-baslik);
-    min-width: 45px;
-    text-align: center;
-}
-
-.filter-btn:hover {
-    background: var(--sor);
-    color: var(--spî);
-    border-color: var(--zer);
-}
-
-.filter-btn.active {
-    background: var(--sor);
-    color: var(--spî);
-    border-color: var(--zer);
     font-weight: 600;
+    font-family: var(--font-baslik);
+}
+
+.alphabet-btn:hover,
+.alphabet-btn.active {
+    background: var(--sor);
+    color: var(--spî);
+    border-color: var(--zer);
 }
 
 /* ===== TABLOLAR ===== */
@@ -411,91 +776,6 @@ td a:hover {
     color: var(--sor);
 }
 
-/* ===== KATEGORİ GRİD (ana sayfa için) ===== */
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin: 40px 0;
-}
-
-.category-card {
-    background: rgba(20, 24, 28, 0.9);
-    border-radius: 15px;
-    padding: 30px 20px;
-    text-align: center;
-    border: 1px solid var(--sor);
-    transition: var(--transition);
-    text-decoration: none;
-    color: var(--spî);
-}
-
-.category-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--zer);
-    box-shadow: 0 5px 20px rgba(225, 25, 25, 0.2);
-}
-
-.category-card i {
-    font-size: 2.5rem;
-    color: var(--zer);
-    margin-bottom: 15px;
-}
-
-.category-card h3 {
-    color: var(--sor);
-    margin-bottom: 10px;
-    font-size: 1.3rem;
-}
-
-.category-card p {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin: 0;
-}
-
-/* ===== ARAMA ===== */
-.search-container {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    max-width: 300px;
-}
-
-.search-input {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--zer);
-    border-radius: 30px;
-    padding: 8px 15px;
-    color: var(--spî);
-    font-size: 0.9rem;
-    width: 100%;
-    transition: var(--transition);
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: var(--sor);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-}
-
-.search-btn {
-    background: transparent;
-    border: 1px solid var(--sor);
-    color: var(--spî);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 8px;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.search-btn:hover {
-    background: var(--sor);
-    color: var(--spî);
-}
-
 /* ===== SAYFALAMA ===== */
 .pagination {
     display: flex;
@@ -522,6 +802,48 @@ td a:hover {
     background: var(--sor);
     border-color: var(--zer);
     color: var(--spî);
+}
+
+/* ===== SON EKLENENLER ===== */
+.son-eklenenler {
+    margin: 50px 0;
+}
+
+.son-eklenen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.son-eklenen-item {
+    background: rgba(20, 24, 28, 0.8);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: var(--transition);
+}
+
+.son-eklenen-item:hover {
+    background: rgba(30, 34, 38, 0.9);
+    transform: translateX(5px);
+}
+
+.son-eklenen-item i {
+    font-size: 1.5rem;
+    color: var(--zer);
+}
+
+.son-eklenen-item a {
+    color: var(--zer);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.son-eklenen-item a:hover {
+    text-decoration: underline;
 }
 
 /* ===== ARA SONUÇLARI ===== */
@@ -640,89 +962,53 @@ footer {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    :root {
-        --spacing-desktop: 20px;
+    .hero-title {
+        font-size: 2.5rem;
     }
     
-    .site-title {
-        font-size: 2rem;
+    .hero-subtitle {
+        font-size: 1.2rem;
     }
     
-    .site-description {
-        font-size: 1rem;
+    .kategori-grid {
+        grid-template-columns: 1fr;
     }
     
-    .main-card {
+    .istatistik-section {
+        grid-template-columns: repeat(2, 1fr);
         padding: 20px;
     }
     
-    .items-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .alphabet-filter {
-        border-radius: 30px;
-        padding: 15px 10px;
-    }
-    
-    .filter-btn {
-        padding: 5px 10px;
-        min-width: 35px;
-        font-size: 0.85rem;
-    }
-    
-    .category-grid {
-        grid-template-columns: 1fr;
+    .ozel-kategori {
+        grid-template-columns: repeat(2, 1fr);
     }
     
     .symbols-section {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
     }
     
-    .footer-gradient {
-        font-size: 1.1rem;
+    .alphabet-bar {
+        border-radius: 30px;
+        padding: 10px;
+    }
+    
+    .alphabet-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
-    .site-title {
-        font-size: 1.6rem;
+    .istatistik-section {
+        grid-template-columns: 1fr;
     }
     
-    h1 {
-        font-size: 1.8rem;
+    .ozel-kategori {
+        grid-template-columns: 1fr;
     }
     
     .symbols-section {
         grid-template-columns: 1fr;
     }
-    
-    .alphabet-filter {
-        gap: 5px;
-    }
-    
-    .filter-btn {
-        min-width: 30px;
-        padding: 4px 6px;
-        font-size: 0.8rem;
-    }
-}
-
-/* ===== UTILITY CLASSES ===== */
-.text-center {
-    text-align: center;
-}
-
-.mt-40 {
-    margin-top: 40px;
-}
-
-.mb-40 {
-    margin-bottom: 40px;
-}
-
-.hidden {
-    display: none;
 }
