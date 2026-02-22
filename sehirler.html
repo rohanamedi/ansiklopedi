@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kürt Şehirleri - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+                <a href="sehirler.html" class="nav-link active">Şehirler</a>
+                <a href="edebiyat.html" class="nav-link">Edebiyat</a>
+                <a href="kavramlar.html" class="nav-link">Kavramlar</a>
+                <a href="din.html" class="nav-link">Din</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="sehirSearch" placeholder="Şehir ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                <h1>🏙️ Kürt Şehirleri</h1>
+                <p>Kürdistan'ın dört parçasında (Bakur, Rojhilat, Başûr, Rojava) yer alan tarihi ve kültürel şehirler. Kürtçe yerel adları ve resmî adlarıyla birlikte.</p>
+                
+                <!-- Bölge Filtreleme -->
+                <div class="filter-bar" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 30px 0; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 50px;">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="bakur">Bakur (Kuzey)</button>
+                    <button class="filter-btn" data-filter="rojava">Rojava (Batı)</button>
+                    <button class="filter-btn" data-filter="basur">Başûr (Güney)</button>
+                    <button class="filter-btn" data-filter="rojhilat">Rojhilat (Doğu)</button>
+                    <button class="filter-btn" data-filter="sor">Kurdistana Sor</button>
+                </div>
+                
+                <!-- İstatistikler -->
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; margin: 40px 0; padding: 25px; background: rgba(0,0,0,0.3); border-radius: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);" id="toplamSehir">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Toplam Şehir</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);" id="bakurSayi">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Bakur</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);" id="rojhilatSayi">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Rojhilat</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);" id="basurSayi">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Başûr</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);" id="rojavaSayi">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Rojava</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);" id="sorSayi">0</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Kurdistana Sor</div>
+                    </div>
+                </div>
+                
+                <!-- Alfabe Filtresi -->
+                <div class="alphabet-bar" id="alphabetBar" style="display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 50px; margin: 30px 0;">
+                    <button class="alphabet-btn active" data-letter="all">Tümü</button>
+                    <button class="alphabet-btn" data-letter="A">A</button>
+                    <button class="alphabet-btn" data-letter="B">B</button>
+                    <button class="alphabet-btn" data-letter="C">C</button>
+                    <button class="alphabet-btn" data-letter="Ç">Ç</button>
+                    <button class="alphabet-btn" data-letter="D">D</button>
+                    <button class="alphabet-btn" data-letter="E">E</button>
+                    <button class="alphabet-btn" data-letter="Ê">Ê</button>
+                    <button class="alphabet-btn" data-letter="F">F</button>
+                    <button class="alphabet-btn" data-letter="G">G</button>
+                    <button class="alphabet-btn" data-letter="H">H</button>
+                    <button class="alphabet-btn" data-letter="I">I</button>
+                    <button class="alphabet-btn" data-letter="Î">Î</button>
+                    <button class="alphabet-btn" data-letter="K">K</button>
+                    <button class="alphabet-btn" data-letter="L">L</button>
+                    <button class="alphabet-btn" data-letter="M">M</button>
+                    <button class="alphabet-btn" data-letter="N">N</button>
+                    <button class="alphabet-btn" data-letter="P">P</button>
+                    <button class="alphabet-btn" data-letter="Q">Q</button>
+                    <button class="alphabet-btn" data-letter="R">R</button>
+                    <button class="alphabet-btn" data-letter="S">S</button>
+                    <button class="alphabet-btn" data-letter="Ş">Ş</button>
+                    <button class="alphabet-btn" data-letter="T">T</button>
+                    <button class="alphabet-btn" data-letter="U">U</button>
+                    <button class="alphabet-btn" data-letter="Û">Û</button>
+                    <button class="alphabet-btn" data-letter="V">V</button>
+                    <button class="alphabet-btn" data-letter="W">W</button>
+                    <button class="alphabet-btn" data-letter="X">X</button>
+                    <button class="alphabet-btn" data-letter="Y">Y</button>
+                    <button class="alphabet-btn" data-letter="Z">Z</button>
+                </div>
+                
+                <!-- ŞEHİR LİSTESİ -->
+                <div class="items-grid" id="sehirListesi">
+                    <!-- ===== BAKUR (KUZEY) ===== -->
+                    <!-- Amed -->
+                    <div class="item-card" data-bolge="bakur" data-isim="amed" data-harf="A">
+                        <h3><a href="sehir/amed.html">Amed (Diyarbakır)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Diyarbakır</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Mezopotamya'nın en eski şehirlerinden biri. Surları, kalesi ve tarihi camileriyle ünlü.</p>
+                        <a href="sehir/amed.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Wan -->
+                    <div class="item-card" data-bolge="bakur" data-isim="wan" data-harf="W">
+                        <h3><a href="sehir/wan.html">Wan (Van)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Van</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Van Gölü kıyısında, Urartu medeniyetine başkentlik yapmış tarihi şehir.</p>
+                        <a href="sehir/wan.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Colemêrg -->
+                    <div class="item-card" data-bolge="bakur" data-isim="colemerg" data-harf="C">
+                        <h3><a href="sehir/colemerg.html">Colemêrg (Hakkâri)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Hakkâri</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Zagros dağlarının zirvesinde, kadim Kürt aşiretlerinin merkezi.</p>
+                        <a href="sehir/colemerg.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Şirnex -->
+                    <div class="item-card" data-bolge="bakur" data-isim="sirnex" data-harf="Ş">
+                        <h3><a href="sehir/sirnex.html">Şirnex (Şırnak)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Şırnak</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Cudi Dağı eteklerinde, Nuh'un gemisine ev sahipliği yaptığına inanılan bölge.</p>
+                        <a href="sehir/sirnex.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Mêrdîn -->
+                    <div class="item-card" data-bolge="bakur" data-isim="merdin" data-harf="M">
+                        <h3><a href="sehir/merdin.html">Mêrdîn (Mardin)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Mardin</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Taş işçiliğiyle ünlü, Mezopotamya'ya bakan tarihi kent.</p>
+                        <a href="sehir/merdin.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Êlih -->
+                    <div class="item-card" data-bolge="bakur" data-isim="elih" data-harf="Ê">
+                        <h3><a href="sehir/elih.html">Êlih (Batman)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Batman</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Ilısu ve Hasankeyf gibi tarihi yerleşimlere ev sahipliği yapar.</p>
+                        <a href="sehir/elih.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Sêrt -->
+                    <div class="item-card" data-bolge="bakur" data-isim="sert" data-harf="S">
+                        <h3><a href="sehir/sert.html">Sêrt (Siirt)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Siirt</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Tillo (Aydınlar) gibi medreseleriyle ünlü ilçeleri barındırır.</p>
+                        <a href="sehir/sert.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Bedlîs -->
+                    <div class="item-card" data-bolge="bakur" data-isim="bedlis" data-harf="B">
+                        <h3><a href="sehir/bedlis.html">Bedlîs (Bitlis)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Bitlis</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Kürt beyliklerine başkentlik yapmış, tarihi kümbetleriyle ünlü.</p>
+                        <a href="sehir/bedlis.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Mûş -->
+                    <div class="item-card" data-bolge="bakur" data-isim="mus" data-harf="M">
+                        <h3><a href="sehir/mus.html">Mûş (Muş)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Muş</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Malazgirt Ovası'na ev sahipliği yapan tarihi şehir.</p>
+                        <a href="sehir/mus.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Agirî -->
+                    <div class="item-card" data-bolge="bakur" data-isim="agiri" data-harf="A">
+                        <h3><a href="sehir/agiri.html">Agirî (Ağrı)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Ağrı</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Ağrı Dağı'nın eteklerinde, 1927-1930 Ağrı Cumhuriyeti'ne ev sahipliği yapmıştır.</p>
+                        <a href="sehir/agiri.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Îdir -->
+                    <div class="item-card" data-bolge="bakur" data-isim="idir" data-harf="Î">
+                        <h3><a href="sehir/idir.html">Îdir (Iğdır)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Iğdır</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Ağrı Dağı'nın kuzey eteklerinde, Aras Nehri kıyısında.</p>
+                        <a href="sehir/idir.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Qers -->
+                    <div class="item-card" data-bolge="bakur" data-isim="qers" data-harf="Q">
+                        <h3><a href="sehir/qers.html">Qers (Kars)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Kars (güney)</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Ani Harabeleri'ne ev sahipliği yapan tarihi şehir.</p>
+                        <a href="sehir/qers.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Çewlîg -->
+                    <div class="item-card" data-bolge="bakur" data-isim="cewlig" data-harf="Ç">
+                        <h3><a href="sehir/cewlig.html">Çewlîg (Bingöl)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Bingöl</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Yüksek dağları ve yaylalarıyla bilinen şehir.</p>
+                        <a href="sehir/cewlig.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Dersim -->
+                    <div class="item-card" data-bolge="bakur" data-isim="dersim" data-harf="D">
+                        <h3><a href="sehir/dersim.html">Dersim (Tunceli)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Tunceli</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Alevi-Kürt kültürünün merkezi, 1937-38 Dersim Direnişi'ne ev sahipliği.</p>
+                        <a href="sehir/dersim.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Xarpêt -->
+                    <div class="item-card" data-bolge="bakur" data-isim="xarpet" data-harf="X">
+                        <h3><a href="sehir/xarpet.html">Xarpêt (Elazığ)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Elazığ (doğu)</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Harput Kalesi ve tarihi evleriyle ünlü.</p>
+                        <a href="sehir/xarpet.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Erzirom -->
+                    <div class="item-card" data-bolge="bakur" data-isim="erzirom" data-harf="E">
+                        <h3><a href="sehir/erzirom.html">Erzirom (Erzurum)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Erzurum</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Palandöken Dağları ve tarihi medreseleriyle ünlü.</p>
+                        <a href="sehir/erzirom.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Erzîngan -->
+                    <div class="item-card" data-bolge="bakur" data-isim="erzingan" data-harf="E">
+                        <h3><a href="sehir/erzingan.html">Erzîngan (Erzincan)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Erzincan</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Fırat Nehri'nin geçtiği, tarihi ipek yolu üzerindeki şehir.</p>
+                        <a href="sehir/erzingan.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Semasûr -->
+                    <div class="item-card" data-bolge="bakur" data-isim="semasur" data-harf="S">
+                        <h3><a href="sehir/semasur.html">Semasûr (Adıyaman)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Adıyaman</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Nemrut Dağı ve Kommagene Krallığı'na ev sahipliği.</p>
+                        <a href="sehir/semasur.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Riha -->
+                    <div class="item-card" data-bolge="bakur" data-isim="riha" data-harf="R">
+                        <h3><a href="sehir/riha.html">Riha (Şanlıurfa)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Şanlıurfa</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Peygamberler şehri, Göbeklitepe'ye ev sahipliği.</p>
+                        <a href="sehir/riha.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Dîlok -->
+                    <div class="item-card" data-bolge="bakur" data-isim="dilok" data-harf="D">
+                        <h3><a href="sehir/dilok.html">Dîlok (Gaziantep)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Gaziantep</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Zeugma mozaikleri ve mutfağıyla ünlü.</p>
+                        <a href="sehir/dilok.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Mereş -->
+                    <div class="item-card" data-bolge="bakur" data-isim="meres" data-harf="M">
+                        <h3><a href="sehir/meres.html">Mereş (Kahramanmaraş)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Kahramanmaraş</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Dondurması ve tarihi kalesiyle ünlü.</p>
+                        <a href="sehir/meres.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Meletî -->
+                    <div class="item-card" data-bolge="bakur" data-isim="meleti" data-harf="M">
+                        <h3><a href="sehir/meleti.html">Meletî (Malatya)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Malatya</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Kayısısı ve Aslantepe Höyüğü ile ünlü.</p>
+                        <a href="sehir/meleti.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Sêwas -->
+                    <div class="item-card" data-bolge="bakur" data-isim="sewas" data-harf="S">
+                        <h3><a href="sehir/sewas.html">Sêwas (Sivas)</a></h3>
+                        <span class="region-badge" style="background: var(--sor); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Bakur</span>
+                        <p><strong>Resmî adı:</strong> Sivas</p>
+                        <p><strong>Bölge:</strong> Kuzey Kürdistan (Bakur)</p>
+                        <p style="margin-top: 10px;">Selçuklu eserleri ve tarihi medreseleriyle ünlü.</p>
+                        <a href="sehir/sewas.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- ===== ROJHİLAT (DOĞU) ===== -->
+                    <!-- Sine -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="sine" data-harf="S">
+                        <h3><a href="sehir/sine.html">Sine (Sanandaj)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Sanandaj</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <p style="margin-top: 10px;">Erdelan Kürt hanedanına başkentlik yapmış, Kürt kültürünün merkezi.</p>
+                        <a href="sehir/sine.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Mehabad -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="mehabad" data-harf="M">
+                        <h3><a href="sehir/mehabad.html">Mehabad (Mahabad)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Mahabad</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <p style="margin-top: 10px;">1946 Mahabad Kürt Cumhuriyeti'ne başkentlik yapmıştır.</p>
+                        <a href="sehir/mehabad.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Seqiz -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="seqiz" data-harf="S">
+                        <h3><a href="sehir/seqiz.html">Seqiz (Saqqez)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Saqqez</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <p style="margin-top: 10px;">Zagros dağlarının eteklerinde, tarihi bir Kürt şehri.</p>
+                        <a href="sehir/seqiz.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Bane -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="bane" data-harf="B">
+                        <h3><a href="sehir/bane.html">Bane (Baneh)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Baneh</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/bane.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Mêrîwan -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="meriwan" data-harf="M">
+                        <h3><a href="sehir/meriwan.html">Mêrîwan (Marivan)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Marivan</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/meriwan.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Ûrmiyê -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="urmiye" data-harf="Û">
+                        <h3><a href="sehir/urmiye.html">Ûrmiyê (Urmia)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Urmia (batı/güney)</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <p style="margin-top: 10px;">Urmiye Gölü kıyısında, tarihi bir Kürt şehri.</p>
+                        <a href="sehir/urmiye.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Kirmanşah -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="kirmansah" data-harf="K">
+                        <h3><a href="sehir/kirmansah.html">Kirmanşah (Kermanshah)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Kermanshah</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <p style="margin-top: 10px;">Taq-e Bostan kaya kabartmalarıyla ünlü tarihi şehir.</p>
+                        <a href="sehir/kirmansah.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Îlam -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="ilam" data-harf="Î">
+                        <h3><a href="sehir/ilam.html">Îlam (Ilam)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Ilam</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/ilam.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Pawê -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="pawe" data-harf="P">
+                        <h3><a href="sehir/pawe.html">Pawê (Paveh)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Paveh</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/pawe.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Sardeşt -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="sardest" data-harf="S">
+                        <h3><a href="sehir/sardest.html">Sardeşt (Sardasht)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Sardasht</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/sardest.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Şino -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="sino" data-harf="Ş">
+                        <h3><a href="sehir/sino.html">Şino (Oshnavieh)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Oshnavieh</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/sino.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Bîcar -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="bicar" data-harf="B">
+                        <h3><a href="sehir/bicar.html">Bîcar (Bijar)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Bijar</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/bicar.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Dêwlan -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="dewlan" data-harf="D">
+                        <h3><a href="sehir/dewlan.html">Dêwlan (Dehgolan)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Dehgolan</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/dewlan.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Kamyaran -->
+                    <div class="item-card" data-bolge="rojhilat" data-isim="kamyaran" data-harf="K">
+                        <h3><a href="sehir/kamyaran.html">Kamyaran (Kamyaran)</a></h3>
+                        <span class="region-badge" style="background: var(--kesk); color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojhilat</span>
+                        <p><strong>Resmî adı:</strong> Kamyaran</p>
+                        <p><strong>Bölge:</strong> Doğu Kürdistan (Rojhilat)</p>
+                        <a href="sehir/kamyaran.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- ===== BAŞÛR (GÜNEY) ===== -->
+                    <!-- Hewlêr -->
+                    <div class="item-card" data-bolge="basur" data-isim="hewler" data-harf="H">
+                        <h3><a href="sehir/hewler.html">Hewlêr (Erbil)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Erbil</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <p style="margin-top: 10px;">Dünyanın en eski yerleşimlerinden biri, 6000 yıllık kalesiyle ünlü.</p>
+                        <a href="sehir/hewler.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Silêmanî -->
+                    <div class="item-card" data-bolge="basur" data-isim="silemani" data-harf="S">
+                        <h3><a href="sehir/silemani.html">Silêmanî (Süleymaniye)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Süleymaniye</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <p style="margin-top: 10px;">Kürt edebiyatı ve kültürünün merkezi, Baban Emirliği'ne başkentlik yapmış.</p>
+                        <a href="sehir/silemani.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Dihok -->
+                    <div class="item-card" data-bolge="basur" data-isim="dihok" data-harf="D">
+                        <h3><a href="sehir/dihok.html">Dihok (Duhok)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Duhok</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <a href="sehir/dihok.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Helebçe -->
+                    <div class="item-card" data-bolge="basur" data-isim="helebce" data-harf="H">
+                        <h3><a href="sehir/helebce.html">Helebçe (Halepçe)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Halepçe</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <p style="margin-top: 10px;">1988'de kimyasal saldırıya uğrayan, Kürt direnişinin sembol şehri.</p>
+                        <a href="sehir/helebce.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Zaxo -->
+                    <div class="item-card" data-bolge="basur" data-isim="zaxo" data-harf="Z">
+                        <h3><a href="sehir/zaxo.html">Zaxo (Zakho)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Zakho</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <p style="margin-top: 10px;">Habur sınır kapısına yakın, tarihi köprüsüyle ünlü.</p>
+                        <a href="sehir/zaxo.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Ranya -->
+                    <div class="item-card" data-bolge="basur" data-isim="ranya" data-harf="R">
+                        <h3><a href="sehir/ranya.html">Ranya (Ranya)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Ranya</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <a href="sehir/ranya.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Koye -->
+                    <div class="item-card" data-bolge="basur" data-isim="koye" data-harf="K">
+                        <h3><a href="sehir/koye.html">Koye (Koy Sanjaq)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Koy Sanjaq</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <a href="sehir/koye.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Akrê -->
+                    <div class="item-card" data-bolge="basur" data-isim="akre" data-harf="A">
+                        <h3><a href="sehir/akre.html">Akrê (Akre)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Akre</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <p style="margin-top: 10px;">Nevruz'da ateş yakma geleneğiyle ünlü.</p>
+                        <a href="sehir/akre.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Soran -->
+                    <div class="item-card" data-bolge="basur" data-isim="soran" data-harf="S">
+                        <h3><a href="sehir/soran.html">Soran (Soran)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Soran</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <a href="sehir/soran.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Kerkûk -->
+                    <div class="item-card" data-bolge="basur" data-isim="kerkuk" data-harf="K">
+                        <h3><a href="sehir/kerkuk.html">Kerkûk (Kerkük)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Kerkük</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <p style="margin-top: 10px;">Petrol zengini, Kürt, Türkmen ve Arap nüfusun bir arada yaşadığı şehir.</p>
+                        <a href="sehir/kerkuk.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Xaneqîn -->
+                    <div class="item-card" data-bolge="basur" data-isim="xaneqin" data-harf="X">
+                        <h3><a href="sehir/xaneqin.html">Xaneqîn (Khanaqin)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Khanaqin</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <a href="sehir/xaneqin.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Maxmûr -->
+                    <div class="item-card" data-bolge="basur" data-isim="maxmur" data-harf="M">
+                        <h3><a href="sehir/maxmur.html">Maxmûr (Mahmur)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Mahmur</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <a href="sehir/maxmur.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Şengal -->
+                    <div class="item-card" data-bolge="basur" data-isim="sengal" data-harf="Ş">
+                        <h3><a href="sehir/sengal.html">Şengal (Sincar)</a></h3>
+                        <span class="region-badge" style="background: var(--zer); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Başûr</span>
+                        <p><strong>Resmî adı:</strong> Sincar</p>
+                        <p><strong>Bölge:</strong> Güney Kürdistan (Başûr)</p>
+                        <p style="margin-top: 10px;">Êzidî Kürtlerin kutsal şehri, 2014'te IŞİD saldırısına uğradı.</p>
+                        <a href="sehir/sengal.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- ===== ROJAVA ===== -->
+                    <!-- Qamişlo -->
+                    <div class="item-card" data-bolge="rojava" data-isim="qamislo" data-harf="Q">
+                        <h3><a href="sehir/qamislo.html">Qamişlo (Kamışlı)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> Kamışlı</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <p style="margin-top: 10px;">Rojava'nın en büyük şehri, kültürel ve ekonomik merkez.</p>
+                        <a href="sehir/qamislo.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Hesekê -->
+                    <div class="item-card" data-bolge="rojava" data-isim="heseke" data-harf="H">
+                        <h3><a href="sehir/heseke.html">Hesekê (Haseke)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> Haseke</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <a href="sehir/heseke.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Kobanê -->
+                    <div class="item-card" data-bolge="rojava" data-isim="kobane" data-harf="K">
+                        <h3><a href="sehir/kobane.html">Kobanê (Ayn el-Arab)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> Ayn el-Arab</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <p style="margin-top: 10px;">2014-2015'te IŞİD'e karşı direnişiyle dünyaca ünlendi.</p>
+                        <a href="sehir/kobane.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Efrîn -->
+                    <div class="item-card" data-bolge="rojava" data-isim="efrin" data-harf="E">
+                        <h3><a href="sehir/efrin.html">Efrîn (Afrin)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> Afrin</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <p style="margin-top: 10px;">Zeytin bahçeleriyle ünlü, 2018'de Türk askeri operasyonuna uğradı.</p>
+                        <a href="sehir/efrin.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Dêrik -->
+                    <div class="item-card" data-bolge="rojava" data-isim="derik" data-harf="D">
+                        <h3><a href="sehir/derik.html">Dêrik (Malikiye)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> Malikiye</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <a href="sehir/derik.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Amûdê -->
+                    <div class="item-card" data-bolge="rojava" data-isim="amude" data-harf="A">
+                        <h3><a href="sehir/amude.html">Amûdê (Amude)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> Amude</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <a href="sehir/amude.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Tirbespî -->
+                    <div class="item-card" data-bolge="rojava" data-isim="tirbespi" data-harf="T">
+                        <h3><a href="sehir/tirbespi.html">Tirbespî (al-Qahtaniyah)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> al-Qahtaniyah</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <a href="sehir/tirbespi.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Girê Spî -->
+                    <div class="item-card" data-bolge="rojava" data-isim="gire-spi" data-harf="G">
+                        <h3><a href="sehir/gire-spi.html">Girê Spî (Tel Abyad)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> Tel Abyad</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <a href="sehir/gire-spi.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Ayn Îsa -->
+                    <div class="item-card" data-bolge="rojava" data-isim="ayn-isa" data-harf="A">
+                        <h3><a href="sehir/ayn-isa.html">Ayn Îsa (Ayn Issa)</a></h3>
+                        <span class="region-badge" style="background: var(--pêşeroj-cyan); color: black; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Rojava</span>
+                        <p><strong>Resmî adı:</strong> Ayn Issa</p>
+                        <p><strong>Bölge:</strong> Batı Kürdistan (Rojava)</p>
+                        <a href="sehir/ayn-isa.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- ===== KURDISTANA SOR ===== -->
+                    <!-- Laçîn -->
+                    <div class="item-card" data-bolge="sor" data-isim="lacin" data-harf="L">
+                        <h3><a href="sehir/lacin.html">Laçîn (Lachin)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/lacin.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Kelbecer -->
+                    <div class="item-card" data-bolge="sor" data-isim="kelbecer" data-harf="K">
+                        <h3><a href="sehir/kelbecer.html">Kelbecer (Kalbajar)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/kelbecer.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Qubadli -->
+                    <div class="item-card" data-bolge="sor" data-isim="qubadli" data-harf="Q">
+                        <h3><a href="sehir/qubadli.html">Qubadli (Kubadlı)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/qubadli.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Zengîlan -->
+                    <div class="item-card" data-bolge="sor" data-isim="zengilan" data-harf="Z">
+                        <h3><a href="sehir/zengilan.html">Zengîlan (Zangilan)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/zengilan.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Cebrayil -->
+                    <div class="item-card" data-bolge="sor" data-isim="cebrayil" data-harf="C">
+                        <h3><a href="sehir/cebrayil.html">Cebrayil (Jabrayil)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/cebrayil.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Ağdam -->
+                    <div class="item-card" data-bolge="sor" data-isim="agdam" data-harf="A">
+                        <h3><a href="sehir/agdam.html">Ağdam (Aghdam)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/agdam.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Gence -->
+                    <div class="item-card" data-bolge="sor" data-isim="gence" data-harf="G">
+                        <h3><a href="sehir/gence.html">Gence (Ganja)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/gence.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Dvin -->
+                    <div class="item-card" data-bolge="sor" data-isim="dvin" data-harf="D">
+                        <h3><a href="sehir/dvin.html">Dvin (Dvin)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/dvin.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Aknalich -->
+                    <div class="item-card" data-bolge="sor" data-isim="aknalich" data-harf="A">
+                        <h3><a href="sehir/aknalich.html">Aknalich (Aknalich)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/aknalich.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Rya Taza -->
+                    <div class="item-card" data-bolge="sor" data-isim="rya-taza" data-harf="R">
+                        <h3><a href="sehir/rya-taza.html">Rya Taza (Rya Taza)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/rya-taza.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Alagyaz -->
+                    <div class="item-card" data-bolge="sor" data-isim="alagyaz" data-harf="A">
+                        <h3><a href="sehir/alagyaz.html">Alagyaz (Alagyaz)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <a href="sehir/alagyaz.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Ani -->
+                    <div class="item-card" data-bolge="sor" data-isim="ani" data-harf="A">
+                        <h3><a href="sehir/ani.html">Ani (Ani)</a></h3>
+                        <span class="region-badge" style="background: #8B4513; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-bottom: 10px;">Kurdistana Sor</span>
+                        <p><strong>Bölge:</strong> Kızıl Kürdistan</p>
+                        <p style="margin-top: 10px;">Ortaçağ'da büyük bir şehir, şimdi ören yeri.</p>
+                        <a href="sehir/ani.html" class="read-more">Detay →</a>
+                    </div>
+                </div>
+                
+                <!-- Toplam Bilgi -->
+                <div style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <h3 style="color: var(--zer);"><i class="fas fa-map-marked-alt"></i> Kürt Şehirleri Hakkında</h3>
+                    <p>Bu sayfada Kürdistan'ın dört parçasından (Bakur, Başûr, Rojhilat, Rojava) ve Kurdistana Sor'dan toplam <strong id="toplamSehirSon">70+</strong> şehir listelenmiştir. Her şehrin Kürtçe yerel adı ve resmî adı belirtilmiştir.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-city"></i></div>
+                <h4>70+ Şehir</h4>
+                <p>Dört parçada</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-map"></i></div>
+                <h4>Bakur, Rojhilat</h4>
+                <p>Başûr, Rojava</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-landmark"></i></div>
+                <h4>Kurdistana Sor</h4>
+                <p>Kızıl Kürdistan</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Sayıları hesapla
+        function hesaplaSayilari() {
+            const tumKartlar = document.querySelectorAll('.item-card');
+            const bakurKartlar = document.querySelectorAll('.item-card[data-bolge="bakur"]');
+            const rojhilatKartlar = document.querySelectorAll('.item-card[data-bolge="rojhilat"]');
+            const basurKartlar = document.querySelectorAll('.item-card[data-bolge="basur"]');
+            const rojavaKartlar = document.querySelectorAll('.item-card[data-bolge="rojava"]');
+            const sorKartlar = document.querySelectorAll('.item-card[data-bolge="sor"]');
+            
+            document.getElementById('toplamSehir').textContent = tumKartlar.length;
+            document.getElementById('bakurSayi').textContent = bakurKartlar.length;
+            document.getElementById('rojhilatSayi').textContent = rojhilatKartlar.length;
+            document.getElementById('basurSayi').textContent = basurKartlar.length;
+            document.getElementById('rojavaSayi').textContent = rojavaKartlar.length;
+            document.getElementById('sorSayi').textContent = sorKartlar.length;
+            document.getElementById('toplamSehirSon').textContent = tumKartlar.length;
+        }
+        
+        // Bölge filtreleme
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const kartlar = document.querySelectorAll('.item-card');
+                
+                if (filter === 'all') {
+                    kartlar.forEach(kart => kart.style.display = 'block');
+                } else {
+                    kartlar.forEach(kart => {
+                        if (kart.dataset.bolge === filter) {
+                            kart.style.display = 'block';
+                        } else {
+                            kart.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Alfabe filtresi
+        document.querySelectorAll('.alphabet-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.alphabet-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const letter = this.dataset.letter;
+                const kartlar = document.querySelectorAll('.item-card');
+                
+                if (letter === 'all') {
+                    kartlar.forEach(kart => kart.style.display = 'block');
+                } else {
+                    kartlar.forEach(kart => {
+                        if (kart.dataset.harf === letter) {
+                            kart.style.display = 'block';
+                        } else {
+                            kart.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Arama
+        document.getElementById('sehirSearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const kartlar = document.querySelectorAll('.item-card');
+            
+            kartlar.forEach(kart => {
+                const metin = kart.textContent.toLowerCase();
+                if (metin.includes(searchTerm)) {
+                    kart.style.display = 'block';
+                } else {
+                    kart.style.display = 'none';
+                }
+            });
+        });
+        
+        // Sayfa yüklendiğinde sayıları hesapla
+        window.addEventListener('load', hesaplaSayilari);
+    </script>
+</body>
+</html>
