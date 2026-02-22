@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kürt Edebiyatı, Sanat ve Kültür - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Edebiyat sayfası için özel stiller */
+        .timeline-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(225,25,25,0.1), rgba(0,153,0,0.1), rgba(255,215,0,0.1));
+            border-radius: 30px;
+            border: 1px solid var(--zer);
+        }
+        
+        .timeline-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-title h2 {
+            color: var(--zer);
+            font-size: 2.2rem;
+        }
+        
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .timeline-item {
+            background: rgba(20, 24, 28, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid var(--sor);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--zer);
+        }
+        
+        .timeline-item .tarih {
+            color: var(--pêşeroj-cyan);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item .yer {
+            color: var(--zer);
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-item .aciklama {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .kultur-kategori {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--zer);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .kultur-kategori h2 {
+            margin: 0;
+            color: var(--zer);
+            font-size: 2rem;
+        }
+        
+        .kultur-kategori i {
+            font-size: 2rem;
+            color: var(--sor);
+        }
+        
+        .eser-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .eser-card {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid var(--zer);
+            transition: var(--transition);
+        }
+        
+        .eser-card:hover {
+            transform: translateY(-3px);
+            border-left-color: var(--sor);
+        }
+        
+        .eser-adi {
+            color: var(--zer);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .eser-yazar {
+            color: var(--pêşeroj-cyan);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        
+        .eser-yazar a {
+            color: var(--pêşeroj-cyan);
+            text-decoration: none;
+        }
+        
+        .eser-yazar a:hover {
+            color: var(--zer);
+            text-decoration: underline;
+        }
+        
+        .eser-tarih {
+            display: inline-block;
+            background: var(--sor);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        .eser-tur {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--zer);
+            color: var(--zer);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        .sanatci-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .sanatci-card {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--sor);
+            transition: var(--transition);
+        }
+        
+        .sanatci-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--zer);
+        }
+        
+        .sanatci-icon {
+            font-size: 3rem;
+            color: var(--zer);
+            margin-bottom: 15px;
+        }
+        
+        .sanatci-isim {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .sanatci-isim a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .sanatci-isim a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .sanatci-tur {
+            color: var(--pêşeroj-cyan);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .sanatci-eser {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+                <a href="sehirler.html" class="nav-link">Şehirler</a>
+                <a href="edebiyat.html" class="nav-link active">Edebiyat</a>
+                <a href="kavramlar.html" class="nav-link">Kavramlar</a>
+                <a href="din.html" class="nav-link">Din</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="edebiyatSearch" placeholder="Yazar, eser, sanatçı ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                <h1>📚 Kürt Edebiyatı, Sanat ve Kültür</h1>
+                <p>Kürt edebiyatının klasik ve modern dönemleri, yazarlar, şairler, eserler, müzik, sinema, tiyatro ve görsel sanatlar.</p>
+                
+                <!-- İstatistikler -->
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; margin: 40px 0; padding: 25px; background: rgba(0,0,0,0.3); border-radius: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);">30+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Yazar/Şair</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);">50+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Eser</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);">15+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Müzisyen</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);">10+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Film</div>
+                    </div>
+                </div>
+                
+                <!-- Filtreleme -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="arkeoloji">Arkeolojik Miras</button>
+                    <button class="filter-btn" data-filter="klasik">Klasik Edebiyat</button>
+                    <button class="filter-btn" data-filter="modern">Modern Edebiyat</button>
+                    <button class="filter-btn" data-filter="muzik">Müzik</button>
+                    <button class="filter-btn" data-filter="sinema">Sinema/Tiyatro</button>
+                    <button class="filter-btn" data-filter="sanat">Görsel Sanat</button>
+                </div>
+                
+                <!-- ===== KRONOLOJİK GÖRSEL TİMELINE (Giriş) ===== -->
+                <div class="timeline-section" data-kategori="arkeoloji">
+                    <div class="timeline-title">
+                        <h2>🏺 Kürdistan Coğrafyasında Arkeolojik Miras</h2>
+                        <p>12.000 yıllık medeniyetin izleri</p>
+                    </div>
+                    
+                    <div class="timeline-grid">
+                        <div class="timeline-item">
+                            <div class="tarih">MÖ 9600 civarı</div>
+                            <div class="yer">Göbekli Tepe</div>
+                            <div class="aciklama">Dünyanın bilinen en eski tapınak kompleksi. Şanlıurfa.</div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="tarih">Neolitik Dönem</div>
+                            <div class="yer">Nevali Çori</div>
+                            <div class="aciklama">Neolitik yerleşim, Şanlıurfa.</div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="tarih">Pre-Pottery Neolithic</div>
+                            <div class="yer">Karahan Tepe</div>
+                            <div class="aciklama">Göbeklitepe benzeri tapınak kompleksi.</div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="tarih">Neolitik Dönem</div>
+                            <div class="yer">Çayönü Tepesi</div>
+                            <div class="aciklama">Neolitik mimarinin önemli örneklerinden. Diyarbakır.</div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="tarih">Neolitik - Ortaçağ</div>
+                            <div class="yer">Hasankeyf</div>
+                            <div class="aciklama">Mağara yerleşimleri ve tarihi yapılar. Batman.</div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="tarih">Paleolitik Dönem</div>
+                            <div class="yer">Şanidar Mağarası</div>
+                            <div class="aciklama">Neandertal kalıntıları. Zagros Dağları, Irak Kürdistanı.</div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="tarih">MÖ 1. yy</div>
+                            <div class="yer">Nemrut Dağı</div>
+                            <div class="aciklama">Kommagene Krallığı'na ait heykeller. Adıyaman.</div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="tarih">4. yy - 16. yy</div>
+                            <div class="yer">Amed Surları</div>
+                            <div class="aciklama">Diyarbakır Kalesi ve surları. Dünyanın en uzun surları.</div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="tarih">MÖ 6000'den günümüze</div>
+                            <div class="yer">Erbil Kalesi</div>
+                            <div class="aciklama">Dünyanın en uzun sürekli yerleşimi olan kalesi.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ===== YAZARLAR VE ŞAİRLER ===== -->
+                <div class="kultur-kategori" data-kategori="klasik modern">
+                    <i class="fas fa-feather-alt"></i>
+                    <h2>✍️ Yazar ve Şairler</h2>
+                </div>
+                
+                <div class="items-grid" id="yazarListesi">
+                    <!-- Ehmedê Xanî -->
+                    <div class="item-card" data-kategori="klasik" data-isim="xani" data-harf="E">
+                        <h3><a href="sahsiyet/ehmede-xani.html">Ehmedê Xanî</a></h3>
+                        <span class="year-badge">17. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Mesnevi/Felsefi</span>
+                        <p><strong>Önemli eserleri:</strong> Mem û Zîn, Nûbihara Biçûkan, Eqîdeya Îmanê</p>
+                        <p style="margin-top: 10px;">Kürt edebiyatının en büyük şairi ve düşünürü. Mem û Zîn eseri Kürt edebiyatının başyapıtıdır.</p>
+                        <a href="sahsiyet/ehmede-xani.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Melayê Cizîrî -->
+                    <div class="item-card" data-kategori="klasik" data-isim="ciziri" data-harf="M">
+                        <h3><a href="sahsiyet/melaye-ciziri.html">Melayê Cizîrî</a></h3>
+                        <span class="year-badge">17. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Divan Şiiri</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan</p>
+                        <p style="margin-top: 10px;">Klasik Kürt şiirinin en önemli temsilcilerinden. Tasavvufi şiirleriyle ünlü.</p>
+                        <a href="sahsiyet/melaye-ciziri.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Feqiyê Teyran -->
+                    <div class="item-card" data-kategori="klasik" data-isim="teyran" data-harf="F">
+                        <h3><a href="sahsiyet/feqiye-teyran.html">Feqiyê Teyran</a></h3>
+                        <span class="year-badge">17. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Tasavvufi Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Şêx Sen'an, Dîwan</p>
+                        <p style="margin-top: 10px;">Kürt edebiyatının önemli şairlerinden. Hayvan masalları ve tasavvufi şiirler yazmıştır.</p>
+                        <a href="sahsiyet/feqiye-teyran.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Ali Harirî -->
+                    <div class="item-card" data-kategori="klasik" data-isim="hariri" data-harf="A">
+                        <h3><a href="sahsiyet/ali-hariri.html">Ali Harirî</a></h3>
+                        <span class="year-badge">15. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Klasik Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan</p>
+                        <p style="margin-top: 10px;">Bilinen en eski Kürt şairlerinden. 15. yüzyılda yaşamıştır.</p>
+                        <a href="sahsiyet/ali-hariri.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Nalî -->
+                    <div class="item-card" data-kategori="klasik" data-isim="nali" data-harf="N">
+                        <h3><a href="sahsiyet/nali.html">Nalî</a></h3>
+                        <span class="year-badge">19. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Klasik Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan</p>
+                        <p style="margin-top: 10px;">Kürt şiirinde önemli bir yere sahiptir. Özellikle gazelleriyle tanınır.</p>
+                        <a href="sahsiyet/nali.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Salim -->
+                    <div class="item-card" data-kategori="klasik" data-isim="salim" data-harf="S">
+                        <h3><a href="sahsiyet/salim.html">Salim</a></h3>
+                        <span class="year-badge">19. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Klasik Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan</p>
+                        <a href="sahsiyet/salim.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Mahwi -->
+                    <div class="item-card" data-kategori="klasik" data-isim="mahwi" data-harf="M">
+                        <h3><a href="sahsiyet/mahwi.html">Mahwi (Kurdi)</a></h3>
+                        <span class="year-badge">19. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Tasavvufi Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan</p>
+                        <a href="sahsiyet/mahwi.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Hecî Qadirê Koyî -->
+                    <div class="item-card" data-kategori="klasik" data-isim="koyi" data-harf="H">
+                        <h3><a href="sahsiyet/heci-qadire-koyi.html">Hecî Qadirê Koyî</a></h3>
+                        <span class="year-badge">19. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Ulusal Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan, Rêga Kurdistanê</p>
+                        <p style="margin-top: 10px;">Kürt uyanışının öncü şairlerinden. Milliyetçi şiirleriyle tanınır.</p>
+                        <a href="sahsiyet/heci-qadire-koyi.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Cigerxwîn -->
+                    <div class="item-card" data-kategori="modern" data-isim="cigerxwin" data-harf="C">
+                        <h3><a href="sahsiyet/cigerxwin.html">Cigerxwîn</a></h3>
+                        <span class="year-badge">20. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Kîme Ez?, Sewra Azadî, Ronak, Gulê, Xwîn û Hêvî, Kurdistan</p>
+                        <p style="margin-top: 10px;">Modern Kürt şiirinin en önemli isimlerinden. Devrimci şiirleriyle ünlü.</p>
+                        <a href="sahsiyet/cigerxwin.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Abdulla Goran -->
+                    <div class="item-card" data-kategori="modern" data-isim="goran" data-harf="A">
+                        <h3><a href="sahsiyet/abdulla-goran.html">Abdulla Goran</a></h3>
+                        <span class="year-badge">20. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Modern Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan, Roja Nû</p>
+                        <p style="margin-top: 10px;">Modern Kürt şiirinin kurucularından. Serbest şiirin öncüsü.</p>
+                        <a href="sahsiyet/abdulla-goran.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Osman Sebrî -->
+                    <div class="item-card" data-kategori="modern" data-isim="sebri" data-harf="O">
+                        <h3><a href="sahsiyet/osman-sebri.html">Osman Sebrî</a></h3>
+                        <span class="year-badge">20. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Şiir/Politik</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan</p>
+                        <a href="sahsiyet/osman-sebri.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Sherko Bekas -->
+                    <div class="item-card" data-kategori="modern" data-isim="bekas" data-harf="Ş">
+                        <h3><a href="sahsiyet/sherko-bekas.html">Sherko Bekas</a></h3>
+                        <span class="year-badge">20–21. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Modern Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Nowrozname, Butterfly Valley, Helebçe</p>
+                        <p style="margin-top: 10px;">Modern Kürt şiirinin en önemli temsilcilerinden. Serbest şiirin ustası.</p>
+                        <a href="sahsiyet/sherko-bekas.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Latif Halmat -->
+                    <div class="item-card" data-kategori="modern" data-isim="halmat" data-harf="L">
+                        <h3><a href="sahsiyet/latif-halmat.html">Latif Halmat</a></h3>
+                        <span class="year-badge">20–21. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Modern Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Şiir derlemeleri</p>
+                        <a href="sahsiyet/latif-halmat.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Mehmed Uzun -->
+                    <div class="item-card" data-kategori="modern" data-isim="uzun" data-harf="M">
+                        <h3><a href="sahsiyet/mehmed-uzun.html">Mehmed Uzun</a></h3>
+                        <span class="year-badge">20–21. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Roman</span>
+                        <p><strong>Önemli eserleri:</strong> Tu, Siya Evînê, Mirina Kalekî Rind, Bîra Qederê</p>
+                        <p style="margin-top: 10px;">Modern Kürt romanının kurucusu. Sürgünde Kürtçe romanlar yazmıştır.</p>
+                        <a href="sahsiyet/mehmed-uzun.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Bachtyar Ali -->
+                    <div class="item-card" data-kategori="modern" data-isim="ali" data-harf="B">
+                        <h3><a href="sahsiyet/bachtyar-ali.html">Bachtyar Ali</a></h3>
+                        <span class="year-badge">21. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Roman</span>
+                        <p><strong>Önemli eserleri:</strong> The Last Pomegranate of the World, I Stared at the Night of the City, Efsûn</p>
+                        <p style="margin-top: 10px;">Çağdaş Kürt edebiyatının en önemli romancılarından. Felsefi romanlarıyla ünlü.</p>
+                        <a href="sahsiyet/bachtyar-ali.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Yaşar Kemal -->
+                    <div class="item-card" data-kategori="modern" data-isim="kemal" data-harf="Y">
+                        <h3><a href="sahsiyet/yasar-kemal.html">Yaşar Kemal</a></h3>
+                        <span class="year-badge">20. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Roman</span>
+                        <p><strong>Önemli eserleri:</strong> İnce Memed, Yer Demir Gök Bakır</p>
+                        <p style="margin-top: 10px;">Türk ve Kürt edebiyatının en büyük romancılarından. Nobel'e aday gösterilmiştir.</p>
+                        <a href="sahsiyet/yasar-kemal.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Seyhmus Dagtekin -->
+                    <div class="item-card" data-kategori="modern" data-isim="dagtekin" data-harf="S">
+                        <h3><a href="sahsiyet/seyhmus-dagtekin.html">Seyhmus Dagtekin</a></h3>
+                        <span class="year-badge">21. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> À la source, Juste un pont, sans feu</p>
+                        <p style="margin-top: 10px;">Fransa'da yaşayan Kürt şair. Fransızca ve Kürtçe şiirleriyle uluslararası ödüller almıştır.</p>
+                        <a href="sahsiyet/seyhmus-dagtekin.html" class="read-more">Detay →</a>
+                    </div>
+                    
+                    <!-- Şêx Riza Talabani -->
+                    <div class="item-card" data-kategori="klasik" data-isim="talabani" data-harf="Ş">
+                        <h3><a href="sahsiyet/sex-riza-talabani.html">Şêx Riza Talabani</a></h3>
+                        <span class="year-badge">19. yy</span>
+                        <span class="eser-tur" style="margin-left: 5px;">Klasik Şiir</span>
+                        <p><strong>Önemli eserleri:</strong> Dîwan</p>
+                        <a href="sahsiyet/sex-riza-talabani.html" class="read-more">Detay →</a>
+                    </div>
+                </div>
+                
+                <!-- ===== ÖNEMLİ ESERLER ===== -->
+                <div class="kultur-kategori" data-kategori="klasik modern">
+                    <i class="fas fa-book"></i>
+                    <h2>📖 Önemli Eserler</h2>
+                </div>
+                
+                <div class="eser-grid">
+                    <!-- Klasik Eserler -->
+                    <div class="eser-card" data-kategori="klasik">
+                        <div class="eser-adi">Mem û Zîn</div>
+                        <div class="eser-yazar"><a href="sahsiyet/ehmede-xani.html">Ehmedê Xanî</a></div>
+                        <div class="eser-tarih">1692</div>
+                        <span class="eser-tur">Mesnevi</span>
+                    </div>
+                    
+                    <div class="eser-card" data-kategori="klasik">
+                        <div class="eser-adi">Nûbihara Biçûkan</div>
+                        <div class="eser-yazar"><a href="sahsiyet/ehmede-xani.html">Ehmedê Xanî</a></div>
+                        <div class="eser-tarih">1683 civarı</div>
+                        <span class="eser-tur">Eğitim/Aruz</span>
+                    </div>
+                    
+                    <div class="eser-card" data-kategori="klasik">
+                        <div class="eser-adi">Eqîdeya Îmanê</div>
+                        <div class="eser-yazar"><a href="sahsiyet/ehmede-xani.html">Ehmedê Xanî</a></div>
+                        <div class="eser-tarih">17. yy</div>
+                        <span class="eser-tur">Felsefi/Dini</span>
+                    </div>
+                    
+                    <div class="eser-card" data-kategori="klasik">
+                        <div class="eser-adi">Dîwan</div>
+                        <div class="eser-yazar"><a href="sahsiyet/melaye-ciziri.html">Melayê Cizîrî</a></div>
+                        <div class="eser-tarih">17. yy</div>
+                        <span class="eser-tur">Divan Şiiri</span>
+                    </div>
+                    
+                    <div class="eser-card" data-kategori="klasik">
+                        <div class="eser-adi">Şêx Sen'an</div>
+                        <div class="eser-yazar"><a href="sahsiyet/feqiye-teyran.html">Feqiyê Teyran</a></div>
+                        <div class="eser-tarih">17. yy</div>
+                        <span class="eser-tur">Tasavvufi Mesnevi</span>
+                    </div>
+                    
+                    <div class="eser-card" data-kategori="klasik">
+                        <div class="eser-adi">Memê
