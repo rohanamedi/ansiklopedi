@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kürt Kültür, Sanat ve Edebiyat - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Kültür sayfası için özel stiller */
+        .timeline-section {
+            margin: 50px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(225,25,25,0.1), rgba(0,153,0,0.1), rgba(255,215,0,0.1));
+            border-radius: 30px;
+            border: 1px solid var(--zer);
+        }
+        
+        .timeline-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-title h2 {
+            color: var(--zer);
+            font-size: 2.2rem;
+        }
+        
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .timeline-item {
+            background: rgba(20, 24, 28, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid var(--sor);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--zer);
+        }
+        
+        .timeline-item .tarih {
+            color: var(--pêşeroj-cyan);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item .yer {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-item .yer a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .timeline-item .yer a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .timeline-item .aciklama {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .kultur-kategori {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--zer);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .kultur-kategori h2 {
+            margin: 0;
+            color: var(--zer);
+            font-size: 2rem;
+        }
+        
+        .kultur-kategori i {
+            font-size: 2rem;
+            color: var(--sor);
+        }
+        
+        .eser-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .eser-card {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid var(--zer);
+            transition: var(--transition);
+        }
+        
+        .eser-card:hover {
+            transform: translateY(-3px);
+            border-left-color: var(--sor);
+        }
+        
+        .eser-adi {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .eser-adi a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .eser-adi a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .eser-yazar {
+            color: var(--pêşeroj-cyan);
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        
+        .eser-yazar a {
+            color: var(--pêşeroj-cyan);
+            text-decoration: none;
+        }
+        
+        .eser-yazar a:hover {
+            color: var(--zer);
+            text-decoration: underline;
+        }
+        
+        .eser-tarih {
+            display: inline-block;
+            background: var(--sor);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+        
+        .eser-tur {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--zer);
+            color: var(--zer);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+        
+        .sanatci-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .sanatci-card {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--sor);
+            transition: var(--transition);
+        }
+        
+        .sanatci-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--zer);
+        }
+        
+        .sanatci-icon {
+            font-size: 3rem;
+            color: var(--zer);
+            margin-bottom: 15px;
+        }
+        
+        .sanatci-isim {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        
+        .sanatci-isim a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .sanatci-isim a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .sanatci-tur {
+            color: var(--pêşeroj-cyan);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .sanatci-eser {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        .destan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .destan-card {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid var(--pêşeroj-cyan);
+            transition: var(--transition);
+        }
+        
+        .destan-card:hover {
+            transform: translateY(-3px);
+            border-left-color: var(--zer);
+        }
+        
+        .destan-adi {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .destan-adi a {
+            color: var(--pêşeroj-cyan);
+            text-decoration: none;
+        }
+        
+        .destan-adi a:hover {
+            color: var(--zer);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+                <a href="sehirler.html" class="nav-link">Şehirler</a>
+                <a href="kultur.html" class="nav-link active">Kültür & Sanat</a>
+                <a href="kavramlar.html" class="nav-link">Kavramlar</a>
+                <a href="din.html" class="nav-link">Din</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="kulturSearch" placeholder="Eser, sanatçı, destan ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                <h1>🎨 Kürt Kültür, Sanat ve Edebiyat</h1>
+                <p>Arkeolojik mirastan sözlü destanlara, klasik edebiyattan moderne, müzikten sinemaya Kürt kültür ve sanat dünyası.</p>
+                
+                <!-- İstatistikler -->
+                <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; margin: 40px 0; padding: 25px; background: rgba(0,0,0,0.3); border-radius: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);">15+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Arkeolojik Miras</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);">10+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Sözlü Destan</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);">50+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Edebi Eser</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; font-weight: bold; color: var(--zer);">15+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Müzisyen</div>
+                    </div>
+                </div>
+                
+                <!-- Filtreleme -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">Tümü</button>
+                    <button class="filter-btn" data-filter="arkeoloji">Arkeoloji</button>
+                    <button class="filter-btn" data-filter="destan">Destanlar</button>
+                    <button class="filter-btn" data-filter="edebiyat">Edebiyat</button>
+                    <button class="filter-btn" data-filter="muzik">Müzik</button>
+                    <button class="filter-btn" data-filter="sinema">Sinema/Tiyatro</button>
+                    <button class="filter-btn" data-filter="sanat">Geleneksel Sanat</button>
+                </div>
+                
+                <!-- ===== BÖLÜM 1: ARKEOLOJİK MİRAS ===== -->
+                <div class="kultur-kategori" data-kategori="arkeoloji">
+                    <i class="fas fa-mountain"></i>
+                    <h2>🏺 Arkeolojik Miras</h2>
+                </div>
+                
+                <div class="timeline-grid">
+                    <!-- Göbekli Tepe -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">MÖ 9600 civarı</div>
+                        <div class="yer"><a href="kultur/gobekli-tepe.html">Göbekli Tepe</a></div>
+                        <div class="aciklama">Dünyanın bilinen en eski tapınak kompleksi. Şanlıurfa.</div>
+                    </div>
+                    
+                    <!-- Karahan Tepe -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">Pre-Pottery Neolithic</div>
+                        <div class="yer"><a href="kultur/karahan-tepe.html">Karahan Tepe</a></div>
+                        <div class="aciklama">Göbeklitepe benzeri tapınak kompleksi.</div>
+                    </div>
+                    
+                    <!-- Nevali Çori -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">Neolitik Dönem</div>
+                        <div class="yer"><a href="kultur/nevali-cori.html">Nevali Çori</a></div>
+                        <div class="aciklama">Neolitik yerleşim, Şanlıurfa.</div>
+                    </div>
+                    
+                    <!-- Çayönü Tepesi -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">Neolitik Dönem</div>
+                        <div class="yer"><a href="kultur/cayonu-tepesi.html">Çayönü Tepesi</a></div>
+                        <div class="aciklama">Neolitik mimarinin önemli örneklerinden. Diyarbakır.</div>
+                    </div>
+                    
+                    <!-- Hasankeyf -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">Neolitik - Ortaçağ</div>
+                        <div class="yer"><a href="kultur/hasankeyf.html">Hasankeyf</a></div>
+                        <div class="aciklama">Mağara yerleşimleri ve tarihi yapılar. Batman.</div>
+                    </div>
+                    
+                    <!-- Şanidar Mağarası -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">Paleolitik Dönem</div>
+                        <div class="yer"><a href="kultur/sanidar-magarasi.html">Şanidar Mağarası</a></div>
+                        <div class="aciklama">Neandertal kalıntıları. Zagros Dağları, Irak Kürdistanı.</div>
+                    </div>
+                    
+                    <!-- Nemrut Dağı -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">MÖ 1. yy</div>
+                        <div class="yer"><a href="kultur/nemrut-dagi.html">Nemrut Dağı</a></div>
+                        <div class="aciklama">Kommagene Krallığı'na ait heykeller. Adıyaman.</div>
+                    </div>
+                    
+                    <!-- Amed Surları -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">4. yy - 16. yy</div>
+                        <div class="yer"><a href="kultur/amed-surlari.html">Amed Surları</a></div>
+                        <div class="aciklama">Diyarbakır Kalesi ve surları. Dünyanın en uzun surları.</div>
+                    </div>
+                    
+                    <!-- Erbil Kalesi -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">MÖ 6000'den günümüze</div>
+                        <div class="yer"><a href="kultur/erbil-kalesi.html">Erbil Kalesi</a></div>
+                        <div class="aciklama">Dünyanın en uzun sürekli yerleşimi olan kale.</div>
+                    </div>
+                    
+                    <!-- Hewsel Bahçeleri -->
+                    <div class="timeline-item" data-kategori="arkeoloji">
+                        <div class="tarih">Antik Dönem</div>
+                        <div class="yer"><a href="kultur/hewsel-bahceleri.html">Hewsel Bahçeleri</a></div>
+                        <div class="aciklama">Diyarbakır'da tarihi bahçeler ve mesire alanı.</div>
+                    </div>
+                </div>
+                
+                <!-- ===== BÖLÜM 2: SÖZLÜ DESTANLAR ===== -->
+                <div class="kultur-kategori" data-kategori="destan">
+                    <i class="fas fa-scroll"></i>
+                    <h2>📜 Sözlü Destanlar</h2>
+                </div>
+                
+                <div class="destan-grid">
+                    <!-- Memê Alan -->
+                    <div class="destan-card" data-kategori="destan">
+                        <div class="destan-adi"><a href="kultur/meme-alan.html">Memê Alan</a></div>
+                        <div class="eser-tur">Aşk Destanı</div>
+                        <p>Kürt sözlü edebiyatının en önemli destanlarından. Alan kalesinde geçen aşk hikayesi.</p>
+                    </div>
+                    
+                    <!-- Siyabend û Xecê -->
+                    <div class="destan-card" data-kategori="destan">
+                        <div class="destan-adi"><a href="kultur/siyabend-xece.html">Siyabend û Xecê</a></div>
+                        <div class="eser-tur">Aşk Destanı</div>
+                        <p>Zilan'da geçen trajik aşk hikayesi. Dengbêjler tarafından yüzyıllardır anlatılır.</p>
+                    </div>
+                    
+                    <!-- Derwêşê Evdî -->
+                    <div class="destan-card" data-kategori="destan">
+                        <div class="destan-adi"><a href="kultur/derwese-evdi.html">Derwêşê Evdî</a></div>
+                        <div class="eser-tur">Destan</div>
+                        <p>Kürt sözlü geleneğinde önemli bir destan.</p>
+                    </div>
+                    
+                    <!-- Zembîlfiroş -->
+                    <div class="destan-card" data-kategori="destan">
+                        <div class="destan-adi"><a href="kultur/zembilfiros.html">Zembîlfiroş</a></div>
+                        <div class="eser-tur">Halk Anlatısı</div>
+                        <p>Ehmedê Xanî'ye atfedilen halk anlatısı. Sepetçi anlamına gelir.</p>
+                    </div>
+                    
+                    <!-- Destana Dimdim -->
+                    <div class="destan-card" data-kategori="destan">
+                        <div class="destan-adi"><a href="kultur/destana-dimdim.html">Destana Dimdim</a></div>
+                        <div class="eser-tur">Tarihsel Destan</div>
+                        <p>Dimdim Kalesi savunmasını anlatan epik anlatı.</p>
+                    </div>
+                    
+                    <!-- Evdalê Zeynikê -->
+                    <div class="destan-card" data-kategori="destan">
+                        <div class="destan-adi"><a href="kultur/evdale-zeynike.html">Evdalê Zeynikê</a></div>
+                        <div class="eser-tur">Dengbêj Destanı</div>
+                        <p>Ünlü dengbêj Evdalê Zeynikê'nin hayatı ve eserleri.</p>
+                    </div>
+                    
+                    <!-- Kela Dimdimê -->
+                    <div class="destan-card" data-kategori="destan">
+                        <div class="destan-adi"><a href="kultur/kela-dimdime.html">Kela Dimdimê</a></div>
+                        <div class="eser-tur">Epik Anlatı</div>
+                        <p>Dimdim Kalesi destanının farklı bir varyantı.</p>
+                    </div>
+                    
+                    <!-- Zînê Botan -->
+                    <div class="destan-card" data-kategori="destan">
+                        <div class="destan-adi"><a href="kultur/zine-botan.html">Zînê Botan</a></div>
+                        <div class="eser-tur">Halk Anlatısı</div>
+                        <p>Botan bölgesine ait halk hikayesi.</p>
+                    </div>
+                </div>
+                
+                <!-- ===== BÖLÜM 3: KLASİK EDEBİ ESERLER ===== -->
+                <div class="kultur-kategori" data-kategori="edebiyat">
+                    <i class="fas fa-feather-alt"></i>
+                    <h2>📖 Klasik Edebi Eserler</h2>
+                </div>
+                
+                <div class="eser-grid">
+                    <!-- Mem û Zîn -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/mem-u-zin.html">Mem û Zîn</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/ehmede-xani.html">Ehmedê Xanî</a></div>
+                        <div class="eser-tarih">1692</div>
+                        <span class="eser-tur">Mesnevi</span>
+                    </div>
+                    
+                    <!-- Dîwan - Cizîrî -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/divan-ciziri.html">Dîwan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/melaye-ciziri.html">Melayê Cizîrî</a></div>
+                        <div class="eser-tarih">17. yy</div>
+                        <span class="eser-tur">Divan Şiiri</span>
+                    </div>
+                    
+                    <!-- Şêx Sen'an -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/sex-senan.html">Şêx Sen'an</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/feqiye-teyran.html">Feqiyê Teyran</a></div>
+                        <div class="eser-tarih">17. yy</div>
+                        <span class="eser-tur">Tasavvufi Mesnevi</span>
+                    </div>
+                    
+                    <!-- Nûbihara Biçûkan -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/nubihara-bicukan.html">Nûbihara Biçûkan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/ehmede-xani.html">Ehmedê Xanî</a></div>
+                        <div class="eser-tarih">1683 civarı</div>
+                        <span class="eser-tur">Eğitim/Aruz</span>
+                    </div>
+                    
+                    <!-- Eqîdeya Îmanê -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/eqideya-imane.html">Eqîdeya Îmanê</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/ehmede-xani.html">Ehmedê Xanî</a></div>
+                        <div class="eser-tarih">17. yy</div>
+                        <span class="eser-tur">Felsefi/Dini</span>
+                    </div>
+                    
+                    <!-- Dîwan - Harirî -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/divan-hariri.html">Dîwan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/ali-hariri.html">Ali Harirî</a></div>
+                        <div class="eser-tarih">15. yy</div>
+                        <span class="eser-tur">Klasik Şiir</span>
+                    </div>
+                    
+                    <!-- Dîwan - Nalî -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/divan-nali.html">Dîwan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/nali.html">Nalî</a></div>
+                        <div class="eser-tarih">19. yy</div>
+                        <span class="eser-tur">Klasik Şiir</span>
+                    </div>
+                    
+                    <!-- Dîwan - Salim -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/divan-salim.html">Dîwan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/salim.html">Salim</a></div>
+                        <div class="eser-tarih">19. yy</div>
+                        <span class="eser-tur">Klasik Şiir</span>
+                    </div>
+                    
+                    <!-- Dîwan - Mahwi -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/divan-mahwi.html">Dîwan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/mahwi.html">Mahwi</a></div>
+                        <div class="eser-tarih">19. yy</div>
+                        <span class="eser-tur">Tasavvufi Şiir</span>
+                    </div>
+                    
+                    <!-- Dîwan - Hecî Qadirê Koyî -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/divan-koyi.html">Dîwan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/heci-qadire-koyi.html">Hecî Qadirê Koyî</a></div>
+                        <div class="eser-tarih">19. yy</div>
+                        <span class="eser-tur">Ulusal Şiir</span>
+                    </div>
+                    
+                    <!-- Rêga Kurdistanê -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/rega-kurdistane.html">Rêga Kurdistanê</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/heci-qadire-koyi.html">Hecî Qadirê Koyî</a></div>
+                        <div class="eser-tarih">19. yy</div>
+                        <span class="eser-tur">Ulusal Şiir</span>
+                    </div>
+                    
+                    <!-- Dîwan - Şêx Riza Talabani -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/divan-talabani.html">Dîwan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/sex-riza-talabani.html">Şêx Riza Talabani</a></div>
+                        <div class="eser-tarih">19. yy</div>
+                        <span class="eser-tur">Klasik Şiir</span>
+                    </div>
+                </div>
+                
+                <!-- ===== BÖLÜM 4: MODERN EDEBİ ESERLER ===== -->
+                <div class="kultur-kategori" data-kategori="edebiyat">
+                    <i class="fas fa-pen-fancy"></i>
+                    <h2>📚 Modern Edebi Eserler</h2>
+                </div>
+                
+                <div class="eser-grid">
+                    <!-- Kîme Ez? -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/kime-ez.html">Kîme Ez?</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/cigerxwin.html">Cigerxwîn</a></div>
+                        <div class="eser-tarih">1940'lar</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Sewra Azadî -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/sewra-azadi.html">Sewra Azadî</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/cigerxwin.html">Cigerxwîn</a></div>
+                        <div class="eser-tarih">1950'ler</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Ronak -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/ronak.html">Ronak</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/cigerxwin.html">Cigerxwîn</a></div>
+                        <div class="eser-tarih">20. yy</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Gulê -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/gule.html">Gulê</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/cigerxwin.html">Cigerxwîn</a></div>
+                        <div class="eser-tarih">20. yy</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Xwîn û Hêvî -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/xwin-u-hevi.html">Xwîn û Hêvî</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/cigerxwin.html">Cigerxwîn</a></div>
+                        <div class="eser-tarih">20. yy</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Kurdistan -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/kurdistan-siir.html">Kurdistan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/cigerxwin.html">Cigerxwîn</a></div>
+                        <div class="eser-tarih">20. yy</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Dîwan - Goran -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/divan-goran.html">Dîwan</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/abdulla-goran.html">Abdulla Goran</a></div>
+                        <div class="eser-tarih">20. yy</div>
+                        <span class="eser-tur">Modern Şiir</span>
+                    </div>
+                    
+                    <!-- Roja Nû -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/roja-nu.html">Roja Nû</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/abdulla-goran.html">Abdulla Goran</a></div>
+                        <div class="eser-tarih">20. yy</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Nowrozname -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/nowrozname.html">Nowrozname</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/sherko-bekas.html">Sherko Bekas</a></div>
+                        <div class="eser-tarih">20. yy</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Butterfly Valley -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/butterfly-valley.html">Butterfly Valley</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/sherko-bekas.html">Sherko Bekas</a></div>
+                        <div class="eser-tarih">1990'lar</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Helebçe -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/helebce-siir.html">Helebçe</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/sherko-bekas.html">Sherko Bekas</a></div>
+                        <div class="eser-tarih">1988 sonrası</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Tu -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/tu.html">Tu</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/mehmed-uzun.html">Mehmed Uzun</a></div>
+                        <div class="eser-tarih">1985</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- Siya Evînê -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/siya-evîne.html">Siya Evînê</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/mehmed-uzun.html">Mehmed Uzun</a></div>
+                        <div class="eser-tarih">1989</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- Mirina Kalekî Rind -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/mirina-kaleki-rind.html">Mirina Kalekî Rind</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/mehmed-uzun.html">Mehmed Uzun</a></div>
+                        <div class="eser-tarih">1990'lar</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- Bîra Qederê -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/bira-qedere.html">Bîra Qederê</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/mehmed-uzun.html">Mehmed Uzun</a></div>
+                        <div class="eser-tarih">20. yy</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- The Last Pomegranate of the World -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/last-pomegranate.html">The Last Pomegranate of the World</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/bachtyar-ali.html">Bachtyar Ali</a></div>
+                        <div class="eser-tarih">2002</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- I Stared at the Night of the City -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/i-stared-at-the-night.html">I Stared at the Night of the City</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/bachtyar-ali.html">Bachtyar Ali</a></div>
+                        <div class="eser-tarih">2008</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- Efsûn -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/efsun.html">Efsûn</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/bachtyar-ali.html">Bachtyar Ali</a></div>
+                        <div class="eser-tarih">21. yy</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- İnce Memed -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/ince-memed.html">İnce Memed</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/yasar-kemal.html">Yaşar Kemal</a></div>
+                        <div class="eser-tarih">1955</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- Yer Demir Gök Bakır -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/yer-demir-gok-bakir.html">Yer Demir Gök Bakır</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/yasar-kemal.html">Yaşar Kemal</a></div>
+                        <div class="eser-tarih">1963</div>
+                        <span class="eser-tur">Roman</span>
+                    </div>
+                    
+                    <!-- À la source -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/a-la-source.html">À la source</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/seyhmus-dagtekin.html">Seyhmus Dagtekin</a></div>
+                        <div class="eser-tarih">2001</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                    
+                    <!-- Juste un pont, sans feu -->
+                    <div class="eser-card" data-kategori="edebiyat">
+                        <div class="eser-adi"><a href="kultur/juste-un-pont.html">Juste un pont, sans feu</a></div>
+                        <div class="eser-yazar"><a href="sahsiyet/seyhmus-dagtekin.html">Seyhmus Dagtekin</a></div>
+                        <div class="eser-tarih">2007</div>
+                        <span class="eser-tur">Şiir</span>
+                    </div>
+                </div>
+                
+                <!-- ===== BÖLÜM 5: MÜZİK ===== -->
+                <div class="kultur-kategori" data-kategori="muzik">
+                    <i class="fas fa-music"></i>
+                    <h2>🎵 Müzik ve Dengbêj Geleneği</h2>
+                </div>
+                
+                <div class="sanatci-grid">
+                    <!-- Dengbêjlik Geleneği -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-microphone-alt"></i></div>
+                        <div class="sanatci-isim"><a href="kultur/dengbejlik.html">Dengbêjlik Geleneği</a></div>
+                        <div class="sanatci-tur">Sözlü Gelenek</div>
+                        <div class="sanatci-eser">Klam, lawik, ağıtlar</div>
+                    </div>
+                    
+                    <!-- Şivan Perwer -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-microphone-alt"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/sivan-perwer.html">Şivan Perwer</a></div>
+                        <div class="sanatci-tur">Müzisyen</div>
+                        <div class="sanatci-eser">Klasik ve modern Kürt müziği</div>
+                    </div>
+                    
+                    <!-- Aynur Doğan -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-microphone-alt"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/aynur-dogan.html">Aynur Doğan</a></div>
+                        <div class="sanatci-tur">Müzisyen</div>
+                        <div class="sanatci-eser">Keçe Kurdan, Bahar</div>
+                    </div>
+                    
+                    <!-- Ciwan Haco -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-guitar"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/ciwan-haco.html">Ciwan Haco</a></div>
+                        <div class="sanatci-tur">Müzisyen</div>
+                        <div class="sanatci-eser">Gula Sor, Dûrî</div>
+                    </div>
+                    
+                    <!-- Aram Tigran -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-piano"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/aram-tigran.html">Aram Tigran</a></div>
+                        <div class="sanatci-tur">Müzisyen</div>
+                        <div class="sanatci-eser">Ermeni-Kürt dostluğu</div>
+                    </div>
+                    
+                    <!-- Nizamettin Ariç -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-microphone-alt"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/nizamettin-aric.html">Nizamettin Ariç</a></div>
+                        <div class="sanatci-tur">Müzisyen</div>
+                        <div class="sanatci-eser">Berxwedan, Daye</div>
+                    </div>
+                    
+                    <!-- Hozan Dino -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-microphone-alt"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/hozan-dino.html">Hozan Dino</a></div>
+                        <div class="sanatci-tur">Müzisyen</div>
+                        <div class="sanatci-eser">Devrimci türküler</div>
+                    </div>
+                    
+                    <!-- Hozan Şemdin -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-microphone-alt"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/hozan-semdin.html">Hozan Şemdin</a></div>
+                        <div class="sanatci-tur">Müzisyen</div>
+                        <div class="sanatci-eser">-</div>
+                    </div>
+                    
+                    <!-- Koma Wetan -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-users"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/koma-wetan.html">Koma Wetan</a></div>
+                        <div class="sanatci-tur">Müzik Grubu</div>
+                        <div class="sanatci-eser">Kürt müziği</div>
+                    </div>
+                    
+                    <!-- Koma Amed -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-users"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/koma-amed.html">Koma Amed</a></div>
+                        <div class="sanatci-tur">Müzik Grubu</div>
+                        <div class="sanatci-eser">Amed kültür merkezi</div>
+                    </div>
+                    
+                    <!-- Koma Berxwedan -->
+                    <div class="sanatci-card" data-kategori="muzik">
+                        <div class="sanatci-icon"><i class="fas fa-users"></i></div>
+                        <div class="sanatci-isim"><a href="sahsiyet/koma-berxwedan.html">Koma Berxwedan</a></div>
+                        <div class="sanatci-tur">Müzik Grubu</div>
+                        <div class="sanatci-eser">Devrimci müzik</div>
+                    </div>
+                </div>
+                
+                <!-- ===== BÖLÜM 6: SİNEMA VE TİYATRO ===== -->
+                <div class="kultur-kategori" data-kategori="sinema">
+                    <i class="fas fa-film"></i>
+                    <h2>🎬 Sinema ve Tiyatro</h2>
+                </div>
+                
+                <div class="sanatci-grid">
+                    <!-- Yol -->
+                    <div class="sanatci-card" data-kategori="sinema">
+                        <div class="sanatci-icon"><i class="fas fa-film"></i></div>
+                        <div class="sanatci-isim"><a href="kultur/yol.html">Yol</a></div>
+                        <div class="sanatci-tur">Film</div>
+                        <div class="sanatci-eser">Yılmaz Güney, Şerif Gören</div>
+                    </div>
+                    
+                    <!-- Sürü -->
+                    <div class="sanatci-card" data-kategori="sinema">
+                        <div class="sanatci-icon"><i class="fas fa-film"></i></div>
+                        <div class="sanatci-isim"><a href="kultur/suru.html">Sürü</a></div>
+                        <div class="sanatci-tur">Film</div>
+                        <div class="sanatci-eser">Yılmaz Güney, Zeki Ökten</div>
+                    </div>
+                    
+                    <!-- A Time for Drunken Horses -->
+                    <div class="sanatci-card" data-kategori="sinema">
+                        <div class="sanatci-icon"><i class="fas fa-film"></i></div>
+                        <div class="sanatci-isim"><a href="kultur/time-for-drunken-horses.html">A Time for Drunken Horses</a></div>
+                        <div class="sanatci-tur">Film</div>
+                        <div class="sanatci-eser">Bahman Ghobadi</div>
+                    </div>
+                    
+                    <!-- Turtles Can Fly -->
+                    <div class="sanatci-card" data-kategori="sinema">
+                        <div class="sanatci-icon"><i class="fas fa-film"></i></div>
+                        <div class="sanatci-isim"><a href="kultur/turtles-can-fly.html">Turtles Can Fly</a></div>
+                        <div class="sanatci-tur">Film</div>
+                        <div class="sanatci-eser">Bahman Ghobadi</div>
+                    </div>
+                    
+                    <!-- Şanoya Amed -->
+                    <div class="sanatci-card" data-kategori="sinema">
+                        <div class="sanatci-icon"><i class="fas fa-theater-masks"></i></div>
+                        <div class="sanatci-isim"><a href="kultur/sanoya-amed.html">Şanoya Amed</a></div>
+                        <div class="sanatci-tur">Tiyatro Topluluğu</div>
+                        <div class="sanatci-eser">Diyarbakır merkezli tiyatro</div>
+                    </div>
+                    
+                    <!-- Teatra Jiyana Nû -->
+                    <div class="sanatci-card" data-kategori="sinema">
+                        <div class="sanatci-icon"><i class="fas fa-theater-masks"></i></div>
+                        <div class="sanatci-isim"><a href="kultur/teatra-jiyana-nu.html">Teatra Jiyana Nû</a></div>
+                        <div class="sanatci-tur">Tiyatro Topluluğu</div>
+                        <div class="sanatci-eser">Kürtçe tiyatro</div>
+                    </div>
+                </div>
+                
+                <!-- ===== BÖLÜM 7: GELENEKSEL SANATLAR ===== -->
+                <div class="kultur-kategori" data-kategori="sanat">
+                    <i class="fas fa-hand-sparkles"></i>
+                    <h2>🪘 Geleneksel Sanatlar</h2>
+                </div>
+                
+                <div class="destan-grid">
+                    <!-- Govend -->
+                    <div class="destan-card" data-kategori="sanat">
+                        <div class="destan-adi"><a href="kultur/govend.html">Govend (Halk Dansı)</a></div>
+                        <p>Kürt halk dansları. Halay tarzı, davul-zurna eşliğinde oynanır.</p>
+                    </div>
+                    
+                    <!-- Kilim Dokumacılığı -->
+                    <div class="destan-card" data-kategori="sanat">
+                        <div class="destan-adi"><a href="kultur/kilim.html">Kilim Dokumacılığı</a></div>
+                        <p>Hakkari, Van ve çevresinde dokunan geleneksel Kürt kilimleri.</p>
+                    </div>
+                    
+                    <!-- Bakır İşçiliği -->
+                    <div class="destan-card" data-kategori="sanat">
+                        <div class="destan-adi"><a href="kultur/bakir-isciligi.html">Bakır İşçiliği</a></div>
+                        <p>Mardin ve çevresinde geleneksel bakır işlemeciliği.</p>
+                    </div>
+                    
+                    <!-- Taş Oymacılığı -->
+                    <div class="destan-card" data-kategori="sanat">
+                        <div class="destan-adi"><a href="kultur/tas-oymaciligi.html">Taş Oymacılığı</a></div>
+                        <p>Ahlat'ta tarihi mezar taşları ve taş işçiliği.</p>
+                    </div>
+                    
+                    <!-- Ahşap Kapı Sanatı -->
+                    <div class="destan-card" data-kategori="sanat">
+                        <div class="destan-adi"><a href="kultur/ahsap-kapi.html">Ahşap Kapı Sanatı</a></div>
+                        <p>Cizre'de geleneksel ahşap oymacılığı ve cami kapıları.</p>
+                    </div>
+                </div>
+                
+                <!-- ===== BÖLÜM 8: FESTİVALLER VE RİTÜELLER ===== -->
+                <div class="kultur-kategori" data-kategori="kultur">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h2>🎉 Festivaller ve Ritüeller</h2>
+                </div>
+                
+                <div class="items-grid">
+                    <!-- Newroz -->
+                    <div class="item-card" data-kategori="kultur">
+                        <h3><a href="kultur/newroz.html">Newroz</a></h3>
+                        <p>Kürt Yeni Yılı ve bahar bayramı. Her yıl 21 Mart'ta kutlanır. Ateşten atlama, doğa uyanışı ve özgürlük sembolü.</p>
+                    </div>
+                    
+                    <!-- Diyarbakır Kültür Sanat Vakfı -->
+                    <div class="item-card" data-kategori="kultur">
+                        <h3><a href="kultur/diyarbakir-kultur-sanat.html">Diyarbakır Kültür Sanat Vakfı</a></h3>
+                        <p>Diyarbakır merkezli kültür ve sanat etkinlikleri düzenleyen vakıf.</p>
+                    </div>
+                    
+                    <!-- Duhok Uluslararası Film Festivali -->
+                    <div class="item-card" data-kategori="kultur">
+                        <h3><a href="kultur/duhok-film-festivali.html">Duhok Uluslararası Film Festivali</a></h3>
+                        <p>Irak Kürdistanı'nda her yıl düzenlenen uluslararası film festivali.</p>
+                    </div>
+                </div>
+                
+                <!-- Toplam Bilgi -->
+                <div style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <h3 style="color: var(--zer);"><i class="fas fa-feather"></i> Kürt Kültür ve Sanatı Hakkında</h3>
+                    <p>Bu sayfada Kürt kültürüne ait arkeolojik miras, sözlü destanlar, edebi eserler, müzik, sinema ve geleneksel sanatlar listelenmiştir. Her bir eser veya yapıtın detaylı sayfasına tıklayarak ulaşabilirsiniz.</p>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-mountain"></i></div>
+                <h4>Göbekli Tepe</h4>
+                <p>MÖ 9600</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-scroll"></i></div>
+                <h4>Mem û Zîn</h4>
+                <p>1692</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-music"></i></div>
+                <h4>Dengbêjlik</h4>
+                <p>Sözlü gelenek</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-film"></i></div>
+                <h4>Yol</h4>
+                <p>Altın Palmiye</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Filtreleme
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const tumKartlar = document.querySelectorAll('[data-kategori]');
+                
+                if (filter === 'all') {
+                    tumKartlar.forEach(kart => kart.style.display = 'block');
+                } else {
+                    tumKartlar.forEach(kart => {
+                        if (kart.dataset.kategori === filter) {
+                            kart.style.display = 'block';
+                        } else {
+                            kart.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Arama
+        document.getElementById('kulturSearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const kartlar = document.querySelectorAll('.timeline-item, .destan-card, .eser-card, .sanatci-card, .item-card');
+            
+            kartlar.forEach(kart => {
+                const metin = kart.textContent.toLowerCase();
+                if (metin.includes(searchTerm)) {
+                    kart.style.display = 'block';
+                } else {
+                    kart.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
