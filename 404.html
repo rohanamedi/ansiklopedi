@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayfa Bulunamadı - 404 - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* 404 sayfası için özel stiller */
+        .error-404-container {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-404-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(225,25,25,0.05), rgba(0,153,0,0.05), rgba(255,215,0,0.05));
+            z-index: -1;
+        }
+        
+        .error-code {
+            font-size: 12rem;
+            font-weight: 900;
+            font-family: var(--font-baslik);
+            line-height: 1;
+            background: linear-gradient(135deg, var(--sor), var(--zer), var(--kesk));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(225,25,25,0.3);
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        .error-title {
+            font-size: 3rem;
+            color: var(--zer);
+            margin-bottom: 20px;
+            font-weight: 600;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: var(--spî);
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        
+        .error-search {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        
+        .error-search-box {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .error-search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--zer);
+            border-radius: 50px;
+            background: rgba(0,0,0,0.5);
+            color: var(--spî);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .error-search-input:focus {
+            outline: none;
+            border-color: var(--sor);
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+        
+        .error-search-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background: var(--sor);
+            color: var(--spî);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid var(--zer);
+        }
+        
+        .error-search-btn:hover {
+            background: var(--zer);
+            color: var(--feza-koyu);
+            transform: translateY(-2px);
+        }
+        
+        .error-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+        
+        .error-btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid transparent;
+        }
+        
+        .error-btn-primary {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        .error-btn-primary:hover {
+            background: var(--zer);
+            color: var(--feza-koyu);
+            transform: translateY(-3px);
+        }
+        
+        .error-btn-secondary {
+            background: transparent;
+            color: var(--zer);
+            border-color: var(--zer);
+        }
+        
+        .error-btn-secondary:hover {
+            background: var(--zer);
+            color: var(--feza-koyu);
+            transform: translateY(-3px);
+        }
+        
+        .error-suggestions {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(255,215,0,0.3);
+            animation: fadeInUp 0.8s ease 1s both;
+        }
+        
+        .error-suggestions h3 {
+            color: var(--zer);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .suggestions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .suggestion-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: rgba(225,25,25,0.1);
+            border-radius: 10px;
+            color: var(--spî);
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .suggestion-link:hover {
+            background: rgba(225,25,25,0.2);
+            border-color: var(--zer);
+            transform: translateX(5px);
+        }
+        
+        .suggestion-link i {
+            color: var(--zer);
+            font-size: 1.2rem;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 8rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-message {
+                font-size: 1rem;
+            }
+            
+            .error-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .error-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON (Minimal) -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+                <a href="sehirler.html" class="nav-link">Şehirler</a>
+                <a href="kultur.html" class="nav-link">Kültür & Sanat</a>
+                <a href="kavramlar.html" class="nav-link">Kavramlar</a>
+                <a href="din.html" class="nav-link">Din</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="errorSearchInput" placeholder="Ansiklopedide ara...">
+                <button class="search-btn" id="errorSearchBtn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK - 404 -->
+        <div class="main-card">
+            <div class="error-404-container">
+                <div class="error-code">404</div>
+                <h2 class="error-title">Rûpel nehate dîtin</h2>
+                <p class="error-message">Aradığınız sayfa bulunamadı. Sayfa taşınmış, silinmiş veya hiç var olmamış olabilir. Ancak Zagros'tan geleceğe uzanan yolculuğumuz devam ediyor.</p>
+                
+                <!-- Arama Kutusu -->
+                <div class="error-search">
+                    <div class="error-search-box">
+                        <input type="text" class="error-search-input" id="errorSearchField" placeholder="Aramak istediğiniz kelimeyi yazın...">
+                        <button class="error-search-btn" id="errorSearchBtn2"><i class="fas fa-search"></i> Ara</button>
+                    </div>
+                </div>
+                
+                <!-- Butonlar -->
+                <div class="error-buttons">
+                    <a href="index.html" class="error-btn error-btn-primary">
+                        <i class="fas fa-home"></i> Ana Sayfaya Dön
+                    </a>
+                    <a href="javascript:history.back()" class="error-btn error-btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Geri Git
+                    </a>
+                </div>
+                
+                <!-- Önerilen Sayfalar -->
+                <div class="error-suggestions">
+                    <h3><i class="fas fa-compass"></i> Önerilen Sayfalar</h3>
+                    <div class="suggestions-grid">
+                        <a href="sahsiyetler.html" class="suggestion-link">
+                            <i class="fas fa-user-tie"></i> Şahsiyetler
+                        </a>
+                        <a href="devletler.html" class="suggestion-link">
+                            <i class="fas fa-crown"></i> Devletler
+                        </a>
+                        <a href="asiretler.html" class="suggestion-link">
+                            <i class="fas fa-tree"></i> Aşiretler
+                        </a>
+                        <a href="direnisler.html" class="suggestion-link">
+                            <i class="fas fa-fist-raised"></i> Direnişler
+                        </a>
+                        <a href="cemiyetler.html" class="suggestion-link">
+                            <i class="fas fa-users"></i> Cemiyetler
+                        </a>
+                        <a href="sehirler.html" class="suggestion-link">
+                            <i class="fas fa-city"></i> Şehirler
+                        </a>
+                        <a href="kultur.html" class="suggestion-link">
+                            <i class="fas fa-feather"></i> Kültür & Sanat
+                        </a>
+                        <a href="kavramlar.html" class="suggestion-link">
+                            <i class="fas fa-book-open"></i> Kavramlar
+                        </a>
+                        <a href="din.html" class="suggestion-link">
+                            <i class="fas fa-pray"></i> Din
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Zagros Dağları Motifi -->
+                <div style="margin-top: 40px; opacity: 0.5;">
+                    <i class="fas fa-mountain" style="color: var(--zer); font-size: 2rem; margin: 0 5px;"></i>
+                    <i class="fas fa-mountain" style="color: var(--sor); font-size: 2.5rem; margin: 0 5px;"></i>
+                    <i class="fas fa-mountain" style="color: var(--kesk); font-size: 2rem; margin: 0 5px;"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER (Minimal) -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-mountain"></i></div>
+                <h4>Zagros</h4>
+                <p>12.000 yıllık medeniyet</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-book"></i></div>
+                <h4>Mem û Zîn</h4>
+                <p>Kürt edebiyatı şaheseri</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-flag"></i></div>
+                <h4>Mahabad 1946</h4>
+                <p>İlk Kürt cumhuriyeti</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Arama fonksiyonu
+        function performSearch() {
+            const searchInputs = [
+                document.getElementById('errorSearchInput'),
+                document.getElementById('errorSearchField')
+            ];
+            
+            let query = '';
+            for (let input of searchInputs) {
+                if (input && input.value.trim() !== '') {
+                    query = input.value.trim();
+                    break;
+                }
+            }
+            
+            if (query === '') {
+                alert('Lütfen bir arama kelimesi girin.');
+                return;
+            }
+            
+            // Arama sayfasına yönlendir (ileride eklenecek)
+            window.location.href = 'arama.html?q=' + encodeURIComponent(query);
+        }
+        
+        // Arama butonları
+        document.getElementById('errorSearchBtn')?.addEventListener('click', performSearch);
+        document.getElementById('errorSearchBtn2')?.addEventListener('click', performSearch);
+        
+        // Enter tuşu ile arama
+        const searchFields = [
+            document.getElementById('errorSearchInput'),
+            document.getElementById('errorSearchField')
+        ];
+        
+        searchFields.forEach(field => {
+            field?.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+        
+        // Rastgele öneri (isteğe bağlı)
+        const suggestions = [
+            'ehmede-xani',
+            'seyh-said',
+            'mahabad',
+            'mervaniler',
+            'xoybun',
+            'newroz',
+            'amed'
+        ];
+        
+        const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+        const searchField = document.getElementById('errorSearchField');
+        if (searchField) {
+            searchField.placeholder = `Örn: ${randomSuggestion}`;
+        }
+    </script>
+</body>
+</html>
