@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kavramlar Sözlüğü - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Kavramlar sayfası için özel stiller */
+        .kavram-giris {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+        
+        .alfabe-navigasyon {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+            position: sticky;
+            top: 10px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .alfabe-harf {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .alfabe-harf:hover,
+        .alfabe-harf.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        .kategori-etiket {
+            display: inline-block;
+            background: var(--sor);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            text-transform: uppercase;
+        }
+        
+        .kavram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .kavram-karti {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            border-left: 4px solid var(--zer);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kavram-karti:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--sor);
+            box-shadow: 0 10px 20px rgba(225,25,25,0.2);
+        }
+        
+        .kavram-baslik {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+            padding-bottom: 10px;
+        }
+        
+        .kavram-baslik h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--zer);
+        }
+        
+        .kavram-baslik h3 a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .kavram-baslik h3 a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .kavram-ikon {
+            font-size: 1.5rem;
+            color: var(--pêşeroj-cyan);
+        }
+        
+        .kavram-aciklama {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .kavram-ilgili {
+            margin-top: 10px;
+            font-size: 0.85rem;
+        }
+        
+        .kavram-ilgili a {
+            color: var(--pêşeroj-cyan);
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        
+        .kavram-ilgili a:hover {
+            color: var(--zer);
+            text-decoration: underline;
+        }
+        
+        .kavram-harf {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgba(255,215,0,0.1);
+            z-index: 0;
+        }
+        
+        .harf-bolumu {
+            margin-top: 40px;
+            scroll-margin-top: 80px;
+        }
+        
+        .harf-baslik {
+            font-size: 2.5rem;
+            color: var(--zer);
+            border-bottom: 2px solid var(--sor);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        .kategori-gosterge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .kategori-tag {
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .kategori-tag.coğrafya {
+            background: rgba(0,212,255,0.2);
+            border: 1px solid var(--pêşeroj-cyan);
+            color: var(--pêşeroj-cyan);
+        }
+        
+        .kategori-tag.siyaset {
+            background: rgba(225,25,25,0.2);
+            border: 1px solid var(--sor);
+            color: var(--sor);
+        }
+        
+        .kategori-tag.tarih {
+            background: rgba(255,215,0,0.2);
+            border: 1px solid var(--zer);
+            color: var(--zer);
+        }
+        
+        .kategori-tag.toplum {
+            background: rgba(0,153,0,0.2);
+            border: 1px solid var(--kesk);
+            color: var(--kesk);
+        }
+        
+        .kategori-tag:hover {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .alfabe-navigasyon {
+                border-radius: 20px;
+                padding: 10px;
+            }
+            
+            .alfabe-harf {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+            
+            .kavram-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+                <a href="sehirler.html" class="nav-link">Şehirler</a>
+                <a href="kultur.html" class="nav-link">Kültür & Sanat</a>
+                <a href="kavramlar.html" class="nav-link active">Kavramlar</a>
+                <a href="din.html" class="nav-link">Din</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="kavramSearch" placeholder="Kavram ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                <h1>📖 Kürt Tarihi ve Kültürü Kavramlar Sözlüğü</h1>
+                
+                <div class="kavram-giris">
+                    <p style="font-size: 1.1rem;">Kürt tarihi, coğrafyası, siyaseti ve toplumsal yapısına dair temel kavramlar. Alfabetik sıralı sözlük.</p>
+                    <div style="margin-top: 15px;">
+                        <span class="kategori-tag coğrafya" onclick="filterKategori('cografya')">🌍 Coğrafya</span>
+                        <span class="kategori-tag siyaset" onclick="filterKategori('siyaset')">⚖️ Siyaset</span>
+                        <span class="kategori-tag tarih" onclick="filterKategori('tarih')">📜 Tarih</span>
+                        <span class="kategori-tag toplum" onclick="filterKategori('toplum')">👥 Toplum</span>
+                    </div>
+                </div>
+                
+                <!-- Alfabe Navigasyon -->
+                <div class="alfabe-navigasyon" id="alfabeNav">
+                    <a href="#A" class="alfabe-harf">A</a>
+                    <a href="#B" class="alfabe-harf">B</a>
+                    <a href="#C" class="alfabe-harf">C</a>
+                    <a href="#D" class="alfabe-harf">D</a>
+                    <a href="#E" class="alfabe-harf">E</a>
+                    <a href="#F" class="alfabe-harf">F</a>
+                    <a href="#G" class="alfabe-harf">G</a>
+                    <a href="#H" class="alfabe-harf">H</a>
+                    <a href="#I" class="alfabe-harf">I</a>
+                    <a href="#İ" class="alfabe-harf">İ</a>
+                    <a href="#K" class="alfabe-harf">K</a>
+                    <a href="#L" class="alfabe-harf">L</a>
+                    <a href="#M" class="alfabe-harf">M</a>
+                    <a href="#N" class="alfabe-harf">N</a>
+                    <a href="#O" class="alfabe-harf">O</a>
+                    <a href="#P" class="alfabe-harf">P</a>
+                    <a href="#R" class="alfabe-harf">R</a>
+                    <a href="#S" class="alfabe-harf">S</a>
+                    <a href="#Ş" class="alfabe-harf">Ş</a>
+                    <a href="#U" class="alfabe-harf">U</a>
+                    <a href="#Y" class="alfabe-harf">Y</a>
+                    <a href="#Ö" class="alfabe-harf">Ö</a>
+                    <a href="#Ü" class="alfabe-harf">Ü</a>
+                </div>
+                
+                <!-- KAVRAMLAR LİSTESİ -->
+                <div class="kavramlar-listesi" id="kavramlarListesi">
+                    
+                    <!-- A HARFİ -->
+                    <div id="A" class="harf-bolumu">
+                        <h2 class="harf-baslik">A</h2>
+                        <div class="kavram-grid">
+                            <!-- Ağa -->
+                            <div class="kavram-karti" data-harf="A" data-kategori="toplum">
+                                <div class="kavram-harf">A</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-user-tie kavram-ikon"></i>
+                                    <h3><a href="kavram/aga.html">Ağa</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket toplum">Toplum</span>
+                                    <p style="margin-top: 10px;">Yerel toprak/siyasi güç sahibi. Geleneksel Kürt toplumunda aşiret liderliği ve toprak mülkiyetine dayalı otorite.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="sahsiyetler.html?role=aga">Ağalar</a>, <a href="asiretler.html">Aşiretler</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Asimilasyon -->
+                            <div class="kavram-karti" data-harf="A" data-kategori="siyaset">
+                                <div class="kavram-harf">A</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-exchange-alt kavram-ikon"></i>
+                                    <h3><a href="kavram/asimilasyon.html">Asimilasyon</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket siyaset">Siyaset</span>
+                                    <p style="margin-top: 10px;">Kültürel kimliğin eritilmesi politikası. Farklı kültürel grupların baskın kültür içinde eritilmesi süreci.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/iskân-politikasi.html">İskân Politikası</a>, <a href="kavram/surgun.html">Sürgün</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Aşiret -->
+                            <div class="kavram-karti" data-harf="A" data-kategori="toplum">
+                                <div class="kavram-harf">A</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-tree kavram-ikon"></i>
+                                    <h3><a href="kavram/asiret.html">Aşiret</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket toplum">Toplum</span>
+                                    <p style="margin-top: 10px;">Geleneksel toplumsal örgütlenme yapısı. Kolektif kimlik, toprak ve liderlik etrafında örgütlenen kabile yapılanması.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="asiretler.html">Aşiretler listesi</a>, <a href="kavram/mir.html">Mir</a>, <a href="kavram/aga.html">Ağa</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- B HARFİ -->
+                    <div id="B" class="harf-bolumu">
+                        <h2 class="harf-baslik">B</h2>
+                        <div class="kavram-grid">
+                            <!-- Bakur -->
+                            <div class="kavram-karti" data-harf="B" data-kategori="coğrafya">
+                                <div class="kavram-harf">B</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-arrow-up kavram-ikon"></i>
+                                    <h3><a href="kavram/bakur.html">Bakur</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket coğrafya">Coğrafya</span>
+                                    <p style="margin-top: 10px;">Kuzey Kürdistan (Türkiye sınırları içi). Günümüzde Türkiye'nin doğu ve güneydoğu bölgelerini kapsayan coğrafya.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/basur.html">Başûr</a>, <a href="kavram/rojhilat.html">Rojhilat</a>, <a href="kavram/rojava.html">Rojava</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Başûr -->
+                            <div class="kavram-karti" data-harf="B" data-kategori="coğrafya">
+                                <div class="kavram-harf">B</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-arrow-down kavram-ikon"></i>
+                                    <h3><a href="kavram/basur.html">Başûr</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket coğrafya">Coğrafya</span>
+                                    <p style="margin-top: 10px;">Güney Kürdistan (Irak sınırları içi). Irak Kürdistan Bölgesel Yönetimi'ni kapsayan coğrafya.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/bakur.html">Bakur</a>, <a href="sehir/hewler.html">Hewlêr</a>, <a href="sehir/silemani.html">Silêmanî</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C HARFİ -->
+                    <div id="C" class="harf-bolumu">
+                        <h2 class="harf-baslik">C</h2>
+                        <div class="kavram-grid"></div>
+                    </div>
+                    
+                    <!-- D HARFİ -->
+                    <div id="D" class="harf-bolumu">
+                        <h2 class="harf-baslik">D</h2>
+                        <div class="kavram-grid">
+                            <!-- Demokratik Konfederalizm -->
+                            <div class="kavram-karti" data-harf="D" data-kategori="siyaset">
+                                <div class="kavram-harf">D</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-balance-scale kavram-ikon"></i>
+                                    <h3><a href="kavram/demokratik-konfederalizm.html">Demokratik Konfederalizm</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket siyaset">Siyaset</span>
+                                    <p style="margin-top: 10px;">Yerel meclis temelli siyasal teori. Merkezi devlet yapısına alternatif, halk meclislerine dayalı özyönetim modeli.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/konfederalizm.html">Konfederalizm</a>, <a href="kavram/ozerklik.html">Özerklik</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- E HARFİ -->
+                    <div id="E" class="harf-bolumu">
+                        <h2 class="harf-baslik">E</h2>
+                        <div class="kavram-grid">
+                            <!-- Emirlik -->
+                            <div class="kavram-karti" data-harf="E" data-kategori="tarih">
+                                <div class="kavram-harf">E</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-crown kavram-ikon"></i>
+                                    <h3><a href="kavram/emirlik.html">Emirlik</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">Osmanlı döneminde yarı özerk Kürt beylikleri. Merkezi otoriteye bağlı ancak iç işlerinde serbest yönetim birimleri.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="devletler.html?type=emirlik">Emirlikler listesi</a>, <a href="kavram/mir.html">Mir</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Enfal -->
+                            <div class="kavram-karti" data-harf="E" data-kategori="tarih">
+                                <div class="kavram-harf">E</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-skull kavram-ikon"></i>
+                                    <h3><a href="kavram/enfal.html">Enfal</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">1988 Irak operasyonları. Saddam Hüseyin rejiminin Kürtlere karşı yürüttüğü, 182.000 kişinin kaybolduğu katliam operasyonu.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/halepce.html">Halepçe</a>, <a href="direnisler/enfal.html">Enfal Direnişi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- F HARFİ -->
+                    <div id="F" class="harf-bolumu">
+                        <h2 class="harf-baslik">F</h2>
+                        <div class="kavram-grid">
+                            <!-- Federalizm -->
+                            <div class="kavram-karti" data-harf="F" data-kategori="siyaset">
+                                <div class="kavram-harf">F</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-sitemap kavram-ikon"></i>
+                                    <h3><a href="kavram/federalizm.html">Federalizm</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket siyaset">Siyaset</span>
+                                    <p style="margin-top: 10px;">Bölgesel siyasi özerklik modeli. Merkezi hükümet ile bölgesel yönetimler arasında yetki paylaşımına dayalı sistem.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/konfederalizm.html">Konfederalizm</a>, <a href="kavram/ozerklik.html">Özerklik</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- H HARFİ -->
+                    <div id="H" class="harf-bolumu">
+                        <h2 class="harf-baslik">H</h2>
+                        <div class="kavram-grid">
+                            <!-- Halepçe -->
+                            <div class="kavram-karti" data-harf="H" data-kategori="tarih">
+                                <div class="kavram-harf">H</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-droplet kavram-ikon"></i>
+                                    <h3><a href="kavram/halepce.html">Halepçe</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">Kimyasal saldırı sembolü. 16 Mart 1988'de Irak güçlerinin Halepçe kentine düzenlediği kimyasal saldırıda 5000'den fazla sivil öldü.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="sehir/helebce.html">Helebçe</a>, <a href="kavram/enfal.html">Enfal</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- İ HARFİ -->
+                    <div id="İ" class="harf-bolumu">
+                        <h2 class="harf-baslik">İ</h2>
+                        <div class="kavram-grid">
+                            <!-- İskân Politikası -->
+                            <div class="kavram-karti" data-harf="İ" data-kategori="siyaset">
+                                <div class="kavram-harf">İ</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-people-arrows kavram-ikon"></i>
+                                    <h3><a href="kavram/iskân-politikasi.html">İskân Politikası</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket siyaset">Siyaset</span>
+                                    <p style="margin-top: 10px;">Demografik mühendislik uygulamaları. Belirli bölgelerdeki nüfus yapısını değiştirmeye yönelik devlet politikaları.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/asimilasyon.html">Asimilasyon</a>, <a href="kavram/surgun.html">Sürgün</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- K HARFİ -->
+                    <div id="K" class="harf-bolumu">
+                        <h2 class="harf-baslik">K</h2>
+                        <div class="kavram-grid">
+                            <!-- KCK -->
+                            <div class="kavram-karti" data-harf="K" data-kategori="siyaset">
+                                <div class="kavram-harf">K</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-users-cog kavram-ikon"></i>
+                                    <h3><a href="kavram/kck.html">KCK</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket siyaset">Siyaset</span>
+                                    <p style="margin-top: 10px;">Kürdistan Topluluklar Birliği yapılanması. Demokratik konfederalizm temelinde örgütlenen şemsiye yapı.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/demokratik-konfederalizm.html">Demokratik Konfederalizm</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Kıyam -->
+                            <div class="kavram-karti" data-harf="K" data-kategori="tarih">
+                                <div class="kavram-harf">K</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-fist-raised kavram-ikon"></i>
+                                    <h3><a href="kavram/kiyam.html">Kıyam</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">Dini-siyasi ayaklanma. Genellikle dini liderlik etrafında örgütlenen toplumsal hareket.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/serhildan.html">Serhildan</a>, <a href="direnisler.html">Direnişler</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Konfederalizm -->
+                            <div class="kavram-karti" data-harf="K" data-kategori="siyaset">
+                                <div class="kavram-harf">K</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-network-wired kavram-ikon"></i>
+                                    <h3><a href="kavram/konfederalizm.html">Konfederalizm</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket siyaset">Siyaset</span>
+                                    <p style="margin-top: 10px;">Merkezi olmayan siyasal örgütlenme modeli. Bağımsız birimlerin gönüllü birliğine dayalı sistem.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/demokratik-konfederalizm.html">Demokratik Konfederalizm</a>, <a href="kavram/federalizm.html">Federalizm</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Kurdistana Sor -->
+                            <div class="kavram-karti" data-harf="K" data-kategori="coğrafya">
+                                <div class="kavram-harf">K</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-map-pin kavram-ikon"></i>
+                                    <h3><a href="kavram/kurdistana-sor.html">Kurdistana Sor</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket coğrafya">Coğrafya</span>
+                                    <p style="margin-top: 10px;">Kızıl Kürdistan (Kafkasya hattı, tarihsel adlandırma). 1923-1929 arasında Azerbaycan SSC sınırları içinde var olan Kürt özerk bölgesi.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="sehirler.html?sor=kurdistana-sor">Kızıl Kürdistan şehirleri</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Kürdistan -->
+                            <div class="kavram-karti" data-harf="K" data-kategori="coğrafya">
+                                <div class="kavram-harf">K</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-globe-asia kavram-ikon"></i>
+                                    <h3><a href="kavram/kurdistan.html">Kürdistan</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket coğrafya">Coğrafya</span>
+                                    <p style="margin-top: 10px;">Kürtlerin tarihsel-coğrafi yerleşim alanı. Dört parçaya bölünmüş (Bakur, Başûr, Rojhilat, Rojava) yaklaşık 500.000 km²'lik coğrafya.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/bakur.html">Bakur</a>, <a href="kavram/basur.html">Başûr</a>, <a href="kavram/rojhilat.html">Rojhilat</a>, <a href="kavram/rojava.html">Rojava</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- L HARFİ -->
+                    <div id="L" class="harf-bolumu">
+                        <h2 class="harf-baslik">L</h2>
+                        <div class="kavram-grid">
+                            <!-- Lozan -->
+                            <div class="kavram-karti" data-harf="L" data-kategori="tarih">
+                                <div class="kavram-harf">L</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-file-signature kavram-ikon"></i>
+                                    <h3><a href="kavram/lozan.html">Lozan</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">1923 antlaşması, sınırların uluslararası tanınması. Türkiye Cumhuriyeti'nin kuruluş antlaşması ve günümüz sınırlarını belirleyen anlaşma.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/misak-i-milli.html">Misak-ı Milli</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- M HARFİ -->
+                    <div id="M" class="harf-bolumu">
+                        <h2 class="harf-baslik">M</h2>
+                        <div class="kavram-grid">
+                            <!-- Millet Sistemi -->
+                            <div class="kavram-karti" data-harf="M" data-kategori="tarih">
+                                <div class="kavram-harf">M</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-pray kavram-ikon"></i>
+                                    <h3><a href="kavram/millet-sistemi.html">Millet Sistemi</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">Osmanlı'daki dini-toplumsal düzen. Dini cemaatlerin kendi iç işlerinde serbest olduğu yönetim modeli.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/ulus-devlet.html">Ulus-devlet</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Mir -->
+                            <div class="kavram-karti" data-harf="M" data-kategori="toplum">
+                                <div class="kavram-harf">M</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-crown kavram-ikon"></i>
+                                    <h3><a href="kavram/mir.html">Mir</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket toplum">Toplum</span>
+                                    <p style="margin-top: 10px;">Emirlik lideri. Kürt beyliklerinde siyasi otoritenin başı, hükümdar.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/emirlik.html">Emirlik</a>, <a href="sahsiyetler.html?role=mir">Mirler</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Misak-ı Milli -->
+                            <div class="kavram-karti" data-harf="M" data-kategori="tarih">
+                                <div class="kavram-harf">M</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-map-marked-alt kavram-ikon"></i>
+                                    <h3><a href="kavram/misak-i-milli.html">Misak-ı Milli</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">Osmanlı sonrası sınır ideali. Türkiye Cumhuriyeti'nin kuruluşunda temel alınan ulusal sınırlar bildirgesi.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/lozan.html">Lozan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ö HARFİ -->
+                    <div id="Ö" class="harf-bolumu">
+                        <h2 class="harf-baslik">Ö</h2>
+                        <div class="kavram-grid">
+                            <!-- Özerklik -->
+                            <div class="kavram-karti" data-harf="Ö" data-kategori="siyaset">
+                                <div class="kavram-harf">Ö</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-hand-peace kavram-ikon"></i>
+                                    <h3><a href="kavram/ozerklik.html">Özerklik</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket siyaset">Siyaset</span>
+                                    <p style="margin-top: 10px;">Yerel yönetim yetkisi. Merkezi hükümete bağlı ancak iç işlerinde serbest olma durumu.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/federalizm.html">Federalizm</a>, <a href="kavram/konfederalizm.html">Konfederalizm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- P HARFİ -->
+                    <div id="P" class="harf-bolumu">
+                        <h2 class="harf-baslik">P</h2>
+                        <div class="kavram-grid">
+                            <!-- Peşmerge -->
+                            <div class="kavram-karti" data-harf="P" data-kategori="toplum">
+                                <div class="kavram-harf">P</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-shield-alt kavram-ikon"></i>
+                                    <h3><a href="kavram/pesmerge.html">Peşmerge</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket toplum">Toplum</span>
+                                    <p style="margin-top: 10px;">"Ölümü göze alan" anlamında savaşçı tanımı. Irak Kürdistanı'nın resmi askeri gücü.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/ypg-ypj.html">YPG/YPJ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- R HARFİ -->
+                    <div id="R" class="harf-bolumu">
+                        <h2 class="harf-baslik">R</h2>
+                        <div class="kavram-grid">
+                            <!-- Rojava -->
+                            <div class="kavram-karti" data-harf="R" data-kategori="coğrafya">
+                                <div class="kavram-harf">R</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-arrow-right kavram-ikon"></i>
+                                    <h3><a href="kavram/rojava.html">Rojava</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket coğrafya">Coğrafya</span>
+                                    <p style="margin-top: 10px;">Batı Kürdistan (Suriye sınırları içi). Suriye'nin kuzeyindeki Kürt nüfusun yoğun olduğu bölge.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/bakur.html">Bakur</a>, <a href="kavram/basur.html">Başûr</a>, <a href="kavram/rojhilat.html">Rojhilat</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Rojhilat -->
+                            <div class="kavram-karti" data-harf="R" data-kategori="coğrafya">
+                                <div class="kavram-harf">R</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-arrow-left kavram-ikon"></i>
+                                    <h3><a href="kavram/rojhilat.html">Rojhilat</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket coğrafya">Coğrafya</span>
+                                    <p style="margin-top: 10px;">Doğu Kürdistan (İran sınırları içi). İran'ın batısında Kürt nüfusun yoğun olduğu bölge.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/bakur.html">Bakur</a>, <a href="kavram/basur.html">Başûr</a>, <a href="kavram/rojava.html">Rojava</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- S HARFİ -->
+                    <div id="S" class="harf-bolumu">
+                        <h2 class="harf-baslik">S</h2>
+                        <div class="kavram-grid">
+                            <!-- Serhildan -->
+                            <div class="kavram-karti" data-harf="S" data-kategori="tarih">
+                                <div class="kavram-harf">S</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-people-arms kavram-ikon"></i>
+                                    <h3><a href="kavram/serhildan.html">Serhildan</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">Halk ayaklanması. Özellikle 1990'lı yıllarda Türkiye'de Kürt bölgelerinde yaşanan halk hareketleri.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/kiyam.html">Kıyam</a>, <a href="direnisler.html">Direnişler</a>
+                                </div>
+                            </div>
+                            
+                            <!-- Sürgün -->
+                            <div class="kavram-karti" data-harf="S" data-kategori="tarih">
+                                <div class="kavram-harf">S</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-person-walking-arrow-right kavram-ikon"></i>
+                                    <h3><a href="kavram/surgun.html">Sürgün</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket tarih">Tarih</span>
+                                    <p style="margin-top: 10px;">Zorunlu yer değiştirme. Devlet politikası olarak toplulukların yaşadıkları yerlerden çıkarılması.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/iskân-politikasi.html">İskân Politikası</a>, <a href="kavram/asimilasyon.html">Asimilasyon</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ş HARFİ -->
+                    <div id="Ş" class="harf-bolumu">
+                        <h2 class="harf-baslik">Ş</h2>
+                        <div class="kavram-grid">
+                            <!-- Şeyh -->
+                            <div class="kavram-karti" data-harf="Ş" data-kategori="toplum">
+                                <div class="kavram-harf">Ş</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-mosque kavram-ikon"></i>
+                                    <h3><a href="kavram/seyh.html">Şeyh</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket toplum">Toplum</span>
+                                    <p style="margin-top: 10px;">Dini otorite, tarikat lideri. Kürt toplumunda hem dini hem de siyasi nüfuz sahibi liderler.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="sahsiyetler.html?role=seyh">Şeyhler</a>, <a href="kavram/aga.html">Ağa</a>, <a href="kavram/mir.html">Mir</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- U HARFİ -->
+                    <div id="U" class="harf-bolumu">
+                        <h2 class="harf-baslik">U</h2>
+                        <div class="kavram-grid">
+                            <!-- Ulus-devlet -->
+                            <div class="kavram-karti" data-harf="U" data-kategori="siyaset">
+                                <div class="kavram-harf">U</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-landmark kavram-ikon"></i>
+                                    <h3><a href="kavram/ulus-devlet.html">Ulus-devlet</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket siyaset">Siyaset</span>
+                                    <p style="margin-top: 10px;">Merkezi egemenlik esaslı modern devlet modeli. Tek bir ulusal kimlik etrafında örgütlenen devlet yapısı.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/millet-sistemi.html">Millet Sistemi</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Y HARFİ -->
+                    <div id="Y" class="harf-bolumu">
+                        <h2 class="harf-baslik">Y</h2>
+                        <div class="kavram-grid">
+                            <!-- YPG -->
+                            <div class="kavram-karti" data-harf="Y" data-kategori="toplum">
+                                <div class="kavram-harf">Y</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-shield kavram-ikon"></i>
+                                    <h3><a href="kavram/ypg.html">YPG</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket toplum">Toplum</span>
+                                    <p style="margin-top: 10px;">Rojava savunma güçleri. Suriye'nin kuzeyinde özerk yönetimin silahlı gücü.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/ypj.html">YPJ</a>, <a href="kavram/pesmerge.html">Peşmerge</a>
+                                </div>
+                            </div>
+                            
+                            <!-- YPJ -->
+                            <div class="kavram-karti" data-harf="Y" data-kategori="toplum">
+                                <div class="kavram-harf">Y</div>
+                                <div class="kavram-baslik">
+                                    <i class="fas fa-female kavram-ikon"></i>
+                                    <h3><a href="kavram/ypj.html">YPJ</a></h3>
+                                </div>
+                                <div class="kavram-aciklama">
+                                    <span class="kategori-etiket toplum">Toplum</span>
+                                    <p style="margin-top: 10px;">Rojava kadın savunma güçleri. YPG'nin kadın birimi, kadın özgürlüğü ve cinsiyet eşitliği temelinde örgütlenmiş.</p>
+                                </div>
+                                <div class="kavram-ilgili">
+                                    <i class="fas fa-link"></i> İlgili: <a href="kavram/ypg.html">YPG</a>, <a href="kavram/pesmerge.html">Peşmerge</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <!-- Toplam Bilgi -->
+                <div style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <h3 style="color: var(--zer);"><i class="fas fa-book-open"></i> Kavramlar Sözlüğü Hakkında</h3>
+                    <p>Bu sözlükte Kürt tarihi, coğrafyası, siyaseti ve toplumsal yapısına dair <strong>40+</strong> temel kavram açıklanmıştır. Her bir kavramın detaylı sayfasına tıklayarak daha kapsamlı bilgilere ulaşabilirsiniz.</p>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-globe"></i></div>
+                <h4>Kürdistan</h4>
+                <p>4 parçalı coğrafya</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-crown"></i></div>
+                <h4>Emirlik</h4>
+                <p>Tarihi beylikler</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-tree"></i></div>
+                <h4>Aşiret</h4>
+                <p>Geleneksel yapı</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-balance-scale"></i></div>
+                <h4>Özerklik</h4>
+                <p>Demokratik özyönetim</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Kategori filtreleme
+        function filterKategori(kategori) {
+            const kartlar = document.querySelectorAll('.kavram-karti');
+            kartlar.forEach(kart => {
+                if (kart.dataset.kategori === kategori) {
+                    kart.style.display = 'block';
+                } else {
+                    kart.style.display = 'none';
+                }
+            });
+            
+            // Tümünü göster butonu ekleyelim
+            const filterBar = document.querySelector('.kavram-giris');
+            if (!document.getElementById('tumunuGoster')) {
+                const btn = document.createElement('button');
+                btn.id = 'tumunuGoster';
+                btn.className = 'filter-btn';
+                btn.textContent = 'Tümünü Göster';
+                btn.style.marginTop = '15px';
+                btn.onclick = function() {
+                    kartlar.forEach(kart => kart.style.display = 'block');
+                    this.remove();
+                };
+                filterBar.appendChild(btn);
+            }
+        }
+        
+        // Arama
+        document.getElementById('kavramSearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const kartlar = document.querySelectorAll('.kavram-karti');
+            
+            kartlar.forEach(kart => {
+                const metin = kart.textContent.toLowerCase();
+                if (metin.includes(searchTerm)) {
+                    kart.style.display = 'block';
+                } else {
+                    kart.style.display = 'none';
+                }
+            });
+        });
+        
+        // Alfabe navigasyonu aktifleştirme
+        window.addEventListener('scroll', function() {
+            const bolumler = document.querySelectorAll('.harf-bolumu');
+            const alfabeHarfleri = document.querySelectorAll('.alfabe-harf');
+            
+            let aktif = '';
+            bolumler.forEach(bolum => {
+                const rect = bolum.getBoundingClientRect();
+                if (rect.top <= 150) {
+                    aktif = bolum.id;
+                }
+            });
+            
+            alfabeHarfleri.forEach(harf => {
+                harf.classList.remove('active');
+                if (harf.getAttribute('href') === '#' + aktif) {
+                    harf.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
