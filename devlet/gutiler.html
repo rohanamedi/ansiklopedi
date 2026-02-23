@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gutiler (Gutians/Quti) - Kürdistan Ansiklopedisi</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
+        </header>
+        
+        <!-- NAVIGASYON -->
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html" class="nav-link">Ana Sayfa</a>
+                <a href="../sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="../devletler.html" class="nav-link active">Devletler</a>
+                <a href="../asiretler.html" class="nav-link">Aşiretler</a>
+                <a href="../direnisler.html" class="nav-link">Direnişler</a>
+                <a href="../cemiyetler.html" class="nav-link">Cemiyetler</a>
+                <a href="../sehirler.html" class="nav-link">Şehirler</a>
+                <a href="../kultur.html" class="nav-link">Kültür & Sanat</a>
+                <a href="../kavramlar.html" class="nav-link">Kavramlar</a>
+                <a href="../din.html" class="nav-link">Din</a>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+        
+        <!-- ANA İÇERİK -->
+        <div class="main-card">
+            <div class="writing-area">
+                
+                <!-- Sayfa Başlığı ve Künye Kartı -->
+                <div class="madde-container">
+                    <!-- Sol: Ana içerik başlığı -->
+                    <div class="madde-icerik">
+                        <h1>Gutiler (Gutians / Quti)</h1>
+                        <p class="subtitle">MÖ 3. binyıl sonlarında Zagros Dağları merkezli antik dağ halkı ve Mezopotamya hâkimi hanedanlık</p>
+                    </div>
+                    
+                    <!-- Sağ: Künye kartı (Devlet formatında) -->
+                    <div class="bilgi-karti">
+                        <div class="bilgi-karti-baslik">Guti Hanedanlığı</div>
+                        <div class="bilgi-karti-resim">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="bilgi-karti-icerik">
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Kuruluş</span>
+                                <span class="bilgi-deger">MÖ 2250 civarı</span>
+                            </div>
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Yıkılış</span>
+                                <span class="bilgi-deger">MÖ 2120 civarı</span>
+                            </div>
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Kurucu</span>
+                                <span class="bilgi-deger"><a href="../sahsiyet/erridupizir.html">Erridupizir</a></span>
+                            </div>
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Başkent(ler)</span>
+                                <span class="bilgi-deger">
+                                    <a href="../sehir/urkish.html">Urkiş</a> (muhtemel),
+                                    <a href="../sehir/arrapha.html">Arrapha</a>
+                                </span>
+                            </div>
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Yönetim</span>
+                                <span class="bilgi-deger">Konfederatif Beylik / Hanedanlık</span>
+                            </div>
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Hanedan</span>
+                                <span class="bilgi-deger"><a href="../asiret/guti.html">Guti Aşiret Konfederasyonu</a></span>
+                            </div>
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Din</span>
+                                <span class="bilgi-deger"><a href="../din/hurri-dini.html">Hurri panteonu</a></span>
+                            </div>
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Para birimi</span>
+                                <span class="bilgi-deger devlet-para">Takas sistemi / Arpa-gümüş</span>
+                            </div>
+                            <div class="bilgi-satiri">
+                                <span class="bilgi-etiket">Önemli hükümdar</span>
+                                <span class="bilgi-deger"><a href="../sahsiyet/yarlagab.html">Yarlagab</a> (15 yıl)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- KURULUŞU VE TARİHÇESİ -->
+                <h2><i class="fas fa-history"></i> Tanım ve Coğrafi Konum</h2>
+                <p>Gutiler, MÖ 3. binyılın sonlarında <a href="../kavram/zagros.html">Zagros Dağları</a> ve çevresinde yaşayan dağlık bir topluluktur. Mezopotamya kaynaklarında "Gutium" olarak anılan bölge, merkezî Zagros hattını, <a href="../kavram/luristan.html">Luristan</a> ile <a href="../sehir/van.html">Van Gölü</a> arasındaki dağlık alanı kapsayan bir coğrafyayı ifade eder. Sümer ve Akad metinlerinde "Guti", "Quti", "Qutil" gibi varyantlarla kaydedilmiştir.</p>
+                
+                <p>Gutium adı yalnızca bir etnik grubu değil, aynı zamanda dağlık bir siyasi alanı tanımlar. Bu alanın çekirdeği günümüz <a href="../sehir/kirmanşan.html">Kirmanşan</a>, <a href="../sehir/süleymaniye.html">Süleymaniye</a>, <a href="../sehir/erbil.html">Erbil</a>, <a href="../sehir/mahabad.html">Mahabad</a>, <a href="../sehir/senendec.html">Senendec</a>, <a href="../sehir/kerkuk.html">Kerkük</a>, <a href="../sehir/duhok.html">Duhok</a>, <a href="../sehir/zaho.html">Zaho</a>, <a href="../sehir/hakkari.html">Hakkari</a> ve <a href="../sehir/sirnak.html">Şırnak</a> hattıyla örtüşmektedir. Mezopotamya hâkimiyeti döneminde siyasi etki alanı <a href="../sehir/musul.html">Musul</a> ovasına, <a href="../kavram/basra-korfezi.html">Basra Körfezi</a>'ne ve kuzeybatıda <a href="../kavram/ermenistan.html">Ermenistan</a>-<a href="../kavram/azerbaycan.html">Azerbaycan</a> hattına kadar genişlemiştir.</p>
+                
+                <h2><i class="fas fa-language"></i> Etnik ve Dilsel Arka Plan</h2>
+                <p>Modern araştırmalar Gutileri, Zagros'un <a href="../kavram/hurri-dili.html">Hurri dil ailesine</a> mensup halkları içerisinde değerlendirir. Dilbilimci <a href="../sahsiyet/igor-diakonoff.html">İgor Diakonoff</a> ve <a href="../sahsiyet/sergei-starostin.html">Starostin</a>'in Hurro-Urartuca üzerine çalışmaları, Guti dilinin Hurri lehçesi olabileceğini öne sürmektedir.</p>
+                
+                <p>Bu bağlamda Gutiler, <a href="../kavram/kurdistan-cografyasi.html">Kürdistan coğrafyasındaki</a> çok sayıdaki <a href="../kavram/hurriler.html">Hurri</a> halkından yalnızca biridir. Hurri ve <a href="../devlet/urartu.html">Urartu</a> halkları bölgenin kadim yerli unsurları olarak değerlendirilir. Dolayısıyla "Gutiler Kürtlerin atasıdır" ifadesi tek boyutludur; daha doğru çerçeve şudur: Gutiler, Kürtlerin atalarından yalnızca biridir.</p>
+                
+                <p>Binlerce yıl içinde <a href="../devlet/mitanni.html">Mitanni</a>, <a href="../devlet/med.html">Med</a>, <a href="../kavram/iskitler.html">İskit</a>, <a href="../kavram/sarmatlar.html">Sarmat</a>, <a href="../kavram/alanlar.html">Alan</a> ve <a href="../devlet/part.html">Part</a> unsurlarının bir kısmı Zagros coğrafyasına yerleşmiş ve Hurri-Urartu tabanıyla kaynaşmıştır. Modern Kürt etnogenezi bu çok katmanlı tarihsel birikimin sonucudur.</p>
+                
+                <!-- KURUCUSU VE HÜKÜMDARLARI -->
+                <h2><i class="fas fa-crown"></i> Tarihî Yükseliş ve Mezopotamya Hâkimiyeti</h2>
+                <p>Yaklaşık MÖ 2200 civarında Gutiler, Zagros'tan inerek Mezopotamya siyasi dengelerine müdahale etti. <a href="../devlet/akad.html">Akad İmparatorluğu</a>'nun zayıfladığı dönemde askeri üstünlük sağladılar. <a href="../kavram/sumer-kral-listesi.html">Sümer Kral Listesi</a> ve Akad kaynaklarına göre MÖ 2250–2120 arasında Mezopotamya'da bir Guti hanedanlığı hüküm sürdü.</p>
+                
+                <p>Bu dönem yaklaşık bir asırdan uzun sürmüş, bazı hesaplamalara göre 125 yıl devam etmiştir.</p>
+                
+                <h3>Guti Kralları</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hükümdar</th>
+                                <th>Hükümdarlık Dönemi</th>
+                                <th>Notlar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="../sahsiyet/erridupizir.html">Erridupizir</a></td>
+                                <td>MÖ 2250 civarı</td>
+                                <td>İlk Guti kralı, kurucu</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/imta.html">Imta</a></td>
+                                <td>3 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/inkisus.html">Inkişuş</a></td>
+                                <td>6 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/sarlagab.html">Sarlagab</a></td>
+                                <td>6 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/sulme.html">Şulme</a></td>
+                                <td>6 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/elulumes.html">Elulumeş</a></td>
+                                <td>6 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/inim-akabes.html">Inim-akabeş</a></td>
+                                <td>5 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/igesaus.html">Igeşauş</a></td>
+                                <td>6 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/yarlagab.html">Yarlagab</a></td>
+                                <td>15 yıl</td>
+                                <td>En uzun süre hüküm süren kral</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/ibate.html">Ibate</a></td>
+                                <td>3 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/yarla.html">Yarla</a></td>
+                                <td>3 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/kurum.html">Kurum</a></td>
+                                <td>1 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/habil-kin.html">Habil-kin</a></td>
+                                <td>3 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/la-erabum.html">La-erabum</a></td>
+                                <td>2 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/irarum.html">Irarum</a></td>
+                                <td>2 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/ibrarum.html">Ibrarum</a></td>
+                                <td>1 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/hablum.html">Hablum</a></td>
+                                <td>2 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/puzzursin.html">Puzzursin</a></td>
+                                <td>7 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/yarlaganda.html">Yarlaganda</a></td>
+                                <td>7 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/sium.html">Si'um</a></td>
+                                <td>7 yıl</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><a href="../sahsiyet/tirigan.html">Tirigan</a></td>
+                                <td>40 gün</td>
+                                <td>Son Guti kralı</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p><a href="../sahsiyet/tirigan.html">Tirigan</a>'ın kısa saltanatı, Sümer kaynaklarında Guti döneminin sonunu simgeler. Ardından <a href="../devlet/ur-iii.html">Ur III Hanedanlığı</a> Mezopotamya'da yeniden Sümer hâkimiyetini kurmuştur.</p>
+                
+                <!-- YÖNETİM YAPISI VE TEŞKİLATI -->
+                <h2><i class="fas fa-sitemap"></i> Yönetim Modeli</h2>
+                <p>Bazı yorumlara göre Guti yöneticileri için kullanılan "Iyanzi / Yanzi" unvanı "yönetici kişi" anlamına gelmektedir. Bu kavramın, komşu bölgelerdeki mutlak krallık anlayışından farklı bir yönetim geleneğini işaret ettiği ileri sürülmektedir. Ancak bu konuda doğrudan belge sınırlıdır.</p>
+                
+                <p>Mezopotamya metinleri Gutileri çoğu zaman "dağlı", "düzensiz", "yabancı" olarak betimler. Bu betimlemelerin siyasi propaganda niteliği taşıdığı kabul edilir.</p>
+                
+                <!-- BAŞKENTLERİ VE ÖNEMLİ ŞEHİRLERİ -->
+                <h2><i class="fas fa-city"></i> Başkentleri ve Önemli Şehirleri</h2>
+                <p>Gutium bölgesinin merkez şehirleri Zagros dağları boyunca uzanan kadim yerleşimlerdir. Kesin başkent bilinmemekle birlikte, <a href="../sehir/urkish.html">Urkiş</a> (bugünkü <a href="../sehir/mardin.html">Mardin</a> civarı) ve <a href="../sehir/arrapha.html">Arrapha</a> (bugünkü <a href="../sehir/kerkuk.html">Kerkük</a>) önemli merkezlerdir.</p>
+                
+                <ul>
+                    <li><strong>Urkiş</strong> - Hurri-Guti kültürünün önemli merkezi, muhtemel başkent</li>
+                    <li><strong>Arrapha</strong> - Guti etkisindeki önemli şehir</li>
+                    <li><strong><a href="../sehir/erbil.html">Urbilum / Erbil</a></strong> - Kadim Zagros şehri, Guti coğrafyasında</li>
+                    <li><strong><a href="../sehir/süleymaniye.html">Süleymaniye</a></strong> - Zagros'un kalbi, Guti yerleşim alanı</li>
+                    <li><strong><a href="../sehir/kirmanşan.html">Kirmanşan</a></strong> - Güney Zagros'ta önemli merkez</li>
+                </ul>
+                
+                <!-- SÜMER PERSPEKTİFİ VE GUTİ İMAJI -->
+                <h2><i class="fas fa-scroll"></i> Sümer Perspektifi ve Guti İmajı</h2>
+                <p><a href="../sahsiyet/ephraim-speiser.html">Ephraim Avigdor Speiser</a>, <em>Mesopotamian Origins</em> adlı eserinde (University of Pennsylvania Press, s.119), Zagros halklarının sürekliliğine dikkat çekerek şu değerlendirmeyi yapar:</p>
+                
+                <blockquote style="font-style: italic; border-left: 4px solid #E11919; padding-left: 20px; margin: 20px 0;">
+                    "Thus we have obtained independent evidence that the original Kurds were one of the ethnic groups that belonged to the large Zagros family… We have found an important link connecting the Kurds with the Qxirti or Gutians…"
+                </blockquote>
+                
+                <p>Speiser, İran öncesi dağ halklarının tamamen kaybolmadığını, dilsel ve antropolojik izler bıraktığını vurgular. <a href="../kavram/haldi.html">Haldi</a> unsurlarının Ermenistan'daki etkisi de bu sürekliliğin örneklerinden biri olarak sunulur.</p>
+                
+                <p>Öte yandan <a href="../sahsiyet/mehrdad-izady.html">Mehrdad R. Izady</a>, hem <em>The Kurds: A Concise Handbook</em> (1992) hem de "In Gutis We Trust" (<em>Kurdish Life</em>, 1995) makalesinde Gutilerin Kürt tarih anlatısında aşırı sembolleştirilmesini eleştirir. Izady'ye göre Gutiler Kürt hafızasında bir başlangıç mitine dönüşmüştür; fakat tarihsel veriler sınırlıdır ve Mezopotamya merkezlidir.</p>
+                
+                <p>Izady'nin temel tezi şudur:<br>
+                Gutiler vardır, ancak Kürt tarihinin tamamını onların üzerine inşa etmek bilimsel değildir. Gutiler, çok sayıdaki <a href="../kavram/hurriler.html">Hurri</a> halkından yalnızca biridir.</p>
+                
+                <!-- ADLANDIRMA VE SÜREKLİLİK -->
+                <h2><i class="fas fa-tag"></i> Adlandırma ve Süreklilik</h2>
+                <p>Akad ve Babil döneminden sonra yaklaşık 1500 yıl boyunca Mezopotamya metinlerinde Zagros dağlarındaki halklara genelleyici biçimde "Guti" denmiştir. Bu durum, "Guti" adının bir etnik kimlikten çok dağlı topluluklara yönelik bir kategoriye dönüştüğünü düşündürmektedir.</p>
+                
+                <p>Bazı araştırmalarda Subiru / Saubaru klan adı ile günümüz <a href="../asiret/zebari.html">Zebari aşireti</a> arasında coğrafi paralellikler kurulmuştur. <a href="../sahsiyet/tirigan.html">Tirigan</a> adı ile <a href="../asiret/tirikan.html">Tirikan aşireti</a> arasında benzerlik iddiası da bu bağlamda zikredilir. Ancak bu bağlantılar kesin kanıtlanmış değildir; yorum düzeyindedir.</p>
+                
+                <p>Yer adları açısından Herkar–<a href="../sehir/hakkari.html">Hakkari</a>, Mard–<a href="../sehir/mardin.html">Mardin</a>, Melidi–<a href="../sehir/malatya.html">Malatya</a>, Muşku–<a href="../sehir/mus.html">Muş</a>, Urbilum–<a href="../sehir/erbil.html">Erbil</a> gibi örnekler, bölgesel süreklilik argümanında sıklıkla anılır.</p>
+                
+                <!-- MODERN DEĞERLENDİRME -->
+                <h2><i class="fas fa-balance-scale"></i> Modern Değerlendirme</h2>
+                
+                <h3>Tarihsel Açıdan Gutiler:</h3>
+                <ul>
+                    <li>Zagros kökenli bir dağ halkıdır.</li>
+                    <li>MÖ 3. binyıl sonunda Mezopotamya'da kısa süreli hâkimiyet kurmuştur.</li>
+                    <li><a href="../kavram/hurri-dili.html">Hurri dil ailesiyle</a> ilişkilendirilir.</li>
+                    <li>Mezopotamya kaynaklarında olumsuz betimlenmiştir.</li>
+                </ul>
+                
+                <h3>Kürt Tarih Perspektifinde Gutiler:</h3>
+                <ul>
+                    <li>Gutiler, kadim Zagros halklarından biridir.</li>
+                    <li>Kürtlerin etnogenezinde muhtemel bir bileşendir.</li>
+                    <li>Ancak tek ve merkezi kurucu unsur değildir.</li>
+                </ul>
+                
+                <!-- KAYNAKÇA -->
+                <h2><i class="fas fa-book"></i> Kaynakça</h2>
+                <div class="kaynakca">
+                    <ul>
+                        <li>Speiser, E. A. (1930). <em>Mesopotamian Origins: The Basic Population of the Near East</em>. University of Pennsylvania Press.</li>
+                        <li>Diakonoff, I. M., & Starostin, S. A. (1986). <em>Hurro-Urartian as an Eastern Caucasian Language</em>. R. Kitzinger.</li>
+                        <li>Izady, M. R. (1992). <em>The Kurds: A Concise Handbook</em>. Taylor & Francis.</li>
+                        <li>Izady, M. R. (1995). "In Gutis We Trust". <em>Kurdish Life</em>, Sayı 18.</li>
+                        <li>Hallo, W. W. (1971). "Gutium". <em>Reallexikon der Assyriologie</em>, Cilt 3, s. 708-712.</li>
+                        <li>Michalowski, P. (2011). <em>The Correspondence of the Kings of Ur</em>. Eisenbrauns.</li>
+                        <li>Van de Mieroop, M. (2004). <em>A History of the Ancient Near East</em>. Blackwell Publishing.</li>
+                    </ul>
+                </div>
+                
+                <!-- İLGİLİ BAĞLANTILAR -->
+                <h2><i class="fas fa-link"></i> İlgili Bağlantılar</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <h4>İlgili Devletler</h4>
+                        <ul>
+                            <li><a href="../devlet/akad.html">Akad İmparatorluğu</a></li>
+                            <li><a href="../devlet/sumer.html">Sümer Şehir Devletleri</a></li>
+                            <li><a href="../devlet/urartu.html">Urartu</a></li>
+                            <li><a href="../devlet/mitanni.html">Mitanni</a></li>
+                            <li><a href="../devlet/med.html">Med İmparatorluğu</a></li>
+                            <li><a href="../devlet/ur-iii.html">Ur III Hanedanlığı</a></li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <h4>İlgili Hanedanlar/Aşiretler</h4>
+                        <ul>
+                            <li><a href="../asiret/tirikan.html">Tirikan Aşireti</a></li>
+                            <li><a href="../asiret/zebari.html">Zebari Aşireti</a></li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <h4>İlgili Şehirler</h4>
+                        <ul>
+                            <li><a href="../sehir/erbil.html">Erbil (Urbilum)</a></li>
+                            <li><a href="../sehir/kerkuk.html">Kerkük (Arrapha)</a></li>
+                            <li><a href="../sehir/mardin.html">Mardin (Urkiş)</a></li>
+                            <li><a href="../sehir/süleymaniye.html">Süleymaniye</a></li>
+                            <li><a href="../sehir/kirmanşan.html">Kirmanşan</a></li>
+                            <li><a href="../sehir/hakkari.html">Hakkari (Herkar)</a></li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                        <h4>İlgili Kavramlar</h4>
+                        <ul>
+                            <li><a href="../kavram/hurriler.html">Hurriler</a></li>
+                            <li><a href="../kavram/hurri-dili.html">Hurri Dili</a></li>
+                            <li><a href="../kavram/zagros.html">Zagros Dağları</a></li>
+                            <li><a href="../kavram/gutium.html">Gutium</a></li>
+                            <li><a href="../kavram/sumer-kral-listesi.html">Sümer Kral Listesi</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- SEMBOLLER -->
+        <div class="symbols-section">
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-mountain"></i></div>
+                <h4>Zagros</h4>
+                <p>Gutilerin anayurdu</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-scroll"></i></div>
+                <h4>Sümer Kral Listesi</h4>
+                <p>Guti hanedanlığının kaydı</p>
+            </div>
+            <div class="symbol-card">
+                <div class="symbol-icon"><i class="fas fa-crown"></i></div>
+                <h4>Guti Kralları</h4>
+                <p>Mezopotamya'da 125 yıl</p>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · Tüm hakları saklıdır.</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
