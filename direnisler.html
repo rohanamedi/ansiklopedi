@@ -3,16 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Direnişler - Zagros'tan Geleceğe</title>
+    <title>Kürt Direnişleri ve İsyanlar - Kürdistan Ansiklopedisi</title>
     
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Font Awesome Ikonlar -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Direnişler sayfası için özel stiller */
+        .donem-baslik {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--zer);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .donem-baslik h2 {
+            margin: 0;
+            color: var(--zer);
+            font-size: 2rem;
+        }
+        
+        .donem-baslik i {
+            font-size: 2rem;
+            color: var(--sor);
+        }
+        
+        .direnis-karti {
+            background: rgba(20, 24, 28, 0.9);
+            border-radius: 15px;
+            border-left: 4px solid var(--zer);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .direnis-karti:hover {
+            border-left-color: var(--sor);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(225, 25, 25, 0.2);
+        }
+        
+        .direnis-bilgi {
+            flex: 2;
+            min-width: 250px;
+        }
+        
+        .direnis-bilgi h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+        }
+        
+        .direnis-bilgi h3 a {
+            color: var(--zer);
+            text-decoration: none;
+        }
+        
+        .direnis-bilgi h3 a:hover {
+            color: var(--sor);
+            text-decoration: underline;
+        }
+        
+        .direnis-tarih {
+            display: inline-block;
+            background: var(--sor);
+            color: var(--spî);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .direnis-lider {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--pêşeroj-cyan);
+            color: var(--pêşeroj-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .direnis-lider a {
+            color: var(--pêşeroj-cyan);
+            text-decoration: none;
+        }
+        
+        .direnis-lider a:hover {
+            color: var(--zer);
+        }
+        
+        .direnis-bolge {
+            flex: 1;
+            min-width: 200px;
+            text-align: right;
+            font-size: 1rem;
+            color: var(--pêşeroj-cyan);
+        }
+        
+        .direnis-bolge i {
+            margin-right: 5px;
+            color: var(--zer);
+        }
+        
+        .direnis-bolge a {
+            color: var(--pêşeroj-cyan);
+            text-decoration: none;
+        }
+        
+        .direnis-bolge a:hover {
+            color: var(--zer);
+        }
+        
+        .direnis-aciklama {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: transparent;
+            border: 1px solid var(--sor);
+            color: var(--spî);
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-baslik);
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--sor);
+            color: var(--spî);
+            border-color: var(--zer);
+        }
+        
+        .direnis-sayac {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 40px 0;
+            padding: 25px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+        }
+        
+        .sayaç-item {
+            text-align: center;
+        }
+        
+        .sayaç-sayi {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--zer);
+            line-height: 1.2;
+        }
+        
+        .sayaç-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .timeline-line {
+            position: relative;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--zer);
+        }
+        
+        @media (max-width: 768px) {
+            .direnis-karti {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .direnis-bolge {
+                text-align: left;
+                width: 100%;
+            }
+            
+            .donem-baslik h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -25,269 +234,520 @@
             </div>
             
             <h1>ZAGROS'TAN GELECEĞE</h1>
-            <div class="subtitle">12. Modern Direnişler · 1916-1980 Geleneksel Dönem</div>
+            <div class="site-description">Kürdistan Ansiklopedisi</div>
         </header>
         
         <!-- NAVIGASYON -->
         <div class="nav-container">
-            <div class="nav-links">
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
+            <div class="nav-links" id="navLinks">
                 <a href="index.html" class="nav-link">Ana Sayfa</a>
-                <a href="proto-kurtler.html" class="nav-link">1. Proto Kürtler</a>
-                <a href="medeniyetin-ilk-taslari.html" class="nav-link">2. Medeniyetin İlkleri</a>
-                <a href="asiret-sistemi.html" class="nav-link">3. Aşiret Sistemi</a>
-                <a href="antik-kurt-devletleri.html" class="nav-link">4. Antik Devletler</a>
-                <a href="islamiyete-gecis.html" class="nav-link">5. İslamiyete Geçiş</a>
-                <a href="ilk-musluman-kurt-devletleri.html" class="nav-link">6. İlk Kürt İslam Devletler</a>
-                <a href="ortacag-kurdistani.html" class="nav-link">7. Ortaçağ Kürdistan'ı</a>
-                <a href="osmanli-hakimiyeti.html" class="nav-link">8. Osmanlı Hakimiyeti</a>
-                <a href="kurt-milliyetciligi.html" class="nav-link">9. Milliyetçilik</a>
-                <a href="ilk-bagimsizlik-direnisleri.html" class="nav-link">10. Direnişler</a>
-                <a href="sykes-picot.html" class="nav-link">11. Sykes-Picot</a>
-                <a href="modern-direnisler.html" class="nav-link active">12. Modern Direnişler</a>
+                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
+                <a href="devletler.html" class="nav-link">Devletler</a>
+                <a href="asiretler.html" class="nav-link">Aşiretler</a>
+                <a href="direnisler.html" class="nav-link active">Direnişler</a>
+                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
+                <a href="sehirler.html" class="nav-link">Şehirler</a>
+                <a href="kultur.html" class="nav-link">Kültür & Sanat</a>
+                <a href="kavramlar.html" class="nav-link">Kavramlar</a>
+                <a href="din.html" class="nav-link">Din</a>
             </div>
             
-            <div class="nav-buttons">
-                <a href="sykes-picot.html" class="nav-btn" title="Önceki: Sykes-Picot">
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                <a href="index.html" class="nav-btn" title="Ana Sayfa">
-                    <i class="fas fa-home"></i>
-                </a>
-                <a href="#" class="nav-btn" onclick="scrollToTop()" title="Yukarı">
-                    <i class="fas fa-arrow-up"></i>
-                </a>
+            <div class="search-container">
+                <input type="text" class="search-input" id="direnisSearch" placeholder="Direniş veya lider ara...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
         
         <!-- ANA İÇERİK -->
         <div class="main-card">
             <div class="writing-area">
-                <h1>12. Modern Direnişler</h1>
-                <h2>Sykes-Picot Sonrası Kürdistan'da Bağımsızlık Mücadeleleri (1916-1980)</h2>
+                <h1>⚔️ Kürt Direnişleri ve İsyanlar</h1>
+                <p>Antik çağlardan günümüze Kürt coğrafyasında gerçekleşen bağımsızlık hareketleri, isyanlar, direnişler ve özgürlük mücadeleleri. 19. yüzyıldan 21. yüzyıla uzanan direniş geleneği.</p>
                 
-                <!-- GİRİŞ -->
-                <p>1916 yılında İngiliz ve Fransız diplomatlar Mark Sykes ile François Georges-Picot'nun gizlice imzaladığı <a href="rohanamedi.github.io/ansiklopedi/kavram/sykes-picot.html" style="color: var(--zer);">Sykes-Picot Anlaşması</a>, Osmanlı İmparatorluğu'nun paylaşılmasının yanı sıra, binlerce yıllık Kürt vatanını da dört parçaya böldü. Bu yapay sınırlar, aynı zamanda modern Kürt direnişinin de başlangıcı oldu. 1916'dan 1980'e kadar uzanan bu dönem, Kürt halkının bağımsızlık ve özgürlük mücadelesinin en yoğun yaşandığı, onlarca isyanın, sayısız kahramanlık destanının ve büyük bedellerin ödendiği bir dönemdir.</p>
-                
-                <p>Bu dönemdeki direnişler, geleneksel toplumsal yapının öncüleri olan <strong>ağa, bey ve şeyh</strong>lerin önderliğinde şekillendi. Her biri farklı coğrafyalarda, farklı dinamiklerle ortaya çıksa da ortak hedefte birleşiyordu: <strong>Bağımsız bir Kürdistan.</strong></p>
-                
-                <!-- 1. KÜRT TEALİ CEMİYETİ VE İLK ÖRGÜTLENMELER -->
-                <h3>1. Kürt Teali Cemiyeti ve Siyasi Örgütlenme Dönemi</h3>
-                
-                <p>Mondros Mütarekesi'nin ardından İstanbul'da kurulan <a href="rohanamedi.github.io/ansiklopedi/cemiyet/kurt-teali-cemiyeti.html" style="color: var(--zer);">Kürt Teali Cemiyeti</a> (Kürt Yükselme Cemiyeti), modern Kürt siyasi hareketinin ilk örgütlü yapılarından biridir. 1918'de kurulan cemiyet, <a href="rohanamedi.github.io/ansiklopedi/sehir/istanbul.html" style="color: var(--zer);">İstanbul</a>'da Kürt aydınlarını, ileri gelenlerini ve <a href="rohanamedi.github.io/ansiklopedi/asiret/bedirxani.html" style="color: var(--zer);">Bedirxani</a> ailesi gibi köklü aileleri bir araya getirdi.</p>
-                
-                <p>Cemiyetin amacı, Wilson İlkeleri çerçevesinde Kürtlerin self-determinasyon hakkını savunmak ve bağımsız bir Kürdistan kurulması için çalışmaktı. <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/emin-ali-bedirxan.html" style="color: var(--zer);">Emin Ali Bedirxan</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/ekrem-cemilpasa.html" style="color: var(--zer);">Ekrem Cemilpaşa</a></strong> gibi isimlerin öncülüğünde yürütülen çalışmalar, Sevr Antlaşması'na Kürtlerle ilgili maddelerin girmesinde etkili oldu. Cemiyetin yayın organı <strong><a href="rohanamedi.github.io/ansiklopedi/kultur/jin-dergisi.html" style="color: var(--zer);">Jin Dergisi</a></strong>, Kürt dili, tarihi ve kültürü üzerine önemli yazılar yayımlayarak milli bilincin uyanmasına katkıda bulundu.</p>
-                
-                <!-- 2. KOÇGİRİ DİRENİŞİ -->
-                <h3>2. Koçgiri Direnişi (1920-1921)</h3>
-                
-                <p><a href="rohanamedi.github.io/ansiklopedi/direnis/kocgiri.html" style="color: var(--zer);">Koçgiri Direnişi</a>, Cumhuriyet öncesi dönemin en önemli uyarılarından biriydi. <a href="rohanamedi.github.io/ansiklopedi/sehir/sivas.html" style="color: var(--zer);">Sivas</a>'ın kuzeyinde, <a href="rohanamedi.github.io/ansiklopedi/asiret/kocgiri.html" style="color: var(--zer);">Koçgiri aşireti</a> önderliğinde başlayan hareket, özerklik talebiyle yükseldi. <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/mustafa-kemal.html" style="color: var(--zer);">Mustafa Kemal</a></strong>'in önderliğindeki Ankara Hükümeti, Kürtlerin hak taleplerine sert bir dille karşılık verdi.</p>
-                
-                <p>Direnişin liderleri arasında <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/haydar-bey.html" style="color: var(--zer);">Haydar Bey</a></strong> ve <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/alişir-bey.html" style="color: var(--zer);">Alişir Bey</a></strong> gibi isimler vardı. 1921'de düzenlenen askeri harekâtla bastırılan direnişin ardından binlerce Koçgirili sürgün edildi. Bu hareket, yeni rejimin Kürtlere bakışının ilk işareti ve Şeyh Said İsyanı'nın habercisi oldu.</p>
-                
-                <!-- 3. ŞEYH SAİD İSYANI -->
-                <h3>3. Şeyh Said İsyanı (1925)</h3>
-                
-                <p>Cumhuriyet'in ilanından sadece iki yıl sonra, 13 Şubat 1925'te <a href="rohanamedi.github.io/ansiklopedi/sehir/diyarbekir.html" style="color: var(--zer);">Diyarbekir</a>'in <a href="rohanamedi.github.io/ansiklopedi/sehir/piran.html" style="color: var(--zer);">Piran</a> (Dicle) ilçesinde başlayan <a href="rohanamedi.github.io/ansiklopedi/direnis/seyh-said.html" style="color: var(--zer);">Şeyh Said İsyanı</a>, Cumhuriyet tarihinin en büyük Kürt ayaklanmasıdır. <a href="rohanamedi.github.io/ansiklopedi/tarikat/naksibendi.html" style="color: var(--zer);">Nakşibendi tarikatı</a>na bağlı olan <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/seyh-said.html" style="color: var(--zer);">Şeyh Said</a></strong>'in önderliğinde başlayan isyan, hilafetin kaldırılması, laik reformlar ve Kürt kimliğinin inkârına karşı bir başkaldırıydı.</p>
-                
-                <p>İsyana <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/halid-beg-cibran.html" style="color: var(--zer);">Halid Beg Cibran</a></strong> önderliğindeki <a href="rohanamedi.github.io/ansiklopedi/cemiyet/azadi.html" style="color: var(--zer);">Azadî Cemiyeti</a> üyeleri, <a href="rohanamedi.github.io/ansiklopedi/asiret/zirki.html" style="color: var(--zer);">Zirki</a> aşiretinden <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/kör-hüseyin-paşa.html" style="color: var(--zer);">Kör Hüseyin Paşa</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/eyüp-sabri.html" style="color: var(--zer);">Eyüp Sabri</a></strong> gibi isimler katıldı. İsyan kısa sürede <a href="rohanamedi.github.io/ansiklopedi/sehir/elazig.html" style="color: var(--zer);">Elazığ</a>, <a href="rohanamedi.github.io/ansiklopedi/sehir/bingol.html" style="color: var(--zer);">Bingöl</a>, <a href="rohanamedi.github.io/ansiklopedi/sehir/mus.html" style="color: var(--zer);">Muş</a>, <a href="rohanamedi.github.io/ansiklopedi/sehir/urfa.html" style="color: var(--zer);">Urfa</a> ve <a href="rohanamedi.github.io/ansiklopedi/sehir/siirt.html" style="color: var(--zer);">Siirt</a> çevresine yayıldı. Ancak aşiretler arası koordinasyon eksikliği ve İngiliz desteğindeki Türk ordusunun üstün gücü karşısında isyan bastırıldı.</p>
-                
-                <p>Şeyh Said ve 46 arkadaşı 28 Haziran 1925'te Diyarbekir'de idam edildi. Binlerce Kürt sürgüne gönderildi, yüzlerce köy boşaltıldı. Bu isyanın ardından çıkarılan Takrir-i Sükûn Kanunu ile muhalefet susturuldu ve tek parti rejimi pekiştirildi.</p>
-                
-                <!-- 4. XOYBUN CEMİYETİ VE ÖRGÜTLENME -->
-                <h3>4. Xoybun Cemiyeti ve Ağrı Direnişi</h3>
-                
-                <h4>Xoybun Cemiyeti</h4>
-                <p>1927 yılında <a href="rohanamedi.github.io/ansiklopedi/sehir/lubnan.html" style="color: var(--zer);">Lübnan</a>'ın <a href="rohanamedi.github.io/ansiklopedi/sehir/bihandun.html" style="color: var(--zer);">Bihandun</a> beldesinde kurulan <a href="rohanamedi.github.io/ansiklopedi/cemiyet/xoybun.html" style="color: var(--zer);">Xoybun Cemiyeti</a> (Bağımsızlık Cemiyeti), Kürt direniş tarihinin en önemli örgütlenmelerinden biridir. Cemiyet, sürgündeki Kürt aydınları, ileri gelenleri ve <a href="rohanamedi.github.io/ansiklopedi/cemiyet/tasnak.html" style="color: var(--zer);">Ermeni Taşnak örgütü</a> temsilcilerinin işbirliğiyle kuruldu.</p>
-                
-                <p>Xoybun'un önde gelen isimleri arasında <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/celadet-ali-bedirxan.html" style="color: var(--zer);">Celadet Ali Bedirxan</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/kamuran-bedirxan.html" style="color: var(--zer);">Kamuran Bedirxan</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/ekrem-cemilpasa.html" style="color: var(--zer);">Ekrem Cemilpaşa</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/haco-aga.html" style="color: var(--zer);">Haco Ağa</a></strong> ve <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/bozan-bey.html" style="color: var(--zer);">Bozan Bey</a></strong> gibi isimler vardı. Cemiyetin amacı, bağımsız bir Kürdistan kurmak için silahlı mücadeleyi örgütlemekti.</p>
-                
-                <h4>İhsan Nuri Paşa ve Ağrı Kürdistan Cumhuriyeti (1927-1930)</h4>
-                
-                <p>Xoybun'un askeri kanadının başında <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/ihsan-nuri-pasa.html" style="color: var(--zer);">İhsan Nuri Paşa</a></strong> bulunuyordu. Eski Osmanlı subayı olan İhsan Nuri, Xoybun'un kararıyla Ağrı Dağı bölgesine geçerek direnişi örgütledi. 1928'de Ağrı Dağı eteklerinde <strong><a href="rohanamedi.github.io/ansiklopedi/devlet/agri-kurdistan-cumhuriyeti.html" style="color: var(--zer);">Ağrı Kürdistan Cumhuriyeti</a></strong> ilan edildi. Bu, modern Kürt tarihinin ikinci cumhuriyet deneyimiydi.</p>
-                
-                <p>Ağrı direnişine <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/bro-haski-tello.html" style="color: var(--zer);">Bro Hasko Tello</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/ferzende-beg.html" style="color: var(--zer);">Ferzende Beg</a></strong> gibi komutanlar katıldı. Üç yıl boyunca Türk ordusuna karşı direnen cumhuriyet, kendi bayrağını, parasını ve idari yapısını oluşturdu. Ancak 1930'da Türkiye-İran işbirliğiyle düzenlenen büyük askeri operasyon sonucu cumhuriyet yıkıldı. İhsan Nuri Paşa, İran üzerinden tekrar sürgüne gitti.</p>
-                
-                <!-- 5. DERSİM DİRENİŞİ -->
-                <h3>5. Dersim Direnişi (1937-1938)</h3>
-                
-                <p><a href="rohanamedi.github.io/ansiklopedi/sehir/dersim.html" style="color: var(--zer);">Dersim</a>, <a href="rohanamedi.github.io/ansiklopedi/inanc/alevilik.html" style="color: var(--zer);">Alevi</a> inancının güçlü olduğu, yüzyıllardır özerk bir yapıya sahip bir bölgeydi. 1937-38 yıllarında <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/seyid-riza.html" style="color: var(--zer);">Seyid Rıza</a></strong> önderliğinde başlayan <a href="rohanamedi.github.io/ansiklopedi/direnis/dersim.html" style="color: var(--zer);">Dersim Direnişi</a>, Cumhuriyet tarihinin en kanlı bastırma hareketlerinden birine sahne oldu.</p>
-                
-                <p>Direnişe <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/seyit-hüseyin.html" style="color: var(--zer);">Seyit Hüseyin</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/cibo-aga.html" style="color: var(--zer);">Cibo Ağa</a></strong> gibi aşiret liderleri de katıldı. Türk ordusunun 1937-38 kışında düzenlediği operasyonlarda on binlerce Dersimli katledildi, binlercesi sürgün edildi. Seyid Rıza ve 6 arkadaşı 1937'de idam edildi. Bu katliam, Kürtlerin kolektif hafızasında hala kanayan bir yaradır.</p>
-                
-                <!-- 6. MAHABAD KÜRDİSTAN CUMHURİYETİ -->
-                <h3>6. Mahabad Kürdistan Cumhuriyeti (1946)</h3>
-                
-                <p>İkinci Dünya Savaşı sonrasında Sovyetler Birliği'nin himayesinde, <a href="rohanamedi.github.io/ansiklopedi/sehir/mahabad.html" style="color: var(--zer);">Mahabad</a> kentinde 22 Ocak 1946'da <strong><a href="rohanamedi.github.io/ansiklopedi/devlet/mahabad-cumhuriyeti.html" style="color: var(--zer);">Mahabad Kürdistan Cumhuriyeti</a></strong> ilan edildi. Cumhuriyetin başkanlığına <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/qazi-mihemed.html" style="color: var(--zer);">Qazî Mihemed</a></strong> getirildi.</p>
-                
-                <p>Cumhuriyetin kuruluşunda <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/mustafa-barzani.html" style="color: var(--zer);">Mustafa Barzani</a></strong> ve Irak Kürdistanı'ndan gelen <a href="rohanamedi.github.io/ansiklopedi/asiret/barzani.html" style="color: var(--zer);">Barzani</a> peşmergeleri önemli rol oynadı. Cumhuriyetin diğer önde gelen isimleri arasında <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/hemze-aga.html" style="color: var(--zer);">Hemze Ağa</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/seyd-qazi.html" style="color: var(--zer);">Seyd Qazî</a></strong> ve <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/hacı-baba-şeyh.html" style="color: var(--zer);">Hacı Baba Şeyh</a></strong> vardı.</p>
-                
-                <p>11 ay boyunca varlığını sürdüren cumhuriyet, kendi bayrağını, ordusunu, posta pullarını ve mahkemelerini oluşturdu. Ancak Sovyetler'in İran'dan çekilmesiyle birlikte İran ordusu Mahabad'a girdi. Qazî Mihemed ve arkadaşları 31 Mart 1947'de idam edildi. Mustafa Barzani ve beraberindeki 500 peşmerge, büyük bir zorlu yürüyüşle Sovyetler Birliği'ne sığındı. Mahabad Cumhuriyeti, sonraki tüm Kürt hareketlerine ilham kaynağı oldu.</p>
-                
-                <!-- 7. MUSTAFA BARZANİ VE IRAK KÜRDİSTANI DİRENİŞİ -->
-                <h3>7. Mustafa Barzani ve Irak Kürdistanı Direnişi</h3>
-                
-                <h4>Barzani Ailesi ve İlk Direnişler</h4>
-                <p><a href="rohanamedi.github.io/ansiklopedi/asiret/barzani.html" style="color: var(--zer);">Barzani aşireti</a>, Irak Kürdistanı'nda uzun yıllardır direnişin sembolüydü. <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/ahmed-barzani.html" style="color: var(--zer);">Şeyh Ahmed Barzani</a></strong>, 1930'larda İngiliz ve Irak ordusuna karşı direniş örgütledi. 1943-1945 arasında <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/mustafa-barzani.html" style="color: var(--zer);">Mustafa Barzani</a></strong> önderliğinde yeniden başlayan direniş, Mahabad Cumhuriyeti'ne katılımla birleşti.</p>
-                
-                <h4>Eylül Devrimi (1961-1975)</h4>
-                <p>Sovyetler'de 11 yıl sürgün yaşadıktan sonra 1958'de Irak'a dönen Mustafa Barzani, 1961'de <strong><a href="rohanamedi.github.io/ansiklopedi/direnis/eylul-devrimi.html" style="color: var(--zer);">Eylül Devrimi</a></strong>'ni başlattı. Bu, Kürt hareketinin en uzun soluklu silahlı mücadelesiydi. Devrim boyunca <a href="rohanamedi.github.io/ansiklopedi/cemiyet/kdp.html" style="color: var(--zer);">Kürdistan Demokrat Partisi</a> (KDP) önderliğinde yürütülen mücadele, Irak Kürdistanı'nın büyük bölümünde kontrol sağladı.</p>
-                
-                <p>Bu dönemde <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/idris-barzani.html" style="color: var(--zer);">İdris Barzani</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/omer-mustafa.html" style="color: var(--zer);">Ömer Mustafa</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/hemze-abdullah.html" style="color: var(--zer);">Hemze Abdullah</a></strong> gibi komutanlar öne çıktı. Ancak 1975'te İran ve Irak arasında imzalanan <a href="rohanamedi.github.io/ansiklopedi/kavram/cezayir-anlasmasi.html" style="color: var(--zer);">Cezayir Anlaşması</a> ile İran'ın desteğini kaybeden Barzani, direnişi sonlandırmak zorunda kaldı. Yüz binlerce Kürt İran'a göç etti. Bu yenilgi, hareketin yeniden yapılanmasına ve <a href="rohanamedi.github.io/ansiklopedi/cemiyet/kyb.html" style="color: var(--zer);">Kürdistan Yurtseverler Birliği</a>'nin (KYB) kurulmasına yol açtı.</p>
-                
-                <!-- 8. TÜRKİYE KÜRDİSTANI'NDA DİĞER DİRENİŞLER -->
-                <h3>8. Türkiye Kürdistanı'nda Diğer Direniş Hareketleri</h3>
-                
-                <h4>Şeyh Abdurrahman (1924)</h4>
-                <p>Şeyh Said İsyanı öncesinde, <a href="rohanamedi.github.io/ansiklopedi/sehir/beytuşşebab.html" style="color: var(--zer);">Beytüşşebab</a>'da <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/şeyh-abdurrahman.html" style="color: var(--zer);">Şeyh Abdurrahman</a></strong> önderliğinde bir direniş yaşandı. Hilafetin kaldırılmasına tepki olarak başlayan bu hareket, kısa sürede bastırıldı.</p>
-                
-                <h4>Sason Direnişleri (1925-1937)</h4>
-                <p><a href="rohanamedi.github.io/ansiklopedi/sehir/sason.html" style="color: var(--zer);">Sason</a> bölgesi, yüzyıllardır özerk yapısıyla biliniyordu. 1925-1937 arasında <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/mele-selah.html" style="color: var(--zer);">Mele Selah</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/mele-hasan.html" style="color: var(--zer);">Mele Hasan</a></strong> gibi isimlerin önderliğinde bir dizi direniş yaşandı. Bölge halkı, askere alma ve vergi politikalarına karşı on yıl boyunca direndi.</p>
-                
-                <h4>Zilan Katliamı (1930)</h4>
-                <p>Ağrı direnişi sırasında, <a href="rohanamedi.github.io/ansiklopedi/sehir/erciş.html" style="color: var(--zer);">Erciş</a> yakınlarındaki Zilan Vadisi'nde binlerce Kürt sivil, Türk ordusu tarafından katledildi. <a href="rohanamedi.github.io/ansiklopedi/kavram/zilan-katliami.html" style="color: var(--zer);">Zilan Katliamı</a>, dönemin basınında da yer buldu ve uluslararası kamuoyunda tepki topladı.</p>
-                
-                <h4>Tunceli Kanunu ve Dersim (1934)</h4>
-                <p>1934'te çıkarılan <a href="rohanamedi.github.io/ansiklopedi/kavram/tunceli-kanunu.html" style="color: var(--zer);">Tunceli Kanunu</a>, Dersim'de olağanüstü hal ilan ederek bölgenin iskan ve imarını düzenlemeyi amaçlıyordu. Bu kanun, 1937-38 katliamlarının hukuki zeminini oluşturdu.</p>
-                
-                <!-- 9. İRAN KÜRDİSTANI DİRENİŞİ -->
-                <h3>9. İran Kürdistanı Direnişi</h3>
-                
-                <p>Mahabad Cumhuriyeti'nin yıkılmasından sonra İran Kürdistanı'nda direniş devam etti. <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/abdurrahman-qasimlu.html" style="color: var(--zer);">Abdurrahman Qasimlu</a></strong> önderliğinde <a href="rohanamedi.github.io/ansiklopedi/cemiyet/kdp-iran.html" style="color: var(--zer);">KDP-İran</a> kuruldu. 1967-1968'de <strong><a href="rohanamedi.github.io/ansiklopedi/direnis/mehabad-ayaklanmasi.html" style="color: var(--zer);">Mahabad Ayaklanması</a></strong> yaşandı. 1979 İran Devrimi sonrasında ise İran Kürdistanı'nda geniş çaplı özerklik talepleri yeniden gündeme geldi.</p>
-                
-                <!-- 10. SURİYE KÜRDİSTANI DİRENİŞİ -->
-                <h3>10. Suriye Kürdistanı'nda Direniş ve Kültürel Uyanış</h3>
-                
-                <p>Fransız Mandası döneminde Suriye Kürdistanı (<a href="rohanamedi.github.io/ansiklopedi/sehir/rojava.html" style="color: var(--zer);">Rojava</a>), Kürt aydınları ve direnişçileri için bir sığınak haline geldi. <a href="rohanamedi.github.io/ansiklopedi/sehir/sam.html" style="color: var(--zer);">Şam</a> ve <a href="rohanamedi.github.io/ansiklopedi/sehir/halep.html" style="color: var(--zer);">Halep</a>, Kürt kültürel uyanışının merkezleri oldu.</p>
-                
-                <p>1932'de <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/celadet-ali-bedirxan.html" style="color: var(--zer);">Celadet Ali Bedirxan</a></strong>'ın Şam'da çıkardığı <strong><a href="rohanamedi.github.io/ansiklopedi/kultur/hawar-dergisi.html" style="color: var(--zer);">Hawar dergisi</a></strong>, Kürtçe'nin Latin alfabesiyle yazılmasının önünü açarak bir dönüm noktası oldu. Dergi, Kürt dilinin gramerini derleyip standartlaştırarak, dilin asimile edilmesine karşı bir kale inşa etti. Hawar'da <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/kamuran-bedirxan.html" style="color: var(--zer);">Kamuran Bedirxan</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/cegerxwin.html" style="color: var(--zer);">Cegerxwîn</a></strong>, <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/osman-sebrî.html" style="color: var(--zer);">Osman Sebrî</a></strong> gibi isimler yazılar yazdı.</p>
-                
-                <p>1957'de <strong><a href="rohanamedi.github.io/ansiklopedi/cemiyet/kdp-suriye.html" style="color: var(--zer);">KDP-Suriye</a></strong> (Partiya Demokrat a Kurdî li Sûriyê) kuruldu. Partinin kurucuları arasında <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/osman-sebrî.html" style="color: var(--zer);">Osman Sebrî</a></strong> ve <strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/hemze-nurani.html" style="color: var(--zer);">Hemze Nurani</a></strong> gibi isimler vardı.</p>
-                
-                <!-- 11. KOLEKTİF HAFIZADAN İZLER -->
-                <h3>11. Kolektif Hafızadan İzler</h3>
-                
-                <ul>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/seyh-said.html" style="color: var(--zer);">Şêx Seîd</a></strong> - 1925'te idam edildi. Büyük Kürt isyanının lideri.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/seyid-riza.html" style="color: var(--zer);">Seyid Rıza</a></strong> - 1937'de idam edildi. Dersim direnişinin sembol ismi.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/ihsan-nuri-pasa.html" style="color: var(--zer);">İhsan Nuri Paşa</a></strong> - Ağrı Cumhuriyeti'nin kurucusu, askeri komutan.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/qazi-mihemed.html" style="color: var(--zer);">Qazî Mihemed</a></strong> - 1946'da idam edildi. Mahabad Cumhuriyeti'nin başkanı.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/mustafa-barzani.html" style="color: var(--zer);">Mustafa Barzani</a></strong> - Eylül Devrimi'nin lideri, modern Kürt hareketinin sembolü.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/sahsiyet/celadet-ali-bedirxan.html" style="color: var(--zer);">Celadet Ali Bedirxan</a></strong> - Hawar dergisinin kurucusu, Kürt dilinin mimarı.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/cemiyet/xoybun.html" style="color: var(--zer);">Xoybun Cemiyeti</a></strong> - Bağımsızlık mücadelesinin örgütlü yapısı.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/devlet/agri-kurdistan-cumhuriyeti.html" style="color: var(--zer);">Ağrı Kürdistan Cumhuriyeti</a></strong> - 1927-1930 arasında yaşayan cumhuriyet deneyimi.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/devlet/mahabad-cumhuriyeti.html" style="color: var(--zer);">Mahabad Kürdistan Cumhuriyeti</a></strong> - 1946'da 11 ay yaşayan cumhuriyet.</li>
-                    <li><strong><a href="rohanamedi.github.io/ansiklopedi/kultur/hawar-dergisi.html" style="color: var(--zer);">Hawar dergisi</a></strong> - 1932'de yayın hayatına başladı. Kürtçe'nin Latin alfabesiyle yazılmasının öncüsü.</li>
-                </ul>
-                
-                <!-- 12. DİRENİŞLERİN ORTAK ÖZELLİKLERİ VE SONUÇ -->
-                <h3>12. Direnişlerin Ortak Özellikleri ve Sonuç</h3>
-                
-                <p>1916-1980 arasındaki bu direnişlerin ortak özellikleri şunlardır:</p>
-                
-                <ul>
-                    <li><strong>Liderlik yapısı:</strong> Direnişlerin çoğu geleneksel liderler olan <strong>ağa, bey ve şeyh</strong>lerin önderliğinde gerçekleşti.</li>
-                    <li><strong>Örgütlenme biçimi:</strong> Aşiret temelli örgütlenme hakimdi, ancak Xoybun gibi modern örgütlenmeler de ortaya çıktı.</li>
-                    <li><strong>Talep:</strong> Temel talep bağımsız veya özerk bir Kürdistan'dı.</li>
-                    <li><strong>Uluslararası boyut:</strong> Direnişler, büyük güçlerin (İngiltere, Sovyetler) bölgesel çıkarlarından doğrudan etkilendi.</li>
-                    <li><strong>Bedel:</strong> Her direnişin ardından büyük katliamlar, sürgünler ve yıkım geldi.</li>
-                </ul>
-                
-                <blockquote style="background: rgba(0,0,0,0.2); padding: 15px; border-left: 4px solid var(--zer); margin: 20px 0;">
-                    <p>"Her yenilgi, yeni bir direnişin tohumudur. Her idam, bir sonraki kuşağın öfkesini büyütür. 1916'dan 1980'e kadar süren bu uzun yürüyüş, modern Kürt siyasi hareketinin temel taşlarını döşedi. Ağrı'da, Dersim'de, Mahabad'da ve Barzan'da dökülen kan, bugün hala Kürtlerin özgürlük mücadelesine ilham vermeye devam ediyor."</p>
-                </blockquote>
-                
-                <!-- 13. 1980 SONRASI DÖNEME GEÇİŞ -->
-                <h3>13. 1980 Sonrası: Yeni Dönem, Yeni Dinamikler</h3>
-                
-                <p>1980'e gelindiğinde, geleneksel kodlarla yürütülen direniş dalgası yerini yeni bir evreye bırakıyordu. 1975'te Eylül Devrimi'nin yenilgisi, Irak Kürdistanı'nda yeni bir siyasi yapılanmayı (<a href="rohanamedi.github.io/ansiklopedi/cemiyet/kyb.html" style="color: var(--zer);">KYB</a>) doğurdu. 1978'de <a href="rohanamedi.github.io/ansiklopedi/sehir/lubnan.html" style="color: var(--zer);">Lübnan</a>'da <a href="rohanamedi.github.io/ansiklopedi/cemiyet/pkk.html" style="color: var(--zer);">PKK</a> kuruldu. 1979 İran Devrimi, İran Kürdistanı'nda yeni bir mücadele dönemi başlattı. 1980'de Türkiye'de askeri darbe oldu.</p>
-                
-                <p>Bu gelişmeler, Kürt direnişinde <strong>yeni bir dönemin</strong> başladığını gösteriyordu. Artık direnişin önderliği, geleneksel ağa, bey ve şeyhlerden, modern siyasi partilere, kentli aydınlara ve yeni nesil örgütlere geçiyordu. 1984'te PKK'nın silahlı mücadele başlatması, 1991'de Irak Kürdistanı'nın özerkliğini kazanması ve 2012'de Rojava Devrimi, bu yeni dönemin önemli kilometre taşları oldu.</p>
-                
-                <!-- ANSİKLOPEDİ YÖNLENDİRME -->
-                <p><strong>Not:</strong> 1980 sonrası PKK, Rojava Devrimi, Kobanê Direnişi ve güncel siyasi partiler (HDP, DEM Parti, YPG/YPJ, KGK, PAK, PDK-İran vb.) için <a href="rohanamedi.github.io/ansiklopedi/" style="color: var(--zer);">Ansiklopedi Sitesi</a>'ni ziyaret ediniz.</p>
-                
-                <!-- KAYNAKÇA -->
-                <h3>📚 Kaynakça</h3>
-                <div class="kaynakca">
-                    <h4>Kitaplar</h4>
-                    <ul>
-                        <li>David McDowall - "A Modern History of the Kurds" (2004)</li>
-                        <li>Wadie Jwaideh - "Kürt Milliyetçiliğinin Tarihi" (1960)</li>
-                        <li>Martin van Bruinessen - "Ağa, Şeyh ve Devlet" (1978)</li>
-                        <li>Mehrdad R. Izady - "The Kurds: A Concise Handbook" (1992)</li>
-                        <li>Robert Olson - "The Emergence of Kurdish Nationalism" (1989)</li>
-                        <li>Şerefhan Bitlisi - "Şerefname" (1597)</li>
-                        <li>Ehmedê Xanî - "Mem û Zîn" (1695)</li>
-                        <li>Celalettin Kişmir - "Kürtler ve Bağımsızlık Hareketleri" (1960)</li>
-                    </ul>
-                    
-                    <h4>Makaleler ve Araştırmalar</h4>
-                    <ul>
-                        <li>Martin Strohmeier - "Crucial Images in the Presentation of a Kurdish National Identity" (2003)</li>
-                        <li>Robert Olson - "The Kurdish Rebellions of Sheikh Said (1925), Mt. Ararat (1930), and Dersim (1937-38)" (2000)</li>
-                        <li>Amir Hassanpour - "The Making of Kurdish Identity" (1994)</li>
-                        <li>Kendal Nezan - "Kurdistan'da Milli Direniş" (1980)</li>
-                        <li>Ismet Şerif Vanlı - "Kürtlerde Milli Mücadele" (1986)</li>
-                    </ul>
+                <!-- İstatistikler -->
+                <div class="direnis-sayac">
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="toplamDirenis">0</div>
+                        <div class="sayaç-label">Toplam Direniş</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="osmanliSayi">0</div>
+                        <div class="sayaç-label">Osmanlı Dönemi</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="cumhuriyetSayi">0</div>
+                        <div class="sayaç-label">Cumhuriyet Dönemi</div>
+                    </div>
+                    <div class="sayaç-item">
+                        <div class="sayaç-sayi" id="modernSayi">0</div>
+                        <div class="sayaç-label">Modern Dönem</div>
+                    </div>
                 </div>
                 
-                <!-- İLGİLİ KONULAR -->
-                <h3>🔍 İlgili Konular</h3>
-                <ul>
-                    <li><a href="sykes-picot.html" style="color: var(--zer);">11. Sykes-Picot</a> - Kürdistan'ın bölünmesi</li>
-                    <li><a href="ilk-bagimsizlik-direnisleri.html" style="color: var(--zer);">10. İlk Direnişler</a> - Osmanlı'ya karşı özerklik mücadeleleri</li>
-                    <li><a href="kurt-milliyetciligi.html" style="color: var(--zer);">9. Kürt Milliyetçiliği</a> - Ehmedê Xanî'den Xoybun'a</li>
-                    <li><a href="rohanamedi.github.io/ansiklopedi/" style="color: var(--zer);">Ansiklopedi</a> - Detaylı bilgi için</li>
-                </ul>
+                <!-- Filtreleme -->
+                <div class="filter-bar">
+                    <button class="filter-btn active" data-filter="all">Tüm Dönemler</button>
+                    <button class="filter-btn" data-filter="osmanli">Osmanlı Dönemi (1800-1922)</button>
+                    <button class="filter-btn" data-filter="cumhuriyet">Cumhuriyet Dönemi (1923-1950)</button>
+                    <button class="filter-btn" data-filter="modern">Modern Dönem (1950-2025)</button>
+                </div>
+                
+                <!-- ===== OSMANLI DÖNEMİ (1800-1922) ===== -->
+                <div class="donem-baslik" data-donem="osmanli">
+                    <i class="fas fa-crown"></i>
+                    <h2>Osmanlı Dönemi Direnişleri (1800-1922)</h2>
+                </div>
+                
+                <!-- Soran İsyanı -->
+                <div class="direnis-karti" data-donem="osmanli" data-isim="soran" data-yil="1830">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/soran-isyani.html">Soran İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1830-1836</span>
+                            <span class="direnis-lider"><a href="sahsiyet/mir-mihemed-pasa.html">Mîr Mihemed Paşa Rewandizî</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Soran Emirliği lideri Mîr Mihemed Paşa önderliğinde Osmanlı yönetimine karşı başlatılan bağımsızlık hareketi. Rewanduz merkezli isyan, Osmanlı güçlerince bastırıldı.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/soran.html">Soran</a>, <a href="sehir/hewler.html">Rewanduz</a>
+                    </div>
+                </div>
+                
+                <!-- Botan İsyanı -->
+                <div class="direnis-karti" data-donem="osmanli" data-isim="botan" data-yil="1847">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/botan-isyani.html">Botan İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1847</span>
+                            <span class="direnis-lider"><a href="sahsiyet/bedirxan-bey.html">Bedirxan Bey</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Botan Emirliği lideri Bedirxan Bey önderliğinde Osmanlı merkezileştirme politikalarına karşı başlatılan isyan. Cizre merkezli isyan, Osmanlı ordusunca bastırıldı.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/cizre.html">Cizre</a>, <a href="sehir/botan.html">Botan</a>
+                    </div>
+                </div>
+                
+                <!-- Şeyh Ubeydullah İsyanı -->
+                <div class="direnis-karti" data-donem="osmanli" data-isim="ubeydullah" data-yil="1880">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/seyh-ubeydullah-isyani.html">Şeyh Ubeydullah İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1880-1881</span>
+                            <span class="direnis-lider"><a href="sahsiyet/seyh-ubeydullah.html">Şeyh Ubeydullah</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Nakşibendi şeyhi Şeyh Ubeydullah önderliğinde Osmanlı ve İran topraklarında bağımsız Kürdistan kurmayı hedefleyen isyan. Her iki devletin ortak operasyonuyla bastırıldı.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/semdinli.html">Şemdinli</a>, <a href="sehir/urmiye.html">Urmiye</a>
+                    </div>
+                </div>
+                
+                <!-- Milli Aşireti İsyanı -->
+                <div class="direnis-karti" data-donem="osmanli" data-isim="milli" data-yil="1920">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/milli-asireti-isyani.html">Milli Aşireti İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1920</span>
+                            <span class="direnis-lider"><a href="sahsiyet/halit-bege-cibri.html">Halit Begê Cibrî</a>, <a href="sahsiyet/ibrahim-pasa.html">İbrahim Paşa</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Urfa ve Viranşehir bölgesinde Milli Aşireti'nin Fransız işgaline ve Ankara Hükümeti'ne karşı başlattığı aşiret merkezli isyan.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/urfa.html">Urfa</a>, <a href="sehir/viransehir.html">Viranşehir</a>
+                    </div>
+                </div>
+                
+                <!-- Mahmut Berzenci İsyanı -->
+                <div class="direnis-karti" data-donem="osmanli" data-isim="berzenci" data-yil="1919">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/mahmut-berzenci-isyani.html">Mahmut Berzenci İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1919-1924</span>
+                            <span class="direnis-lider"><a href="sahsiyet/seyh-mahmut-berzenci.html">Şeyh Mahmut Berzenci</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Süleymaniye merkezli, İngiliz işgaline karşı başlatılan ve Kürdistan Krallığı'nın ilanına kadar uzanan bağımsızlık hareketi.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/silemani.html">Süleymaniye</a>
+                    </div>
+                </div>
+                
+                <!-- Koçgiri İsyanı -->
+                <div class="direnis-karti" data-donem="osmanli" data-isim="kocgiri" data-yil="1921">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/kocgiri-isyani.html">Koçgiri İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1920-1921</span>
+                            <span class="direnis-lider"><a href="sahsiyet/aliser.html">Alişer</a>, <a href="sahsiyet/nuri-dersimi.html">Nuri Dersimi</a>, <a href="sahsiyet/haydar-bey.html">Haydar Bey</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Dersim ve Sivas arasında Koçgiri aşireti önderliğinde Ankara Hükümeti'ne karşı başlatılan, Kürt özerkliği talep eden isyan.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/dersim.html">Dersim</a>, <a href="sehir/sivas.html">Sivas</a>
+                    </div>
+                </div>
+                
+                <!-- ===== CUMHURİYET DÖNEMİ (1923-1950) ===== -->
+                <div class="donem-baslik" data-donem="cumhuriyet">
+                    <i class="fas fa-flag"></i>
+                    <h2>Cumhuriyet Dönemi Direnişleri (1923-1950)</h2>
+                </div>
+                
+                <!-- Şeyh Said İsyanı -->
+                <div class="direnis-karti" data-donem="cumhuriyet" data-isim="seyh-said" data-yil="1925">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/seyh-said-isyani.html">Şeyh Said İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">13.02.1925 - 15.04.1925</span>
+                            <span class="direnis-lider"><a href="sahsiyet/seyh-said.html">Şeyh Said</a>, <a href="sahsiyet/cibranli-halit-bey.html">Cibranlı Halit Bey</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Cumhuriyet döneminin en büyük Kürt isyanı. Nakşibendi şeyhi Şeyh Said önderliğinde dini ve ulusal motiflerle başlatılan isyan, Diyarbakır, Elazığ, Bingöl'de etkili oldu. Liderleri 15 Nisan 1925'te idam edildi.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/diyarbakir.html">Diyarbakır</a>, <a href="sehir/elazig.html">Elazığ</a>, <a href="sehir/bingol.html">Bingöl</a>
+                    </div>
+                </div>
+                
+                <!-- Ağrı İsyanı -->
+                <div class="direnis-karti" data-donem="cumhuriyet" data-isim="agri" data-yil="1930">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/agri-isyani.html">Ağrı (Ararat) İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1927-1930</span>
+                            <span class="direnis-lider"><a href="sahsiyet/ihsan-nuri-pasa.html">İhsan Nuri Paşa</a>, <a href="sahsiyet/ferzende-beg.html">Ferzende Beg</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Ağrı Dağı çevresinde Ağrı Cumhuriyeti ilan edilerek sürdürülen bağımsızlık hareketi. Xoybûn örgütünün desteklediği isyan, Türk ordusunun büyük operasyonuyla bastırıldı.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/agri.html">Ağrı</a>, <a href="sehir/agri-dagi.html">Ağrı Dağı</a>
+                    </div>
+                </div>
+                
+                <!-- Dersim İsyanı -->
+                <div class="direnis-karti" data-donem="cumhuriyet" data-isim="dersim" data-yil="1937">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/dersim-isyani.html">Dersim İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1937-1938</span>
+                            <span class="direnis-lider"><a href="sahsiyet/seyid-riza.html">Seyid Rıza</a>, <a href="sahsiyet/nuri-dersimi.html">Nuri Dersimi</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Dersim bölgesinde Alevi-Kürt aşiretlerinin merkezi hükümete karşı başlattığı direniş. Seyid Rıza liderliğindeki hareket, ağır askeri operasyonlarla bastırıldı, binlerce kişi hayatını kaybetti.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/dersim.html">Dersim (Tunceli)</a>
+                    </div>
+                </div>
+                
+                <!-- Barzan İsyanı -->
+                <div class="direnis-karti" data-donem="cumhuriyet" data-isim="barzan" data-yil="1943">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/barzan-isyani.html">Barzan İsyanı</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1943-1945</span>
+                            <span class="direnis-lider"><a href="sahsiyet/mustafa-barzani.html">Mustafa Barzani</a>, <a href="sahsiyet/ahmed-barzani.html">Ahmed Barzani</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Irak Kürdistanı'nda Barzan aşireti lideri Mustafa Barzani önderliğinde Irak yönetimine karşı başlatılan bağımsızlık hareketi. İsyan sonrası Barzani Sovyetler Birliği'ne sığındı.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/barzan.html">Barzan</a>, <a href="sehir/hewler.html">Erbil</a>
+                    </div>
+                </div>
+                
+                <!-- Mahabad Cumhuriyeti -->
+                <div class="direnis-karti" data-donem="cumhuriyet" data-isim="mahabad" data-yil="1946">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/mahabad-cumhuriyeti.html">Mahabad Cumhuriyeti</a></h3>
+                        <div>
+                            <span class="direnis-tarih">22.01.1946 - 15.12.1946</span>
+                            <span class="direnis-lider"><a href="sahsiyet/qazi-mihemed.html">Qazî Mihemed</a>, <a href="sahsiyet/mustafa-barzani.html">Mustafa Barzani</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            İran Kürdistanı'nda ilan edilen ilk Kürt cumhuriyeti. Qazî Mihemed liderliğinde kurulan devlet, Sovyet desteğiyle 11 ay yaşadı, İran ordusunca yıkıldı. Qazî Mihemed idam edildi.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/mehabad.html">Mahabad</a>
+                    </div>
+                </div>
+                
+                <!-- ===== MODERN DÖNEM (1950-2025) ===== -->
+                <div class="donem-baslik" data-donem="modern">
+                    <i class="fas fa-fist-raised"></i>
+                    <h2>Modern Dönem Direnişleri (1950-2025)</h2>
+                </div>
+                
+                <!-- Eylül Devrimi -->
+                <div class="direnis-karti" data-donem="modern" data-isim="eylul" data-yil="1961">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/eylul-devrimi.html">Eylül Devrimi</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1961-1975</span>
+                            <span class="direnis-lider"><a href="sahsiyet/mustafa-barzani.html">Mustafa Barzani</a>, <a href="sahsiyet/ibrahim-ahmed.html">İbrahim Ahmed</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Irak Kürdistanı'nda Mustafa Barzani liderliğinde Irak yönetimine karşı başlatılan geniş çaplı bağımsızlık hareketi. 1975 Cezayir Anlaşması sonrası hareket bölündü.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/hewler.html">Erbil</a>, <a href="sehir/silemani.html">Süleymaniye</a>
+                    </div>
+                </div>
+                
+                <!-- PKK Direnişi -->
+                <div class="direnis-karti" data-donem="modern" data-isim="pkk" data-yil="1984">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/pkk-direnis.html">PKK Direnişi</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1978-günümüz</span>
+                            <span class="direnis-lider"><a href="sahsiyet/abdullah-ocalan.html">Abdullah Öcalan</a>, <a href="sahsiyet/cemil-bayik.html">Cemil Bayık</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            1978'de kurulan PKK, 1984'te silahlı mücadele başlattı. Demokratik konfederalizm ideolojisiyle Türkiye'de Kürt hakları mücadelesi yürüttü. 2013'te çözüm süreci başladı, 2015'te yeniden çatışmalar arttı.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="kavram/bakur.html">Bakur</a>
+                    </div>
+                </div>
+                
+                <!-- KDPI Direnişi -->
+                <div class="direnis-karti" data-donem="modern" data-isim="kdpi" data-yil="1979">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/kdpi-direnis.html">KDPI Direnişi</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1979-1996</span>
+                            <span class="direnis-lider"><a href="sahsiyet/abdurrahman-qasimlu.html">Abdurrahman Qasimlu</a>, <a href="sahsiyet/sadik-veziri.html">Sadık Veziri</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            İran'daki 1979 İslam Devrimi sonrası Kürdistan Demokrat Partisi-İran'ın başlattığı silahlı mücadele. Qasimlu'nun 1989'da Viyana'da, Veziri'nin 1996'da Berlin'de öldürülmesiyle hareket zayıfladı.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="kavram/rojhilat.html">Rojhilat</a>
+                    </div>
+                </div>
+                
+                <!-- Güney Kürdistan Ayaklanması -->
+                <div class="direnis-karti" data-donem="modern" data-isim="güney" data-yil="1991">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/guney-kurdistan-ayaklanmasi.html">Güney Kürdistan Ayaklanması</a></h3>
+                        <div>
+                            <span class="direnis-tarih">1991</span>
+                            <span class="direnis-lider">Halk ayaklanması, <a href="sahsiyet/mesud-barzani.html">Mesud Barzani</a>, <a href="sahsiyet/celal-talabani.html">Celal Talabani</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Körfez Savaşı sonrası Irak Kürdistanı'nda halkın Saddam rejimine karşı başlattığı ayaklanma. Güvenli bölge ilanı ve uçuş yasağı sonrası Kürdistan Bölgesel Yönetimi kuruldu.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="kavram/basur.html">Başûr</a>
+                    </div>
+                </div>
+                
+                <!-- Kamışlı Ayaklanması -->
+                <div class="direnis-karti" data-donem="modern" data-isim="kamisli" data-yil="2004">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/kamisli-ayaklanmasi.html">Kamışlı Ayaklanması</a></h3>
+                        <div>
+                            <span class="direnis-tarih">12.03.2004</span>
+                            <span class="direnis-lider">Halk ayaklanması</span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Suriye'nin Kamışlı kentinde bir futbol maçında başlayan olayların büyümesiyle Kürt nüfusun yoğun olduğu bölgelerde rejime karşı başlatılan ayaklanma.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/qamislo.html">Kamışlı</a>, <a href="kavram/rojava.html">Rojava</a>
+                    </div>
+                </div>
+                
+                <!-- Rojava Devrimi -->
+                <div class="direnis-karti" data-donem="modern" data-isim="rojava" data-yil="2012">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/rojava-devrimi.html">Rojava Devrimi</a></h3>
+                        <div>
+                            <span class="direnis-tarih">2012-günümüz</span>
+                            <span class="direnis-lider"><a href="sahsiyet/salih-muslim.html">Salih Müslim</a>, <a href="sahsiyet/asya-abdullah.html">Asya Abdullah</a></span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Suriye iç savaşı sırasında Rojava'da Kürt güçlerinin kontrolü ele geçirmesi ve Demokratik Özerk Yönetim ilan etmesi. PYD öncülüğünde gerçekleşen devrim.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="kavram/rojava.html">Rojava</a>
+                    </div>
+                </div>
+                
+                <!-- Kobanê Direnişi -->
+                <div class="direnis-karti" data-donem="modern" data-isim="kobane" data-yil="2014">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/kobane-direnis.html">Kobanê Direnişi</a></h3>
+                        <div>
+                            <span class="direnis-tarih">2014-2015</span>
+                            <span class="direnis-lider"><a href="sahsiyet/mazlum-kobani.html">Mazlum Kobanî</a>, YPG/YPJ güçleri</span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            IŞİD'in kuşattığı Kobanê kentinin 6 ay süren direniş sonrası kurtarılması. Uluslararası koalisyon güçlerinin desteğiyle kazanılan zafer, Rojava Devrimi'nin sembolü oldu.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/kobane.html">Kobanê</a>, <a href="kavram/rojava.html">Rojava</a>
+                    </div>
+                </div>
+                
+                <!-- Afrin Direnişi -->
+                <div class="direnis-karti" data-donem="modern" data-isim="efrin" data-yil="2018">
+                    <div class="direnis-bilgi">
+                        <h3><a href="direnis/efrin-direnis.html">Efrîn Direnişi</a></h3>
+                        <div>
+                            <span class="direnis-tarih">20.01.2018 - 18.03.2018</span>
+                            <span class="direnis-lider">YPG/YPJ güçleri</span>
+                        </div>
+                        <div class="direnis-aciklama">
+                            Türk Silahlı Kuvvetleri'nin Zeytin Dalı Harekatı ile Efrîn'e düzenlediği operasyon sonrası kent düştü. Yerinden edilen binlerce Kürt göç etmek zorunda kaldı.
+                        </div>
+                    </div>
+                    <div class="direnis-bolge">
+                        <i class="fas fa-map-marker-alt"></i> <a href="sehir/efrin.html">Efrîn</a>
+                    </div>
+                </div>
+                
+                <!-- Toplam Bilgi -->
+                <div style="margin-top: 50px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <h3 style="color: var(--zer);"><i class="fas fa-hourglass-half"></i> Kürt Direnişleri Tarihi</h3>
+                    <p>Bu sayfada Kürt tarihindeki <strong id="toplamSayi">20'den fazla</strong> büyük isyan ve direniş listelenmiştir. 19. yüzyıldan günümüze uzanan direniş geleneği, bağımsızlık, özerklik ve kültürel haklar mücadelesi etrafında şekillenmiştir.</p>
+                    
+                    <div class="timeline-line" style="margin-top: 20px;">
+                        <p><strong>En eski:</strong> Soran İsyanı (1830)</p>
+                        <p><strong>En uzun süreli:</strong> PKK Direnişi (1978-günümüz, 45+ yıl)</p>
+                        <p><strong>En kanlı:</strong> Dersim İsyanı (1937-1938, on binlerce ölü)</p>
+                        <p><strong>En sembolik:</strong> Mahabad Cumhuriyeti (1946, ilk Kürt cumhuriyeti)</p>
+                    </div>
+                </div>
+                
             </div>
         </div>
         
-        <!-- SEMBOLLER / ÖNEMLİ DİRENİŞLER -->
+        <!-- SEMBOLLER -->
         <div class="symbols-section">
             <div class="symbol-card">
-                <div class="symbol-icon"><i class="fas fa-mountain"></i></div>
-                <h4>Ağrı</h4>
-                <p>1927-1930 · Cumhuriyet</p>
+                <div class="symbol-icon"><i class="fas fa-fist-raised"></i></div>
+                <h4>Şeyh Said</h4>
+                <p>1925 İsyanı</p>
             </div>
             <div class="symbol-card">
                 <div class="symbol-icon"><i class="fas fa-flag"></i></div>
                 <h4>Mahabad</h4>
-                <p>1946 · 11 ay</p>
+                <p>1946 Cumhuriyeti</p>
             </div>
             <div class="symbol-card">
-                <div class="symbol-icon"><i class="fas fa-book"></i></div>
-                <h4>Hawar</h4>
-                <p>1932 · Latin alfabesi</p>
-            </div>
-            <div class="symbol-card">
-                <div class="symbol-icon"><i class="fas fa-users"></i></div>
-                <h4>Xoybun</h4>
-                <p>1927 · Örgütlü direniş</p>
-            </div>
-            <div class="symbol-card">
-                <div class="symbol-icon"><i class="fas fa-mosque"></i></div>
-                <h4>Şeyh Said</h4>
-                <p>1925 · Büyük isyan</p>
-            </div>
-            <div class="symbol-card">
-                <div class="symbol-icon"><i class="fas fa-tree"></i></div>
-                <h4>Dersim</h4>
-                <p>1937-38 · Direniş</p>
+                <div class="symbol-icon"><i class="fas fa-mountain"></i></div>
+                <h4>Kobanê</h4>
+                <p>2014 Direnişi</p>
             </div>
         </div>
         
         <!-- FOOTER -->
         <footer>
-            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Modern Direnişler (1916-1980)</div>
-            <div class="footer-gradient">12/12 · 12.000 YILLIK MEDENİYET</div>
-            <p style="margin-top:20px; opacity:0.7;">© 2026 · KÜRDİSTAN</p>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · Tüm hakları saklıdır.</p>
         </footer>
     </div>
     
+    <!-- JavaScript -->
     <script>
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Menü toggle
+        document.getElementById('menuToggle')?.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('show');
+        });
+        
+        // Sayıları hesapla
+        function hesaplaSayilari() {
+            const tumKartlar = document.querySelectorAll('.direnis-karti');
+            const osmanliKartlar = document.querySelectorAll('.direnis-karti[data-donem="osmanli"]');
+            const cumhuriyetKartlar = document.querySelectorAll('.direnis-karti[data-donem="cumhuriyet"]');
+            const modernKartlar = document.querySelectorAll('.direnis-karti[data-donem="modern"]');
+            
+            document.getElementById('toplamDirenis').textContent = tumKartlar.length;
+            document.getElementById('osmanliSayi').textContent = osmanliKartlar.length;
+            document.getElementById('cumhuriyetSayi').textContent = cumhuriyetKartlar.length;
+            document.getElementById('modernSayi').textContent = modernKartlar.length;
+            document.getElementById('toplamSayi').textContent = tumKartlar.length;
         }
+        
+        // Filtreleme
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const filter = this.dataset.filter;
+                const kartlar = document.querySelectorAll('.direnis-karti');
+                const donemBasliklari = document.querySelectorAll('.donem-baslik');
+                
+                if (filter === 'all') {
+                    kartlar.forEach(kart => kart.style.display = 'flex');
+                    donemBasliklari.forEach(baslik => baslik.style.display = 'flex');
+                } else {
+                    kartlar.forEach(kart => {
+                        if (kart.dataset.donem === filter) {
+                            kart.style.display = 'flex';
+                        } else {
+                            kart.style.display = 'none';
+                        }
+                    });
+                    
+                    donemBasliklari.forEach(baslik => {
+                        if (baslik.dataset.donem === filter) {
+                            baslik.style.display = 'flex';
+                        } else {
+                            baslik.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Arama
+        document.getElementById('direnisSearch')?.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const kartlar = document.querySelectorAll('.direnis-karti');
+            
+            kartlar.forEach(kart => {
+                const metin = kart.textContent.toLowerCase();
+                if (metin.includes(searchTerm)) {
+                    kart.style.display = 'flex';
+                } else {
+                    kart.style.display = 'none';
+                }
+            });
+        });
+        
+        // Sayfa yüklendiğinde sayıları hesapla
+        window.addEventListener('load', hesaplaSayilari);
     </script>
 </body>
 </html>
