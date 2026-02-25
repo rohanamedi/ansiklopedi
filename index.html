@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kürdistan Site Haritası</title>
+
+<style>
+:root{
+  --bg:#0f0f14;
+  --text:#f5f5f5;
+  --accent-red:#c8102e;
+  --accent-yellow:#ffd400;
+  --accent-green:#1f8f3a;
+  --card:#1b1b22;
+}
+
+.light{
+  --bg:#f4f1ea;
+  --text:#111;
+  --card:#ffffff;
+}
+
+body{
+  margin:0;
+  font-family: "Segoe UI", sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:.3s;
+}
+
+header{
+  padding:20px;
+  text-align:center;
+  border-bottom:2px solid var(--accent-yellow);
+}
+
+header h1{
+  margin:0;
+  letter-spacing:2px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 20px;
+  align-items:center;
+}
+
+button{
+  background:var(--accent-green);
+  border:none;
+  padding:8px 12px;
+  color:white;
+  cursor:pointer;
+}
+
+.search{
+  padding:8px;
+  width:250px;
+}
+
+.container{
+  display:flex;
+  min-height:80vh;
+}
+
+nav{
+  width:250px;
+  border-right:1px solid var(--accent-red);
+  padding:20px;
+}
+
+nav div{
+  margin-bottom:10px;
+  cursor:pointer;
+  padding:8px;
+  border-left:4px solid transparent;
+}
+
+nav div:hover{
+  border-left:4px solid var(--accent-yellow);
+}
+
+main{
+  flex:1;
+  padding:20px;
+}
+
+.card{
+  background:var(--card);
+  padding:10px;
+  margin-bottom:8px;
+  transition:.2s;
+}
+
+.card:hover{
+  border-left:4px solid var(--accent-red);
+}
+
+.filters{
+  margin-bottom:20px;
+}
+
+.filters button{
+  margin:2px;
+  background:var(--accent-yellow);
+  color:#000;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>KÜRDİSTAN SİTE HARİTASI</h1>
+</header>
+
+<div class="topbar">
+<input class="search" type="text" placeholder="Ara..." onkeyup="searchItems(this.value)">
+<button onclick="toggleTheme()">Tema Değiştir</button>
+</div>
+
+<div class="container">
+
+<nav>
+<div onclick="openCategory('sahsiyet')">Şahsiyet</div>
+<div onclick="openCategory('devlet')">Devletler</div>
+<div onclick="openCategory('sehir')">Şehirler</div>
+<div onclick="openCategory('kultur')">Kültür / Eser</div>
+<div onclick="openCategory('direnis')">Direnişler</div>
+<div onclick="openCategory('cemiyet')">Cemiyetler</div>
+<div onclick="openCategory('asiret')">Aşiretler</div>
+<div onclick="openCategory('kavram')">Kavramlar</div>
+<div onclick="openCategory('din')">Din</div>
+</nav>
+
+<main>
+<div id="filters" class="filters"></div>
+<div id="content"></div>
+</main>
+
+</div>
+
+<script>
+let currentCategory=null;
+
+const DATA={
+sahsiyet:[
+{title:"Abdurrahman Qasimlu",link:"/sahsiyet/abdurrahman-qasimlu.html",letter:"A"},
+{title:"Ahmed Barzani",link:"/sahsiyet/ahmed-barzani.html",letter:"A"},
+{title:"Cegerxwîn",link:"/sahsiyet/cegerxwin.html",letter:"C"},
+{title:"Ehmedê Xanî",link:"/sahsiyet/ehmede-xani.html",letter:"E"},
+{title:"Mesud Barzani",link:"/sahsiyet/mesud-barzani.html",letter:"M"}
+],
+
+devlet:[
+{title:"Medler",link:"/devlet/medler.html",era:"Antik"},
+{title:"Eyyûbîler",link:"/devlet/eyyubiler.html",era:"Ortaçağ"},
+{title:"Mahabad Cumhuriyeti",link:"/devlet/mahabad.html",era:"Modern"}
+],
+
+sehir:[
+{title:"Amed",link:"/sehir/amed.html",region:"Bakur"},
+{title:"Hewlêr",link:"/sehir/hewler.html",region:"Başur"},
+{title:"Qamişlo",link:"/sehir/qamislo.html",region:"Rojava"}
+],
+
+kultur:[
+{title:"Mem û Zîn",link:"/kultur/mem-u-zin.html",type:"Destan"},
+{title:"Yol (film)",link:"/kultur/yol.html",type:"Film"}
+],
+
+direnis:[
+{title:"Şeyh Said İsyanı",link:"/direnis/seyh-said-isyani.html"}
+],
+
+cemiyet:[
+{title:"Kürdistan Teali Cemiyeti",link:"/cemiyet/kurdistan-teali-cemiyeti.html"}
+],
+
+asiret:[
+{title:"Barzan",link:"/asiret/barzan.html"}
+],
+
+kavram:[
+{title:"Kürdistan",link:"/kavram/kurdistan.html"}
+],
+
+din:[
+{title:"İslam",link:"/din/islam.html"}
+]
+};
+
+function openCategory(cat){
+currentCategory=cat;
+document.getElementById("content").innerHTML="";
+renderFilters(cat);
+renderItems(DATA[cat]);
+}
+
+function renderItems(items){
+let container=document.getElementById("content");
+container.innerHTML="";
+items.forEach(item=>{
+container.innerHTML+=`<div class="card">
+<a href="${item.link}" target="_blank">${item.title}</a>
+</div>`;
+});
+}
+
+function renderFilters(cat){
+let f=document.getElementById("filters");
+f.innerHTML="";
+
+if(cat==="sahsiyet"){
+let letters=[...new Set(DATA.sahsiyet.map(i=>i.letter))].sort();
+letters.forEach(l=>{
+f.innerHTML+=`<button onclick="filterByLetter('${l}')">${l}</button>`;
+});
+}
+
+if(cat==="devlet"){
+let eras=[...new Set(DATA.devlet.map(i=>i.era))];
+eras.forEach(e=>{
+f.innerHTML+=`<button onclick="filterByEra('${e}')">${e}</button>`;
+});
+}
+
+if(cat==="sehir"){
+let regions=[...new Set(DATA.sehir.map(i=>i.region))];
+regions.forEach(r=>{
+f.innerHTML+=`<button onclick="filterByRegion('${r}')">${r}</button>`;
+});
+}
+
+if(cat==="kultur"){
+let types=[...new Set(DATA.kultur.map(i=>i.type))];
+types.forEach(t=>{
+f.innerHTML+=`<button onclick="filterByType('${t}')">${t}</button>`;
+});
+}
+}
+
+function filterByLetter(l){
+renderItems(DATA.sahsiyet.filter(i=>i.letter===l));
+}
+
+function filterByEra(e){
+renderItems(DATA.devlet.filter(i=>i.era===e));
+}
+
+function filterByRegion(r){
+renderItems(DATA.sehir.filter(i=>i.region===r));
+}
+
+function filterByType(t){
+renderItems(DATA.kultur.filter(i=>i.type===t));
+}
+
+function searchItems(q){
+if(!currentCategory)return;
+let items=DATA[currentCategory];
+let filtered=items.filter(i=>i.title.toLowerCase().includes(q.toLowerCase()));
+renderItems(filtered);
+}
+
+function toggleTheme(){
+document.body.classList.toggle("light");
+}
+</script>
+
+</body>
+</html>
