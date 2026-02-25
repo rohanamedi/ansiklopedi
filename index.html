@@ -1,273 +1,699 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kürdistan Site Haritası</title>
-
-<style>
-:root{
-  --bg:#0f0f14;
-  --text:#f5f5f5;
-  --accent-red:#c8102e;
-  --accent-yellow:#ffd400;
-  --accent-green:#1f8f3a;
-  --card:#1b1b22;
-}
-
-.light{
-  --bg:#f4f1ea;
-  --text:#111;
-  --card:#ffffff;
-}
-
-body{
-  margin:0;
-  font-family: "Segoe UI", sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:.3s;
-}
-
-header{
-  padding:20px;
-  text-align:center;
-  border-bottom:2px solid var(--accent-yellow);
-}
-
-header h1{
-  margin:0;
-  letter-spacing:2px;
-}
-
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 20px;
-  align-items:center;
-}
-
-button{
-  background:var(--accent-green);
-  border:none;
-  padding:8px 12px;
-  color:white;
-  cursor:pointer;
-}
-
-.search{
-  padding:8px;
-  width:250px;
-}
-
-.container{
-  display:flex;
-  min-height:80vh;
-}
-
-nav{
-  width:250px;
-  border-right:1px solid var(--accent-red);
-  padding:20px;
-}
-
-nav div{
-  margin-bottom:10px;
-  cursor:pointer;
-  padding:8px;
-  border-left:4px solid transparent;
-}
-
-nav div:hover{
-  border-left:4px solid var(--accent-yellow);
-}
-
-main{
-  flex:1;
-  padding:20px;
-}
-
-.card{
-  background:var(--card);
-  padding:10px;
-  margin-bottom:8px;
-  transition:.2s;
-}
-
-.card:hover{
-  border-left:4px solid var(--accent-red);
-}
-
-.filters{
-  margin-bottom:20px;
-}
-
-.filters button{
-  margin:2px;
-  background:var(--accent-yellow);
-  color:#000;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Kürdistan Ansiklopedisi - Zagros'tan Geleceğe</title>
+    
+    <!-- Ana stil dosyası -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome Ikonlar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
+    
+    <style>
+        /* Site haritasına özel ek stiller (style.css'yi tamamlayıcı) */
+        .sitemap-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .sitemap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .sitemap-search {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 5px 5px 5px 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .sitemap-search input {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            padding: 10px 0;
+            width: 100%;
+            outline: none;
+            font-size: 1rem;
+        }
+        
+        .sitemap-search input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .sitemap-search button {
+            background: var(--zer);
+            border: none;
+            color: #000;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+        
+        .sitemap-search button:hover {
+            background: var(--zer-hover, #ffc800);
+            transform: scale(1.05);
+        }
+        
+        .theme-toggle {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--zer);
+            color: var(--zer);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--zer);
+            color: #000;
+        }
+        
+        .sitemap-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0 30px;
+            justify-content: center;
+        }
+        
+        .sitemap-nav-item {
+            padding: 12px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid transparent;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+        }
+        
+        .sitemap-nav-item i {
+            color: var(--zer);
+            font-size: 1.1rem;
+        }
+        
+        .sitemap-nav-item:hover {
+            border-color: var(--zer);
+            background: rgba(255, 215, 0, 0.1);
+        }
+        
+        .sitemap-nav-item.active {
+            background: var(--zer);
+            color: #000;
+            border-color: var(--zer);
+        }
+        
+        .sitemap-nav-item.active i {
+            color: #000;
+        }
+        
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            border-left: 4px solid var(--zer);
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px;
+            color: var(--text);
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .filter-btn:hover {
+            background: var(--zer);
+            color: #000;
+            border-color: var(--zer);
+        }
+        
+        .filter-btn.active {
+            background: var(--zer);
+            color: #000;
+            border-color: var(--zer);
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .item-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            border-left: 4px solid transparent;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .item-card:hover {
+            border-left: 4px solid var(--zer);
+            background: rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+        
+        .item-card a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .item-card a i {
+            color: var(--zer);
+            font-size: 1.2rem;
+            width: 24px;
+        }
+        
+        .item-card a:hover {
+            color: var(--zer);
+        }
+        
+        .item-meta {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            gap: 15px;
+        }
+        
+        .item-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .item-meta i {
+            color: var(--zer);
+            font-size: 0.8rem;
+        }
+        
+        .result-count {
+            margin: 15px 0;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .result-count strong {
+            color: var(--zer);
+            font-size: 1.2rem;
+        }
+        
+        .no-result {
+            text-align: center;
+            padding: 50px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+        }
+        
+        /* Light tema */
+        body.light-theme .item-card {
+            background: rgba(0, 0, 0, 0.03);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-theme .item-card a {
+            color: #333;
+        }
+        
+        body.light-theme .filter-btn {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        
+        body.light-theme .sitemap-nav-item {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+        
+        body.light-theme .sitemap-search input {
+            color: #333;
+        }
+        
+        body.light-theme .sitemap-search input::placeholder {
+            color: rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="flag">
+                <div class="flag-red"></div>
+                <div class="flag-white"></div>
+                <div class="flag-green"></div>
+            </div>
+            
+            <h1>ZAGROS'TAN GELECEĞE</h1>
+            <div class="subtitle">Kürdistan Anksiklopedisi · Tüm İçerikler</div>
+        </header>
+        
+        <!-- ANA İÇERİK - ANSİKLOPEDİ -->
+        <div class="main-card">
+            <div class="writing-area">
+                <div class="sitemap-container">
+                    
+                    <!-- Üst Bar: Arama ve Tema -->
+                    <div class="sitemap-header">
+                        <div class="sitemap-search">
+                            <input type="text" id="searchInput" placeholder="Ara (örn. Şeyh Said, Mahabad, Barzani...)" onkeyup="searchItems()">
+                            <button onclick="searchItems()"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="theme-toggle" onclick="toggleTheme()" title="Tema Değiştir">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Kategori Navigasyonu -->
+                    <div class="sitemap-nav">
+                        <div class="sitemap-nav-item" onclick="openCategory('sahsiyet')" id="nav-sahsiyet">
+                            <i class="fas fa-user"></i> Şahsiyetler
+                        </div>
+                        <div class="sitemap-nav-item" onclick="openCategory('devlet')" id="nav-devlet">
+                            <i class="fas fa-landmark"></i> Devletler
+                        </div>
+                        <div class="sitemap-nav-item" onclick="openCategory('sehir')" id="nav-sehir">
+                            <i class="fas fa-city"></i> Şehirler
+                        </div>
+                        <div class="sitemap-nav-item" onclick="openCategory('kultur')" id="nav-kultur">
+                            <i class="fas fa-book"></i> Kültür/Eserler
+                        </div>
+                        <div class="sitemap-nav-item" onclick="openCategory('direnis')" id="nav-direnis">
+                            <i class="fas fa-fist-raised"></i> Direnişler
+                        </div>
+                        <div class="sitemap-nav-item" onclick="openCategory('cemiyet')" id="nav-cemiyet">
+                            <i class="fas fa-users"></i> Cemiyetler
+                        </div>
+                        <div class="sitemap-nav-item" onclick="openCategory('asiret')" id="nav-asiret">
+                            <i class="fas fa-tree"></i> Aşiretler
+                        </div>
+                        <div class="sitemap-nav-item" onclick="openCategory('kavram')" id="nav-kavram">
+                            <i class="fas fa-lightbulb"></i> Kavramlar
+                        </div>
+                        <div class="sitemap-nav-item" onclick="openCategory('din')" id="nav-din">
+                            <i class="fas fa-pray"></i> Din/İnanç
+                        </div>
+                    </div>
+                    
+                    <!-- Filtre Bölümü -->
+                    <div id="filterSection" class="filter-section" style="display: none;"></div>
+                    
+                    <!-- Sonuç Sayacı -->
+                    <div id="resultCount" class="result-count"></div>
+                    
+                    <!-- İçerik Listesi -->
+                    <div id="itemsContainer" class="items-grid"></div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-text"><strong>Zagros'tan Geleceğe</strong> · Kürdistan Ansiklopedisi</div>
+            <div class="footer-gradient">12.000 YILLIK MEDENİYET · Tüm İçerikler</div>
+            <p style="margin-top:20px; opacity:0.7;">© 2026 · KÜRDİSTAN</p>
+        </footer>
+    </div>
 
-<header>
-<h1>KÜRDİSTAN SİTE HARİTASI</h1>
-</header>
+    <script>
+        // Veri seti (Modern Direnişler sayfasındaki link yapısına uygun)
+        const DATA = {
+            sahsiyet: [
+                {title: "Şeyh Said", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/seyh-said.html", letter: "Ş", meta: "idam 1925"},
+                {title: "İhsan Nuri Paşa", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/ihsan-nuri-pasa.html", letter: "İ", meta: "Ağrı Cumhuriyeti"},
+                {title: "Qazî Mihemed", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/qazi-mihemed.html", letter: "Q", meta: "Mahabad 1946"},
+                {title: "Mustafa Barzani", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/mustafa-barzani.html", letter: "M", meta: "Eylül Devrimi"},
+                {title: "Seyid Rıza", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/seyid-riza.html", letter: "S", meta: "Dersim 1937"},
+                {title: "Celadet Ali Bedirxan", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/celadet-ali-bedirxan.html", letter: "C", meta: "Hawar dergisi"},
+                {title: "Ahmed Barzani", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/ahmed-barzani.html", letter: "A", meta: "Barzan direnişi"},
+                {title: "Abdurrahman Qasimlu", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/abdurrahman-qasimlu.html", letter: "A", meta: "KDP-İran"},
+                {title: "Ehmedê Xanî", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/ehmede-xani.html", letter: "E", meta: "Mem û Zîn"},
+                {title: "Şeyh Fahri Bukarki", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/seyh-fahri-bukarki.html", letter: "Ş", meta: "1933 şehit"},
+                {title: "Cegerxwîn", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/cegerxwin.html", letter: "C", meta: "Şair"},
+                {title: "Osman Sebrî", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/osman-sebri.html", letter: "O", meta: "Xoybun"},
+                {title: "Haco Ağa", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/haco-aga.html", letter: "H", meta: "Xoybun"},
+                {title: "Kamuran Bedirxan", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/kamuran-bedirxan.html", letter: "K", meta: "Xoybun"},
+                {title: "Kör Hüseyin Paşa", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/kor-huseyin-pasa.html", letter: "K", meta: "Şeyh Said"},
+                {title: "Halid Beg Cibran", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/halid-beg-cibran.html", letter: "H", meta: "Azadî"},
+                {title: "Bro Hasko Tello", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/bro-haski-tello.html", letter: "B", meta: "Ağrı"},
+                {title: "Ferzende Beg", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/ferzende-beg.html", letter: "F", meta: "Ağrı"},
+                {title: "Mesud Barzani", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/mesud-barzani.html", letter: "M", meta: "KDP lideri"},
+                {title: "Emin Ali Bedirxan", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/emin-ali-bedirxan.html", letter: "E", meta: "Teali Cemiyeti"},
+                {title: "Ekrem Cemilpaşa", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/ekrem-cemilpasa.html", letter: "E", meta: "Xoybun"},
+                {title: "Haydar Bey", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/haydar-bey.html", letter: "H", meta: "Koçgiri"},
+                {title: "Alişir Bey", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/alisir-bey.html", letter: "A", meta: "Koçgiri"},
+                {title: "Şeyh Abdurrahman", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/seyh-abdurrahman.html", letter: "Ş", meta: "1924"},
+                {title: "Mele Selah", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/mele-selah.html", letter: "M", meta: "Sason"},
+                {title: "İdris Barzani", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/idris-barzani.html", letter: "İ", meta: "Barzani"},
+                {title: "Hemze Abdullah", link: "rohanamedi.github.io/ansiklopedi/sahsiyet/hemze-abdullah.html", letter: "H", meta: "Eylül Devrimi"}
+            ],
+            
+            devlet: [
+                {title: "Medler", link: "rohanamedi.github.io/ansiklopedi/devlet/medler.html", era: "Antik", meta: "M.Ö. 678-549"},
+                {title: "Eyyûbîler", link: "rohanamedi.github.io/ansiklopedi/devlet/eyyubiler.html", era: "Ortaçağ", meta: "1171-1260"},
+                {title: "Mahabad Cumhuriyeti", link: "rohanamedi.github.io/ansiklopedi/devlet/mahabad-cumhuriyeti.html", era: "Modern", meta: "1946"},
+                {title: "Ağrı Kürdistan Cumhuriyeti", link: "rohanamedi.github.io/ansiklopedi/devlet/agri-kurdistan-cumhuriyeti.html", era: "Modern", meta: "1927-1930"},
+                {title: "Urartu", link: "rohanamedi.github.io/ansiklopedi/devlet/urartu.html", era: "Antik", meta: "M.Ö. 860-590"},
+                {title: "Mitanni", link: "rohanamedi.github.io/ansiklopedi/devlet/mitanni.html", era: "Antik", meta: "M.Ö. 1500-1300"},
+                {title: "Şeddadiler", link: "rohanamedi.github.io/ansiklopedi/devlet/seddadiler.html", era: "Ortaçağ", meta: "951-1199"},
+                {title: "Mervaniler", link: "rohanamedi.github.io/ansiklopedi/devlet/mervaniler.html", era: "Ortaçağ", meta: "983-1096"},
+                {title: "Hasanveyhiler", link: "rohanamedi.github.io/ansiklopedi/devlet/hasanveyhiler.html", era: "Ortaçağ", meta: "959-1015"},
+                {title: "Revvadiler", link: "rohanamedi.github.io/ansiklopedi/devlet/revvadiler.html", era: "Ortaçağ", meta: "955-1071"},
+                {title: "Annaziler", link: "rohanamedi.github.io/ansiklopedi/devlet/annaziler.html", era: "Ortaçağ", meta: "990-1117"},
+                {title: "Baban", link: "rohanamedi.github.io/ansiklopedi/devlet/baban.html", era: "Beylik", meta: "1649-1850"},
+                {title: "Sorani", link: "rohanamedi.github.io/ansiklopedi/devlet/sorani.html", era: "Beylik", meta: "1816-1835"},
+                {title: "Botan", link: "rohanamedi.github.io/ansiklopedi/devlet/botan.html", era: "Beylik", meta: "1330-1847"},
+                {title: "Bitlis", link: "rohanamedi.github.io/ansiklopedi/devlet/bitlis.html", era: "Beylik", meta: "1182-1847"}
+            ],
+            
+            sehir: [
+                {title: "Amed (Diyarbekir)", link: "rohanamedi.github.io/ansiklopedi/sehir/amed.html", region: "Bakur", meta: "Kuzey Kürdistan"},
+                {title: "Hewlêr (Erbil)", link: "rohanamedi.github.io/ansiklopedi/sehir/hewler.html", region: "Başur", meta: "Güney Kürdistan"},
+                {title: "Qamişlo", link: "rohanamedi.github.io/ansiklopedi/sehir/qamislo.html", region: "Rojava", meta: "Batı Kürdistan"},
+                {title: "Mahabad", link: "rohanamedi.github.io/ansiklopedi/sehir/mahabad.html", region: "Rojhilat", meta: "Doğu Kürdistan"},
+                {title: "Dersim (Tunceli)", link: "rohanamedi.github.io/ansiklopedi/sehir/dersim.html", region: "Bakur", meta: "1938 direnişi"},
+                {title: "Süleymaniye", link: "rohanamedi.github.io/ansiklopedi/sehir/suleymaniye.html", region: "Başur", meta: "Kürt kültürü"},
+                {title: "Kerkük", link: "rohanamedi.github.io/ansiklopedi/sehir/kerkuk.html", region: "Başur", meta: "Tartışmalı bölge"},
+                {title: "Senendec", link: "rohanamedi.github.io/ansiklopedi/sehir/senendec.html", region: "Rojhilat", meta: "Doğu Kürdistan"},
+                {title: "Kobanê", link: "rohanamedi.github.io/ansiklopedi/sehir/kobane.html", region: "Rojava", meta: "2014 direnişi"},
+                {title: "Afrin", link: "rohanamedi.github.io/ansiklopedi/sehir/afrin.html", region: "Rojava", meta: "Zeytin Dalı"},
+                {title: "Cizîr", link: "rohanamedi.github.io/ansiklopedi/sehir/cizir.html", region: "Bakur", meta: "Botan Beyliği"},
+                {title: "Farqin (Silvan)", link: "rohanamedi.github.io/ansiklopedi/sehir/farqin.html", region: "Bakur", meta: "Bukarki ailesi"},
+                {title: "Pîran (Dicle)", link: "rohanamedi.github.io/ansiklopedi/sehir/piran.html", region: "Bakur", meta: "Şeyh Said"},
+                {title: "Zagros", link: "rohanamedi.github.io/ansiklopedi/sehir/zagros.html", region: "Havza", meta: "12.000 yıllık tarih"}
+            ],
+            
+            kultur: [
+                {title: "Mem û Zîn", link: "rohanamedi.github.io/ansiklopedi/kultur/mem-u-zin.html", type: "Destan", meta: "Ehmedê Xanî"},
+                {title: "Hawar Dergisi", link: "rohanamedi.github.io/ansiklopedi/kultur/hawar-dergisi.html", type: "Dergi", meta: "1932 Latin alfabesi"},
+                {title: "Jin Dergisi", link: "rohanamedi.github.io/ansiklopedi/kultur/jin-dergisi.html", type: "Dergi", meta: "Teali Cemiyeti"},
+                {title: "Şerefname", link: "rohanamedi.github.io/ansiklopedi/kultur/serefname.html", type: "Kitap", meta: "1597"},
+                {title: "Xelya Heci (stran)", link: "rohanamedi.github.io/ansiklopedi/kultur/xelya-heci.html", type: "Stran", meta: "Sidiqe Boze"},
+                {title: "Yol (film)", link: "rohanamedi.github.io/ansiklopedi/kultur/yol.html", type: "Film", meta: "Şerif Gören"},
+                {title: "Dengbêj", link: "rohanamedi.github.io/ansiklopedi/kultur/dengbej.html", type: "Gelenek", meta: "Sözlü tarih"},
+                {title: "Cegerxwîn Şiirleri", link: "rohanamedi.github.io/ansiklopedi/kultur/cegerxwin-siirleri.html", type: "Şiir", meta: "20. yüzyıl"},
+                {title: "Ehmedê Xanî", link: "rohanamedi.github.io/ansiklopedi/kultur/ehmede-xani-eserleri.html", type: "Eser", meta: "17. yüzyıl"},
+                {title: "Şal u Şapık", link: "rohanamedi.github.io/ansiklopedi/kultur/sal-u-sapik.html", type: "Giyim", meta: "Geleneksel Kürt kıyafeti"}
+            ],
+            
+            direnis: [
+                {title: "Şeyh Said İsyanı (1925)", link: "rohanamedi.github.io/ansiklopedi/direnis/seyh-said-isyani.html", meta: "Büyük isyan"},
+                {title: "Ağrı Direnişi (1927-1930)", link: "rohanamedi.github.io/ansiklopedi/direnis/agri-direnis.html", meta: "Ağrı Cumhuriyeti"},
+                {title: "Dersim Direnişi (1937-1938)", link: "rohanamedi.github.io/ansiklopedi/direnis/dersim-direnis.html", meta: "Seyid Rıza"},
+                {title: "Koçgiri Direnişi (1920-1921)", link: "rohanamedi.github.io/ansiklopedi/direnis/kocgiri-direnis.html", meta: "Sivas"},
+                {title: "Sason Direnişi (1925-1937)", link: "rohanamedi.github.io/ansiklopedi/direnis/sason-direnis.html", meta: "Mele Selah"},
+                {title: "Mahabad Direnişi (1946)", link: "rohanamedi.github.io/ansiklopedi/direnis/mahabad-direnis.html", meta: "Mahabad Cumhuriyeti"},
+                {title: "Eylül Devrimi (1961-1975)", link: "rohanamedi.github.io/ansiklopedi/direnis/eylul-devrimi.html", meta: "Mustafa Barzani"},
+                {title: "Barzan Direnişleri", link: "rohanamedi.github.io/ansiklopedi/direnis/barzan-direnisleri.html", meta: "Ahmed Barzani"},
+                {title: "Beytüşşebab Direnişi (1924)", link: "rohanamedi.github.io/ansiklopedi/direnis/beytussebab-direnis.html", meta: "Şeyh Abdurrahman"},
+                {title: "Zilan Katliamı (1930)", link: "rohanamedi.github.io/ansiklopedi/direnis/zilan-katliami.html", meta: "Ağrı direnişi"},
+                {title: "Şeyh Fahri Bukarki (1933)", link: "rohanamedi.github.io/ansiklopedi/direnis/seyh-fahri-bukarki.html", meta: "Malegır direnişi"}
+            ],
+            
+            cemiyet: [
+                {title: "Kürdistan Teali Cemiyeti", link: "rohanamedi.github.io/ansiklopedi/cemiyet/kurdistan-teali-cemiyeti.html", meta: "1918 İstanbul"},
+                {title: "Xoybun Cemiyeti", link: "rohanamedi.github.io/ansiklopedi/cemiyet/xoybun.html", meta: "1927 Lübnan"},
+                {title: "Azadî Cemiyeti", link: "rohanamedi.github.io/ansiklopedi/cemiyet/azadi.html", meta: "1923 Erzurum"},
+                {title: "KDP", link: "rohanamedi.github.io/ansiklopedi/cemiyet/kdp.html", meta: "1946 Mahabad"},
+                {title: "KYB", link: "rohanamedi.github.io/ansiklopedi/cemiyet/kyb.html", meta: "1975"},
+                {title: "KDP-İran", link: "rohanamedi.github.io/ansiklopedi/cemiyet/kdp-iran.html", meta: "1945"},
+                {title: "KDP-Suriye", link: "rohanamedi.github.io/ansiklopedi/cemiyet/kdp-suriye.html", meta: "1957"},
+                {title: "Taşnak (Ermeni)", link: "rohanamedi.github.io/ansiklopedi/cemiyet/tasnak.html", meta: "Xoybun işbirliği"},
+                {title: "PKK", link: "rohanamedi.github.io/ansiklopedi/cemiyet/pkk.html", meta: "1978"},
+                {title: "HDP", link: "rohanamedi.github.io/ansiklopedi/cemiyet/hdp.html", meta: "2012"},
+                {title: "DEM Parti", link: "rohanamedi.github.io/ansiklopedi/cemiyet/dem-parti.html", meta: "2023"}
+            ],
+            
+            asiret: [
+                {title: "Barzani Aşireti", link: "rohanamedi.github.io/ansiklopedi/asiret/barzani.html", meta: "Irak Kürdistanı"},
+                {title: "Bedirxani Ailesi", link: "rohanamedi.github.io/ansiklopedi/asiret/bedirxani.html", meta: "Botan Beyliği"},
+                {title: "Bukarki Ailesi", link: "rohanamedi.github.io/ansiklopedi/asiret/bukarki.html", meta: "Farqin/Bismil"},
+                {title: "Septi Ailesi", link: "rohanamedi.github.io/ansiklopedi/asiret/septi.html", meta: "Nakşibendi"},
+                {title: "Zirki Aşireti", link: "rohanamedi.github.io/ansiklopedi/asiret/zirki.html", meta: "Şeyh Said"},
+                {title: "Koçgiri Aşireti", link: "rohanamedi.github.io/ansiklopedi/asiret/kocgiri.html", meta: "Sivas"},
+                {title: "Cibran Aşireti", link: "rohanamedi.github.io/ansiklopedi/asiret/cibran.html", meta: "Halid Beg"},
+                {title: "Heyderan Aşireti", link: "rohanamedi.github.io/ansiklopedi/asiret/heyderan.html", meta: "Ağrı"},
+                {title: "Hevidan Aşireti", link: "rohanamedi.github.io/ansiklopedi/asiret/hevidan.html", meta: "Bukarki"},
+                {title: "Badiki Aşireti", link: "rohanamedi.github.io/ansiklopedi/asiret/badiki.html", meta: "Bongılan"},
+                {title: "Kulpi Aşireti", link: "rohanamedi.github.io/ansiklopedi/asiret/kulpi.html", meta: "Bongılan"}
+            ],
+            
+            kavram: [
+                {title: "Kürdistan", link: "rohanamedi.github.io/ansiklopedi/kavram/kurdistan.html", meta: "Coğrafya"},
+                {title: "Sykes-Picot", link: "rohanamedi.github.io/ansiklopedi/kavram/sykes-picot.html", meta: "1916"},
+                {title: "Enfal", link: "rohanamedi.github.io/ansiklopedi/kavram/enfal.html", meta: "1988 katliam"},
+                {title: "Dersim Katliamı", link: "rohanamedi.github.io/ansiklopedi/kavram/dersim-katliami.html", meta: "1937-38"},
+                {title: "Zilan Katliamı", link: "rohanamedi.github.io/ansiklopedi/kavram/zilan-katliami.html", meta: "1930"},
+                {title: "Cezayir Anlaşması", link: "rohanamedi.github.io/ansiklopedi/kavram/cezayir-anlasmasi.html", meta: "1975"},
+                {title: "Takrir-i Sükûn", link: "rohanamedi.github.io/ansiklopedi/kavram/takrir-i-sukun.html", meta: "1925"},
+                {title: "Tunceli Kanunu", link: "rohanamedi.github.io/ansiklopedi/kavram/tunceli-kanunu.html", meta: "1934"},
+                {title: "Nakşibendi", link: "rohanamedi.github.io/ansiklopedi/kavram/naksibendi.html", meta: "Tarikat"},
+                {title: "Alevilik", link: "rohanamedi.github.io/ansiklopedi/kavram/alevilik.html", meta: "İnanç"},
+                {title: "Peşmerge", link: "rohanamedi.github.io/ansiklopedi/kavram/pesmerge.html", meta: "Savaşçı"},
+                {title: "Dengbêj", link: "rohanamedi.github.io/ansiklopedi/kavram/dengbej.html", meta: "Ozancılık"},
+                {title: "Şal u Şapık", link: "rohanamedi.github.io/ansiklopedi/kavram/sal-u-sapik.html", meta: "Kıyafet"},
+                {title: "Aşiret", link: "rohanamedi.github.io/ansiklopedi/kavram/asiret.html", meta: "Kabile sistemi"}
+            ],
+            
+            din: [
+                {title: "İslam", link: "rohanamedi.github.io/ansiklopedi/din/islam.html", meta: "Çoğunluk dini"},
+                {title: "Alevilik", link: "rohanamedi.github.io/ansiklopedi/din/alevilik.html", meta: "Dersim"},
+                {title: "Nakşibendi", link: "rohanamedi.github.io/ansiklopedi/din/naksibendi.html", meta: "Tarikat"},
+                {title: "Yezîdîlik", link: "rohanamedi.github.io/ansiklopedi/din/yezidilik.html", meta: "Ezidiler"},
+                {title: "Zerdüştlük", link: "rohanamedi.github.io/ansiklopedi/din/zerdustluk.html", meta: "Antik inanç"},
+                {title: "Hristiyanlık", link: "rohanamedi.github.io/ansiklopedi/din/hristiyanlik.html", meta: "Keldani, Süryani"}
+            ]
+        };
 
-<div class="topbar">
-<input class="search" type="text" placeholder="Ara..." onkeyup="searchItems(this.value)">
-<button onclick="toggleTheme()">Tema Değiştir</button>
-</div>
+        let currentCategory = null;
+        let currentItems = [];
+        let activeFilters = {};
 
-<div class="container">
+        // Sayfa yüklendiğinde varsayılan olarak şahsiyetler açılsın
+        window.onload = function() {
+            openCategory('sahsiyet');
+        };
 
-<nav>
-<div onclick="openCategory('sahsiyet')">Şahsiyet</div>
-<div onclick="openCategory('devlet')">Devletler</div>
-<div onclick="openCategory('sehir')">Şehirler</div>
-<div onclick="openCategory('kultur')">Kültür / Eser</div>
-<div onclick="openCategory('direnis')">Direnişler</div>
-<div onclick="openCategory('cemiyet')">Cemiyetler</div>
-<div onclick="openCategory('asiret')">Aşiretler</div>
-<div onclick="openCategory('kavram')">Kavramlar</div>
-<div onclick="openCategory('din')">Din</div>
-</nav>
+        function openCategory(cat) {
+            currentCategory = cat;
+            currentItems = [...DATA[cat]];
+            
+            // Aktif nav item'ı güncelle
+            document.querySelectorAll('.sitemap-nav-item').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(`nav-${cat}`).classList.add('active');
+            
+            // Filtreleri göster
+            renderFilters(cat);
+            
+            // İçeriği render et
+            renderItems(currentItems);
+        }
 
-<main>
-<div id="filters" class="filters"></div>
-<div id="content"></div>
-</main>
+        function renderFilters(cat) {
+            let filterDiv = document.getElementById('filterSection');
+            filterDiv.innerHTML = '';
+            filterDiv.style.display = 'none';
+            
+            if (cat === 'sahsiyet') {
+                let letters = [...new Set(DATA.sahsiyet.map(i => i.letter))].sort();
+                filterDiv.innerHTML = letters.map(l => 
+                    `<button class="filter-btn" onclick="filterByLetter('${l}')">${l}</button>`
+                ).join('');
+                filterDiv.style.display = 'flex';
+            }
+            
+            if (cat === 'devlet') {
+                let eras = [...new Set(DATA.devlet.map(i => i.era))];
+                filterDiv.innerHTML = eras.map(e => 
+                    `<button class="filter-btn" onclick="filterByEra('${e}')">${e}</button>
+                `).join('');
+                filterDiv.style.display = 'flex';
+            }
+            
+            if (cat === 'sehir') {
+                let regions = [...new Set(DATA.sehir.map(i => i.region))];
+                filterDiv.innerHTML = regions.map(r => 
+                    `<button class="filter-btn" onclick="filterByRegion('${r}')">${r}</button>
+                `).join('');
+                filterDiv.style.display = 'flex';
+            }
+            
+            if (cat === 'kultur') {
+                let types = [...new Set(DATA.kultur.map(i => i.type))];
+                filterDiv.innerHTML = types.map(t => 
+                    `<button class="filter-btn" onclick="filterByType('${t}')">${t}</button>
+                `).join('');
+                filterDiv.style.display = 'flex';
+            }
+            
+            // Tüm filtreler için "Tümünü Göster" butonu ekle
+            if (filterDiv.style.display === 'flex') {
+                filterDiv.innerHTML += `<button class="filter-btn" onclick="showAll()">Tümünü Göster</button>`;
+            }
+        }
 
-</div>
+        function filterByLetter(letter) {
+            currentItems = DATA.sahsiyet.filter(i => i.letter === letter);
+            renderItems(currentItems);
+        }
 
-<script>
-let currentCategory=null;
+        function filterByEra(era) {
+            currentItems = DATA.devlet.filter(i => i.era === era);
+            renderItems(currentItems);
+        }
 
-const DATA={
-sahsiyet:[
-{title:"Abdurrahman Qasimlu",link:"/sahsiyet/abdurrahman-qasimlu.html",letter:"A"},
-{title:"Ahmed Barzani",link:"/sahsiyet/ahmed-barzani.html",letter:"A"},
-{title:"Cegerxwîn",link:"/sahsiyet/cegerxwin.html",letter:"C"},
-{title:"Ehmedê Xanî",link:"/sahsiyet/ehmede-xani.html",letter:"E"},
-{title:"Mesud Barzani",link:"/sahsiyet/mesud-barzani.html",letter:"M"}
-],
+        function filterByRegion(region) {
+            currentItems = DATA.sehir.filter(i => i.region === region);
+            renderItems(currentItems);
+        }
 
-devlet:[
-{title:"Medler",link:"/devlet/medler.html",era:"Antik"},
-{title:"Eyyûbîler",link:"/devlet/eyyubiler.html",era:"Ortaçağ"},
-{title:"Mahabad Cumhuriyeti",link:"/devlet/mahabad.html",era:"Modern"}
-],
+        function filterByType(type) {
+            currentItems = DATA.kultur.filter(i => i.type === type);
+            renderItems(currentItems);
+        }
 
-sehir:[
-{title:"Amed",link:"/sehir/amed.html",region:"Bakur"},
-{title:"Hewlêr",link:"/sehir/hewler.html",region:"Başur"},
-{title:"Qamişlo",link:"/sehir/qamislo.html",region:"Rojava"}
-],
+        function showAll() {
+            if (currentCategory) {
+                currentItems = [...DATA[currentCategory]];
+                renderItems(currentItems);
+            }
+        }
 
-kultur:[
-{title:"Mem û Zîn",link:"/kultur/mem-u-zin.html",type:"Destan"},
-{title:"Yol (film)",link:"/kultur/yol.html",type:"Film"}
-],
+        function searchItems() {
+            let query = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            if (!currentCategory) {
+                openCategory('sahsiyet');
+            }
+            
+            if (query === '') {
+                showAll();
+                return;
+            }
+            
+            let allItems = DATA[currentCategory];
+            currentItems = allItems.filter(i => 
+                i.title.toLowerCase().includes(query) || 
+                (i.meta && i.meta.toLowerCase().includes(query))
+            );
+            
+            renderItems(currentItems);
+        }
 
-direnis:[
-{title:"Şeyh Said İsyanı",link:"/direnis/seyh-said-isyani.html"}
-],
+        function renderItems(items) {
+            let container = document.getElementById('itemsContainer');
+            let countDiv = document.getElementById('resultCount');
+            
+            if (!items || items.length === 0) {
+                container.innerHTML = '<div class="no-result"><i class="fas fa-search"></i> Sonuç bulunamadı.</div>';
+                countDiv.innerHTML = '<strong>0</strong> sonuç';
+                return;
+            }
+            
+            container.innerHTML = items.map(item => `
+                <div class="item-card">
+                    <a href="https://${item.link}" target="_blank">
+                        <i class="fas ${getIconForCategory(currentCategory)}"></i>
+                        ${item.title}
+                    </a>
+                    <div class="item-meta">
+                        ${item.meta ? `<span><i class="fas fa-info-circle"></i> ${item.meta}</span>` : ''}
+                        ${item.letter ? `<span><i class="fas fa-font"></i> ${item.letter}</span>` : ''}
+                        ${item.era ? `<span><i class="fas fa-clock"></i> ${item.era}</span>` : ''}
+                        ${item.region ? `<span><i class="fas fa-map-marker-alt"></i> ${item.region}</span>` : ''}
+                        ${item.type ? `<span><i class="fas fa-tag"></i> ${item.type}</span>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            countDiv.innerHTML = `<strong>${items.length}</strong> sonuç`;
+        }
 
-cemiyet:[
-{title:"Kürdistan Teali Cemiyeti",link:"/cemiyet/kurdistan-teali-cemiyeti.html"}
-],
+        function getIconForCategory(cat) {
+            const icons = {
+                sahsiyet: 'fa-user',
+                devlet: 'fa-landmark',
+                sehir: 'fa-city',
+                kultur: 'fa-book',
+                direnis: 'fa-fist-raised',
+                cemiyet: 'fa-users',
+                asiret: 'fa-tree',
+                kavram: 'fa-lightbulb',
+                din: 'fa-pray'
+            };
+            return icons[cat] || 'fa-link';
+        }
 
-asiret:[
-{title:"Barzan",link:"/asiret/barzan.html"}
-],
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            let icon = document.getElementById('themeIcon');
+            if (document.body.classList.contains('light-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
 
-kavram:[
-{title:"Kürdistan",link:"/kavram/kurdistan.html"}
-],
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-din:[
-{title:"İslam",link:"/din/islam.html"}
-]
-};
-
-function openCategory(cat){
-currentCategory=cat;
-document.getElementById("content").innerHTML="";
-renderFilters(cat);
-renderItems(DATA[cat]);
-}
-
-function renderItems(items){
-let container=document.getElementById("content");
-container.innerHTML="";
-items.forEach(item=>{
-container.innerHTML+=`<div class="card">
-<a href="${item.link}" target="_blank">${item.title}</a>
-</div>`;
-});
-}
-
-function renderFilters(cat){
-let f=document.getElementById("filters");
-f.innerHTML="";
-
-if(cat==="sahsiyet"){
-let letters=[...new Set(DATA.sahsiyet.map(i=>i.letter))].sort();
-letters.forEach(l=>{
-f.innerHTML+=`<button onclick="filterByLetter('${l}')">${l}</button>`;
-});
-}
-
-if(cat==="devlet"){
-let eras=[...new Set(DATA.devlet.map(i=>i.era))];
-eras.forEach(e=>{
-f.innerHTML+=`<button onclick="filterByEra('${e}')">${e}</button>`;
-});
-}
-
-if(cat==="sehir"){
-let regions=[...new Set(DATA.sehir.map(i=>i.region))];
-regions.forEach(r=>{
-f.innerHTML+=`<button onclick="filterByRegion('${r}')">${r}</button>`;
-});
-}
-
-if(cat==="kultur"){
-let types=[...new Set(DATA.kultur.map(i=>i.type))];
-types.forEach(t=>{
-f.innerHTML+=`<button onclick="filterByType('${t}')">${t}</button>`;
-});
-}
-}
-
-function filterByLetter(l){
-renderItems(DATA.sahsiyet.filter(i=>i.letter===l));
-}
-
-function filterByEra(e){
-renderItems(DATA.devlet.filter(i=>i.era===e));
-}
-
-function filterByRegion(r){
-renderItems(DATA.sehir.filter(i=>i.region===r));
-}
-
-function filterByType(t){
-renderItems(DATA.kultur.filter(i=>i.type===t));
-}
-
-function searchItems(q){
-if(!currentCategory)return;
-let items=DATA[currentCategory];
-let filtered=items.filter(i=>i.title.toLowerCase().includes(q.toLowerCase()));
-renderItems(filtered);
-}
-
-function toggleTheme(){
-document.body.classList.toggle("light");
-}
-</script>
-
+        // Enter tuşu ile arama
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchItems();
+            }
+        });
+    </script>
 </body>
 </html>
