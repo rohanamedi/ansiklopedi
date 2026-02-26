@@ -14,247 +14,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
     
-    <style>
-        /* 404 sayfası için özel stiller */
-        .error-404-container {
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .error-404-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(225,25,25,0.05), rgba(0,153,0,0.05), rgba(255,215,0,0.05));
-            z-index: -1;
-        }
-        
-        .error-code {
-            font-size: 12rem;
-            font-weight: 900;
-            font-family: var(--font-baslik);
-            line-height: 1;
-            background: linear-gradient(135deg, var(--sor), var(--zer), var(--kesk));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(225,25,25,0.3);
-            margin-bottom: 20px;
-            animation: fadeInDown 0.8s ease;
-        }
-        
-        .error-title {
-            font-size: 3rem;
-            color: var(--zer);
-            margin-bottom: 20px;
-            font-weight: 600;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-        
-        .error-message {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            color: var(--spî);
-            opacity: 0.9;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-        
-        .error-search {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 40px;
-            animation: fadeInUp 0.8s ease 0.6s both;
-        }
-        
-        .error-search-box {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .error-search-input {
-            flex: 1;
-            padding: 15px 20px;
-            border: 2px solid var(--zer);
-            border-radius: 50px;
-            background: rgba(0,0,0,0.5);
-            color: var(--spî);
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .error-search-input:focus {
-            outline: none;
-            border-color: var(--sor);
-            box-shadow: 0 0 20px rgba(255,215,0,0.3);
-        }
-        
-        .error-search-btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            background: var(--sor);
-            color: var(--spî);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid var(--zer);
-        }
-        
-        .error-search-btn:hover {
-            background: var(--zer);
-            color: var(--feza-koyu);
-            transform: translateY(-2px);
-        }
-        
-        .error-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 50px;
-            animation: fadeInUp 0.8s ease 0.8s both;
-        }
-        
-        .error-btn {
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: 2px solid transparent;
-        }
-        
-        .error-btn-primary {
-            background: var(--sor);
-            color: var(--spî);
-            border-color: var(--zer);
-        }
-        
-        .error-btn-primary:hover {
-            background: var(--zer);
-            color: var(--feza-koyu);
-            transform: translateY(-3px);
-        }
-        
-        .error-btn-secondary {
-            background: transparent;
-            color: var(--zer);
-            border-color: var(--zer);
-        }
-        
-        .error-btn-secondary:hover {
-            background: var(--zer);
-            color: var(--feza-koyu);
-            transform: translateY(-3px);
-        }
-        
-        .error-suggestions {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            border: 1px solid rgba(255,215,0,0.3);
-            animation: fadeInUp 0.8s ease 1s both;
-        }
-        
-        .error-suggestions h3 {
-            color: var(--zer);
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-        }
-        
-        .suggestions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-        
-        .suggestion-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 15px;
-            background: rgba(225,25,25,0.1);
-            border-radius: 10px;
-            color: var(--spî);
-            text-decoration: none;
-            transition: all 0.3s;
-            border: 1px solid transparent;
-        }
-        
-        .suggestion-link:hover {
-            background: rgba(225,25,25,0.2);
-            border-color: var(--zer);
-            transform: translateX(5px);
-        }
-        
-        .suggestion-link i {
-            color: var(--zer);
-            font-size: 1.2rem;
-        }
-        
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .error-code {
-                font-size: 8rem;
-            }
-            
-            .error-title {
-                font-size: 2rem;
-            }
-            
-            .error-message {
-                font-size: 1rem;
-            }
-            
-            .error-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .error-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+    
 </head>
 <body>
     <div class="container">
@@ -273,19 +33,6 @@
         <!-- NAVIGASYON (Minimal) -->
         <div class="nav-container">
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i> Menü</button>
-            <div class="nav-links" id="navLinks">
-                <a href="index.html" class="nav-link">Ana Sayfa</a>
-                <a href="sahsiyetler.html" class="nav-link">Şahsiyetler</a>
-                <a href="devletler.html" class="nav-link">Devletler</a>
-                <a href="asiretler.html" class="nav-link">Aşiretler</a>
-                <a href="direnisler.html" class="nav-link">Direnişler</a>
-                <a href="cemiyetler.html" class="nav-link">Cemiyetler</a>
-                <a href="sehirler.html" class="nav-link">Şehirler</a>
-                <a href="kultur.html" class="nav-link">Kültür & Sanat</a>
-                <a href="kavramlar.html" class="nav-link">Kavramlar</a>
-                <a href="din.html" class="nav-link">Din</a>
-            </div>
-            
             <div class="search-container">
                 <input type="text" class="search-input" id="errorSearchInput" placeholder="Ansiklopedide ara...">
                 <button class="search-btn" id="errorSearchBtn"><i class="fas fa-search"></i></button>
@@ -309,7 +56,7 @@
                 
                 <!-- Butonlar -->
                 <div class="error-buttons">
-                    <a href="index.html" class="error-btn error-btn-primary">
+                    <a href="https://rohanamedi.github.io/ansiklopedi/" class="error-btn error-btn-primary">
                         <i class="fas fa-home"></i> Ana Sayfaya Dön
                     </a>
                     <a href="javascript:history.back()" class="error-btn error-btn-secondary">
@@ -321,33 +68,19 @@
                 <div class="error-suggestions">
                     <h3><i class="fas fa-compass"></i> Önerilen Sayfalar</h3>
                     <div class="suggestions-grid">
-                        <a href="sahsiyetler.html" class="suggestion-link">
-                            <i class="fas fa-user-tie"></i> Şahsiyetler
-                        </a>
-                        <a href="devletler.html" class="suggestion-link">
-                            <i class="fas fa-crown"></i> Devletler
-                        </a>
-                        <a href="asiretler.html" class="suggestion-link">
-                            <i class="fas fa-tree"></i> Aşiretler
-                        </a>
-                        <a href="direnisler.html" class="suggestion-link">
-                            <i class="fas fa-fist-raised"></i> Direnişler
-                        </a>
-                        <a href="cemiyetler.html" class="suggestion-link">
-                            <i class="fas fa-users"></i> Cemiyetler
-                        </a>
-                        <a href="sehirler.html" class="suggestion-link">
-                            <i class="fas fa-city"></i> Şehirler
-                        </a>
-                        <a href="kultur.html" class="suggestion-link">
-                            <i class="fas fa-feather"></i> Kültür & Sanat
-                        </a>
-                        <a href="kavramlar.html" class="suggestion-link">
-                            <i class="fas fa-book-open"></i> Kavramlar
-                        </a>
-                        <a href="din.html" class="suggestion-link">
-                            <i class="fas fa-pray"></i> Din
-                        </a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/" class="nav-link active">Ana Sayfa</a>
+                        <a href="proto-kurtler.html" class="nav-link"><i class="fas fa-people-arrows"></i> 1. Proto Kürtler</a>
+                        <a href="medeniyetin-ilk-taslari.html" class="nav-link"><i class="fas fa-archaeology"></i> 2. Medeniyetin İlkleri</a>
+                        <a href="asiret-sistemi.html" class="nav-link"><i class="fas fa-code-branch"></i> 3. Aşiret Sistemi</a>
+                        <a href="antik-kurt-devletleri.html" class="nav-link"><i class="fas fa-crown"></i> 4. Antik Devletler</a>
+                        <a href="islamiyete-gecis.html" class="nav-link"><i class="fas fa-moon"></i> 5. İslamiyete Geçiş</a>
+                        <a href="ilk-musluman-kurt-devletleri.html" class="nav-link"><i class="fas fa-mosque"></i> 6. İlk Kürt İslam Devletler</a>
+                        <a href="ortacag-kurdistani.html" class="nav-link"><i class="fas fa-knight"></i> 7. Ortaçağ Kürdistan'ı</a>
+                        <a href="osmanli-hakimiyeti.html" class="nav-link"><i class="fas fa-ottoman-empire"></i> 8. Osmanlı Hakimiyeti</a>
+                        <a href="kurt-milliyetciligi.html" class="nav-link"><i class="fas fa-flag"></i> 9. Milliyetçilik</a>
+                        <a href="ilk-bagimsizlik-direnisleri.html" class="nav-link"><i class="fas fa-fist-raised"></i> 10. Direnişler</a>
+                        <a href="sykes-picot.html" class="nav-link"><i class="fas fa-pen-fancy"></i> 11. Sykes-Picot</a>
+                        <a href="kurdistan-direnisleri.html" class="nav-link"><i class="fas fa-bolt"></i> 12. Modern Direnişler</a>
                     </div>
                 </div>
                 
