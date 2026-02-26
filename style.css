@@ -1012,3 +1012,317 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+/* 404 HATA SAYFASI STİLLERİ */
+.error-404-container {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--zer);
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    margin-bottom: 20px;
+    font-family: 'Arial Black', sans-serif;
+    letter-spacing: 10px;
+    animation: errorGlow 2s ease-in-out infinite;
+}
+
+@keyframes errorGlow {
+    0%, 100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.3); }
+    50% { text-shadow: 0 0 50px rgba(255, 215, 0, 0.7); }
+}
+
+.error-title {
+    font-size: 2rem;
+    color: var(--text);
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+.error-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sor), var(--zer), var(--kesk));
+    border-radius: 3px;
+}
+
+.error-message {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+}
+
+/* Arama Kutusu */
+.error-search {
+    margin: 40px auto;
+    max-width: 500px;
+}
+
+.error-search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.error-search-box:hover,
+.error-search-box:focus-within {
+    border-color: var(--zer);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.error-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 15px 25px;
+    color: var(--text);
+    font-size: 1rem;
+    outline: none;
+}
+
+.error-search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: italic;
+}
+
+.error-search-btn {
+    background: var(--zer);
+    border: none;
+    color: #000;
+    padding: 15px 30px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+}
+
+.error-search-btn:hover {
+    background: #ffc800;
+    transform: scale(1.02);
+}
+
+/* Butonlar */
+.error-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.error-btn {
+    padding: 12px 30px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.error-btn-primary {
+    background: var(--zer);
+    color: #000;
+}
+
+.error-btn-primary:hover {
+    background: #ffc800;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+}
+
+.error-btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 2px solid var(--zer);
+}
+
+.error-btn-secondary:hover {
+    background: var(--zer);
+    color: #000;
+    transform: translateY(-3px);
+}
+
+/* Önerilen Sayfalar */
+.error-suggestions {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.error-suggestions h3 {
+    color: var(--zer);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.5rem;
+}
+
+.error-suggestions h3 i {
+    font-size: 1.5rem;
+}
+
+.suggestions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.suggestions-grid a {
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    border-left: 3px solid transparent;
+}
+
+.suggestions-grid a:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-left-color: var(--zer);
+    transform: translateX(5px);
+}
+
+.suggestions-grid a i {
+    color: var(--zer);
+    width: 20px;
+    font-size: 1rem;
+}
+
+/* Light tema için 404 stilleri */
+body.light-theme .error-404-container {
+    color: #333;
+}
+
+body.light-theme .error-search-box {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+body.light-theme .error-search-input {
+    color: #333;
+}
+
+body.light-theme .error-search-input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+body.light-theme .error-btn-secondary {
+    color: #333;
+    border-color: var(--zer);
+}
+
+body.light-theme .suggestions-grid a {
+    background: rgba(0, 0, 0, 0.03);
+    color: #333;
+}
+
+body.light-theme .suggestions-grid a:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 6rem;
+    }
+    
+    .error-title {
+        font-size: 1.6rem;
+    }
+    
+    .error-message {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+    
+    .error-search-box {
+        flex-direction: column;
+        border-radius: 20px;
+    }
+    
+    .error-search-input {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .error-search-btn {
+        width: 100%;
+        justify-content: center;
+        border-radius: 0;
+    }
+    
+    .suggestions-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .error-code {
+        font-size: 4rem;
+        letter-spacing: 5px;
+    }
+    
+    .error-title {
+        font-size: 1.3rem;
+    }
+    
+    .error-buttons {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    
+    .error-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .suggestions-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Zagros Dağları animasyonu */
+.error-404-container .fa-mountain {
+    transition: 0.3s;
+    cursor: default;
+}
+
+.error-404-container .fa-mountain:hover {
+    transform: translateY(-10px);
+    opacity: 1 !important;
+}
