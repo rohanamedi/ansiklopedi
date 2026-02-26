@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sayfa Bulunamadı - 404 - Kürdistan Ansiklopedisi</title>
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="/style.css">
+    <!-- CSS - TAM URL İLE -->
+    <link rel="stylesheet" href="https://rohanamedi.github.io/ansiklopedi/style.css">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,7 +15,7 @@
     <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23E11919'/><circle cx='50' cy='50' r='35' fill='%23FFFFFF'/><circle cx='50' cy='50' r='25' fill='%23009900'/><circle cx='50' cy='50' r='15' fill='%23FFD700'/></svg>">
     
     <style>
-        /* 404 sayfasına özel minimal ek stiller - ana CSS'i bozmadan */
+        /* SADECE 404 sayfası için gerekli minimal eklemeler - ana CSS'i DEĞİŞTİRMEZ */
         body, html {
             height: 100%;
             margin: 0;
@@ -31,7 +31,7 @@
             overflow-y: auto;
         }
         
-        /* Header'ı biraz küçült */
+        /* Header'ı biraz küçült - sadece bu sayfa için */
         header {
             padding: 20px 20px 15px;
             margin-bottom: 15px;
@@ -57,11 +57,6 @@
             margin-bottom: 15px;
         }
         
-        .nav-link {
-            padding: 5px 12px;
-            font-size: 0.85rem;
-        }
-        
         /* Ana kartı esnek yap */
         .main-card {
             flex: 1;
@@ -73,7 +68,7 @@
             overflow-y: auto;
         }
         
-        /* 404 içeriği */
+        /* 404 içeriği - mevcut error-404-container stilleri style.css'de var */
         .error-404-container {
             text-align: center;
             padding: 10px;
@@ -85,7 +80,6 @@
         .error-code {
             font-size: 5rem;
             margin-bottom: 5px;
-            animation: errorGlow 2s ease-in-out infinite;
         }
         
         .error-title {
@@ -107,14 +101,10 @@
             margin-right: auto;
         }
         
-        /* Arama kutusu - daha kompakt */
+        /* Arama kutusu - mevcut stiller style.css'de */
         .error-search {
             margin: 15px auto;
             max-width: 400px;
-        }
-        
-        .error-search-box {
-            border-radius: 40px;
         }
         
         .error-search-input {
@@ -127,7 +117,7 @@
             font-size: 0.9rem;
         }
         
-        /* Butonlar - daha kompakt */
+        /* Butonlar */
         .error-buttons {
             margin: 15px 0;
             gap: 10px;
@@ -138,7 +128,7 @@
             font-size: 0.9rem;
         }
         
-        /* ÖNDER SÖZLERİ BÖLÜMÜ - ana CSS'e uyumlu */
+        /* LİDERLER BÖLÜMÜ - style.css'deki item-card stillerini KULLANIR */
         .leaders-section {
             margin: 20px 0 10px;
             padding: 15px;
@@ -183,7 +173,7 @@
             background: var(--bg-primary);
         }
         
-        /* Lider kartı - item-card stilini temel alır */
+        /* Lider kartı - item-card stilini kullanır */
         .leader-card {
             min-width: 280px;
             max-width: 300px;
@@ -215,7 +205,11 @@
             border-radius: 50%;
             background: var(--bg-primary);
             border: 2px solid var(--zer);
-            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
         
         .leader-info {
@@ -262,7 +256,7 @@
             font-weight: bold;
         }
         
-        /* Önerilen sayfalar - daha kompakt */
+        /* Önerilen sayfalar - style.css'deki suggestions-grid stillerini KULLANIR */
         .error-suggestions {
             margin-top: 10px;
             padding-top: 10px;
@@ -286,30 +280,15 @@
         
         .suggestions-grid a {
             padding: 4px 8px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 20px;
-            color: var(--spî);
-            text-decoration: none;
             font-size: 0.8rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-            border-left: 2px solid transparent;
             white-space: nowrap;
         }
         
-        .suggestions-grid a:hover {
-            background: rgba(225, 25, 25, 0.2);
-            border-left-color: var(--sor);
-            transform: translateX(2px);
-        }
-        
         .suggestions-grid a i {
-            color: var(--zer);
             font-size: 0.7rem;
         }
         
-        /* Zagros dağları motifi - minimal */
+        /* Zagros dağları motifi */
         .zagros-minimal {
             margin-top: 10px;
             opacity: 0.3;
@@ -334,7 +313,7 @@
             font-size: 1rem;
         }
         
-        /* Responsive düzenlemeler */
+        /* Responsive */
         @media (max-width: 768px) {
             .error-code {
                 font-size: 4rem;
@@ -355,24 +334,11 @@
                 flex-wrap: nowrap;
                 padding-bottom: 5px;
             }
-            
-            .suggestions-grid a {
-                white-space: nowrap;
-            }
         }
         
         @media (max-width: 480px) {
             .error-code {
                 font-size: 3rem;
-            }
-            
-            .error-buttons {
-                flex-direction: row;
-            }
-            
-            .error-btn {
-                padding: 6px 15px;
-                font-size: 0.85rem;
             }
             
             .leader-card {
@@ -391,7 +357,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- HEADER (Küçültülmüş) -->
+        <!-- HEADER -->
         <header>
             <div class="flag">
                 <div class="flag-red"></div>
@@ -403,7 +369,7 @@
             <div class="site-description">Kürdistan Ansiklopedisi</div>
         </header>
         
-        <!-- NAVIGASYON (Küçültülmüş) -->
+        <!-- NAVIGASYON -->
         <div class="nav-container">
             <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
             <div class="search-container">
@@ -412,7 +378,7 @@
             </div>
         </div>
         
-        <!-- ANA İÇERİK - 404 + ÖNDER SÖZLERİ -->
+        <!-- ANA İÇERİK -->
         <div class="main-card">
             <div class="error-404-container">
                 <!-- 404 Bölümü -->
@@ -440,7 +406,7 @@
                     </a>
                 </div>
                 
-                <!-- BÜYÜK ÖNDERLERİN SÖZLERİ / VASİYETLERİ -->
+                <!-- BÜYÜK ÖNDERLERİN SÖZLERİ -->
                 <div class="leaders-section">
                     <h3><i class="fas fa-quote-right"></i> Büyük Önderlerin Sözleri <i class="fas fa-quote-left"></i></h3>
                     
@@ -448,10 +414,7 @@
                         <!-- Şeyh Said -->
                         <div class="leader-card" data-link="seyh-said">
                             <div class="leader-header">
-                                <img src="https://tr.wikiquote.org/wiki/%C5%9Eeyh_Said#/media/Dosya:%C5%9Eeyh_Said_Vakit.jpg" 
-                                     alt="Şeyh Said" 
-                                     class="leader-img"
-                                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23E11919%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23FFD700%22>Ş</text></svg>'">
+                                <div class="leader-img" style="background: var(--sor); color: var(--zer);">Ş</div>
                                 <div class="leader-info">
                                     <div class="leader-name">Şêx Seîd</div>
                                     <div class="leader-years">1865 • 1925</div>
@@ -465,10 +428,7 @@
                         <!-- Qazî Mihemed -->
                         <div class="leader-card" data-link="qazi-mihemed">
                             <div class="leader-header">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Qazi_Muhammad.jpg/200px-Qazi_Muhammad.jpg" 
-                                     alt="Qazî Mihemed" 
-                                     class="leader-img"
-                                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23009900%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23FFD700%22">ق</text></svg>'">
+                                <div class="leader-img" style="background: var(--kesk); color: var(--zer);">ق</div>
                                 <div class="leader-info">
                                     <div class="leader-name">Qazî Mihemed</div>
                                     <div class="leader-years">1893 • 1947</div>
@@ -482,10 +442,7 @@
                         <!-- İhsan Nuri Paşa -->
                         <div class="leader-card" data-link="ihsan-nuri-pasa">
                             <div class="leader-header">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/%C4%B0hsan_Nuri_Pa%C5%9Fa.jpg/200px-%C4%B0hsan_Nuri_Pa%C5%9Fa.jpg" 
-                                     alt="İhsan Nuri Paşa" 
-                                     class="leader-img"
-                                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23FFFFFF%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23E11919%22>İ</text></svg>'">
+                                <div class="leader-img" style="background: var(--spî); color: var(--sor);">İ</div>
                                 <div class="leader-info">
                                     <div class="leader-name">İhsan Nuri Paşa</div>
                                     <div class="leader-years">1892 • 1976</div>
@@ -499,10 +456,7 @@
                         <!-- Mustafa Barzani -->
                         <div class="leader-card" data-link="mustafa-barzani">
                             <div class="leader-header">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mustafa_Barzani_-_Irak_K%C3%BCrdistan%C4%B1.jpg/200px-Mustafa_Barzani_-_Irak_K%C3%BCrdistan%C4%B1.jpg" 
-                                     alt="Mustafa Barzani" 
-                                     class="leader-img"
-                                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23E11919%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23FFD700%22">م</text></svg>'">
+                                <div class="leader-img" style="background: var(--sor); color: var(--zer);">م</div>
                                 <div class="leader-info">
                                     <div class="leader-name">Mustafa Barzani</div>
                                     <div class="leader-years">1903 • 1979</div>
@@ -516,10 +470,7 @@
                         <!-- Seyid Rıza -->
                         <div class="leader-card" data-link="seyid-riza">
                             <div class="leader-header">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Seyit_R%C4%B1za.jpg/200px-Seyit_R%C4%B1za.jpg" 
-                                     alt="Seyid Rıza" 
-                                     class="leader-img"
-                                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23009900%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23FFD700%22">س</text></svg>'">
+                                <div class="leader-img" style="background: var(--kesk); color: var(--zer);">س</div>
                                 <div class="leader-info">
                                     <div class="leader-name">Seyid Rıza</div>
                                     <div class="leader-years">1863 • 1937</div>
@@ -533,10 +484,7 @@
                         <!-- Celadet Ali Bedirxan -->
                         <div class="leader-card" data-link="celadet-ali-bedirxan">
                             <div class="leader-header">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Celadet_Ali_Bedirxan.jpg/200px-Celadet_Ali_Bedirxan.jpg" 
-                                     alt="Celadet Ali Bedirxan" 
-                                     class="leader-img"
-                                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2250%22 height=%2250%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23FFFFFF%22/><text x=%2250%22 y=%2265%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23E11919%22">ج</text></svg>'">
+                                <div class="leader-img" style="background: var(--spî); color: var(--sor);">ج</div>
                                 <div class="leader-info">
                                     <div class="leader-name">Celadet Ali Bedirxan</div>
                                     <div class="leader-years">1893 • 1951</div>
@@ -549,22 +497,22 @@
                     </div>
                 </div>
                 
-                <!-- Önerilen Sayfalar (Minimal) -->
+                <!-- Önerilen Sayfalar -->
                 <div class="error-suggestions">
                     <h3><i class="fas fa-compass"></i> Hızlı Erişim</h3>
                     <div class="suggestions-grid">
-                        <a href="proto-kurtler.html"><i class="fas fa-people-arrows"></i> 1. Proto</a>
-                        <a href="medeniyetin-ilk-taslari.html"><i class="fas fa-archaeology"></i> 2. Medeniyet</a>
-                        <a href="asiret-sistemi.html"><i class="fas fa-code-branch"></i> 3. Aşiret</a>
-                        <a href="antik-kurt-devletleri.html"><i class="fas fa-crown"></i> 4. Antik</a>
-                        <a href="islamiyete-gecis.html"><i class="fas fa-moon"></i> 5. İslam</a>
-                        <a href="ilk-musluman-kurt-devletleri.html"><i class="fas fa-mosque"></i> 6. İlk Devletler</a>
-                        <a href="ortacag-kurdistani.html"><i class="fas fa-knight"></i> 7. Ortaçağ</a>
-                        <a href="osmanli-hakimiyeti.html"><i class="fas fa-ottoman-empire"></i> 8. Osmanlı</a>
-                        <a href="kurt-milliyetciligi.html"><i class="fas fa-flag"></i> 9. Milliyetçilik</a>
-                        <a href="ilk-bagimsizlik-direnisleri.html"><i class="fas fa-fist-raised"></i> 10. Direnişler</a>
-                        <a href="sykes-picot.html"><i class="fas fa-pen-fancy"></i> 11. Sykes-Picot</a>
-                        <a href="kurdistan-direnisleri.html"><i class="fas fa-bolt"></i> 12. Modern</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/proto-kurtler.html"><i class="fas fa-people-arrows"></i> 1</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/medeniyetin-ilk-taslari.html"><i class="fas fa-archaeology"></i> 2</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/asiret-sistemi.html"><i class="fas fa-code-branch"></i> 3</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/antik-kurt-devletleri.html"><i class="fas fa-crown"></i> 4</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/islamiyete-gecis.html"><i class="fas fa-moon"></i> 5</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/ilk-musluman-kurt-devletleri.html"><i class="fas fa-mosque"></i> 6</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/ortacag-kurdistani.html"><i class="fas fa-knight"></i> 7</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/osmanli-hakimiyeti.html"><i class="fas fa-ottoman-empire"></i> 8</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/kurt-milliyetciligi.html"><i class="fas fa-flag"></i> 9</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/ilk-bagimsizlik-direnisleri.html"><i class="fas fa-fist-raised"></i> 10</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/sykes-picot.html"><i class="fas fa-pen-fancy"></i> 11</a>
+                        <a href="https://rohanamedi.github.io/ansiklopedi/kurdistan-direnisleri.html"><i class="fas fa-bolt"></i> 12</a>
                     </div>
                 </div>
                 
@@ -592,7 +540,6 @@
             if (navLinks) {
                 navLinks.classList.toggle('show');
             } else {
-                // Nav-links yoksa uyarı
                 alert('Navigasyon menüsü henüz eklenmedi.');
             }
         });
@@ -617,7 +564,6 @@
                 return;
             }
             
-            // Arama sayfasına yönlendir
             window.location.href = 'https://rohanamedi.github.io/ansiklopedi/arama.html?q=' + encodeURIComponent(query);
         }
         
@@ -639,26 +585,22 @@
             });
         });
         
-        // Lider kartlarına tıklanınca ansiklopediye yönlendir
+        // Lider kartlarına tıklanınca
         document.querySelectorAll('.leader-card').forEach(card => {
             card.addEventListener('click', function() {
                 const link = this.getAttribute('data-link');
                 if (link) {
-                    window.location.href = `https://rohanamedi.github.io/ansiklopedi/sahsiyet/${link}.html`;
+                    window.location.href = 'https://rohanamedi.github.io/ansiklopedi/sahsiyet/' + link + '.html';
                 }
             });
         });
         
         // Rastgele öneri
-        const suggestions = [
-            'ehmede-xani', 'seyh-said', 'mahabad', 'mervaniler', 
-            'xoybun', 'newroz', 'amed', 'barzani', 'dersim'
-        ];
-        
+        const suggestions = ['ehmede-xani', 'seyh-said', 'mahabad', 'mervaniler', 'xoybun'];
         const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
         const searchField = document.getElementById('errorSearchField');
         if (searchField) {
-            searchField.placeholder = `Örn: ${randomSuggestion}`;
+            searchField.placeholder = 'Örn: ' + randomSuggestion;
         }
     </script>
 </body>
